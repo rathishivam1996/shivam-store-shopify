@@ -1,0 +1,11 @@
+<h1>Index template</h1>
+<h3>Inside {{ collections.frontpage.title }} collection</h3>
+{% for product in collections.frontpage.products %}
+  <div>
+    <a href="{{product.url}}">
+      <img src="{{ product.featured_image |  image_url: width: 400 }}">
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.price | money }}</p>
+    </a>
+  </div>
+{% endfor %}
