@@ -1,0 +1,13 @@
+<h1>List-Collections.liquid</h1>
+
+{% paginate collections by 5 %}
+  {% for collection in collections %}
+    <div>
+      <a heref="{{ collection.url }}">
+        <h2>{{ collection.title }}</h2>
+        <p>Num Products: {{ collection.all_products_count }}</p>
+      </a>
+    </div>
+  {% endfor %}
+  {{ paginate | default_pagination }}
+{% endpaginate %}

@@ -1,0 +1,7 @@
+<h1>Index template</h1>
+{% section 'image-slider' %}
+<h3>Inside {{ collections.frontpage.title }} collection</h3>
+<!-- rentered in product-item snippet. Accepts a product object -->
+{% for product in collections['test-collection'].products %}
+  {% render 'product-item', product: product %}
+{% endfor %}

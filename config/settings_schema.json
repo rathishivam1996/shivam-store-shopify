@@ -1,0 +1,1 @@
+[{"name":"Colors","settings":[{"type":"color","id":"background-color","label":"Background Color","default":"#ffffff"},{"type":"color","id":"text-color","label":"Text Color","default":"#000000"}]},{"name":"Some Name","settings":[{"type":"checkbox","id":"show-search-form","label":"Show Search Form","default":true}]}]

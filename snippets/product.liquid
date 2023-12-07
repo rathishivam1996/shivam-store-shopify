@@ -1,0 +1,45 @@
+<script>
+  const product = {{product | json}}
+    document.querySelectorAll(".product-options input[type='radio']").forEach((radio) => {
+      radio.addEventListener("change", () => {
+
+        // find the selected options
+        const selectedOptions = [];
+        document.querySelectorAll(".product-options input[type='radio']:checked").forEach((checkedRadio) => {
+          selectedOptions.push(checkedRadio.value);
+        });
+
+        // find the matched variant .find(v=>{}) returns true if the variant is to be selected.
+        const matchedVariant = product.variants.find((variant) => {
+          let pass = true;
+
+          for (let i=0; i<selectedOptions.length; i+=1) {
+            if(selectedOptions.indexOf(variant.options[i]) === -1) {
+              pass = false;
+              break;
+            }
+          }
+          return pass;
+        });
+
+        // change hidden product-form variant id
+        document.querySelector("#hidden-product-variant-input").value = matchedVariant.id;
+
+        // update url without refreshing page,
+        // so that we can share url with correct variant-id.
+        const url = new URL(window.location.href);
+        url.searchParams.set("variant", matchedVariant.id);
+        if (window.history.replaceState) {
+          //prevents browser from storing history with each change:
+          window.history.replaceState(statedata=null, title=null, url.toString());
+        } else { // change location.href => reloads page!!!
+          window.location.href = url.toString();
+        }
+
+        // change prices
+        document.querySelector(".product-price-container").textContent = formatShopifyPriceToINR(matchedVariant.price.toString());
+        document.querySelector(".product-compare-at-price-container").textContent = formatShopifyPriceToINR(matchedVariant.compare_at_price.toString());
+
+      });
+    });
+</script>

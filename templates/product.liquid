@@ -1,0 +1,191 @@
+<h1>On Product-Item snippet</h1>
+<br>
+<h1>{{ product.title }}</h1>
+
+{% assign selectedProduct = product.selected_or_first_available_variant %}
+
+<div class="product-featured-image-container">
+  {% if selectedProduct.featured_image %}
+    {% assign featuredImage = selectedProduct.featured_image %}
+    <h3>Featured Image</h3>
+    <img
+      width="200"
+      height="200"
+      src="{{featuredImage |  image_url: master }}"
+    >
+  {% else %}
+    {% assign featuredImage = product.featured_image %}
+    <h1>Product Image</h1>
+    <img
+      width="200"
+      height="200"
+      src="{{featuredImage|  image_url: master }}"
+    >
+  {% endif %}
+</div>
+<br>
+<div class="product-thumb-container">
+  <h3>Thumbnail Images</h3>
+  {% for image in product.images %}
+    <img
+      width="200"
+      height="200"
+      src="{{image |  image_url: master }}"
+      class="
+        {% if image == featuredImage %}
+          selected
+        {% endif %}
+      "
+    >
+  {% endfor %}
+</div>
+<div class="product-prices-container">
+  <p
+    class="
+      product-compare-at-price-container
+      {% if selectedProduct.compare_at_price == nil or selectedProduct.compare_at_price == empty or selectedProduct.compare_at_price <= selectedProduct.price %}
+        hide
+      {% endif %}
+    "
+  >
+    Original Price =
+    {{ product.selected_or_first_available_variant.compare_at_price | money }}
+  </p>
+
+  <p
+    class="product-price-container"
+  >
+    Discounted Price =
+    {{ product.selected_or_first_available_variant.price | money }}
+  </p>
+</div>
+<div>
+  <p>{{ product.description }}</p>
+</div>
+
+{% form 'product', product %}
+  <input
+    type="hidden"
+    name="id"
+    value="{{ product.selected_or_first_available_variant.id }}"
+    id="hidden-product-variant-input"
+  >
+
+  <div>
+    <label for="quantity">Quantity</label>
+    <input id="quantity" name="quantity" value="1" class="quantity-product">
+  </div>
+
+  {% if product.variants.size > 1 %}
+    <div class="product-options">
+      {% for option in product.options_with_values -%}
+        <fieldset>
+          <legend>{{ option.name }}</legend>
+
+          {% for value in option.values %}
+            <div>
+              <input
+                {% if option.selected_value == value %}
+                  checked
+                {% endif %}
+                type="radio"
+                name="{{ option.name }}"
+                value="{{ value }}"
+                id="{{ option.name | handleize }}-{{ value | handleize }}"
+              >
+              <label for="{{ option.name | handleize }}-{{ value | handleize }}">
+                {{- value -}}
+              </label>
+            </div>
+          {% endfor %}
+        </fieldset>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <button type="submit">Add to cart</button>
+{% endform %}
+
+{% comment %} {% render 'product' %} {% endcomment %}
+<script>
+  let productJs = {{product | json}}
+  // listener for different variant radio button change.
+    document.querySelectorAll(".product-options input[type='radio']").forEach((radio) => {
+      radio.addEventListener("change", () => {
+
+        // find the selected options
+        const selectedOptions = [];
+        document.querySelectorAll(".product-options input[type='radio']:checked").forEach((checkedRadio) => {
+          selectedOptions.push(checkedRadio.value);
+        });
+
+        // find the matched variant .find(v=>{}) returns true if the variant is to be selected.
+        const matchedVariant = productJs.variants.find((variant) => {
+          let pass = true;
+
+          for (let i=0; i<selectedOptions.length; i+=1) {
+            if(selectedOptions.indexOf(variant.options[i]) === -1) {
+              pass = false;
+              break;
+            }
+          }
+          return pass;
+        });
+
+        // change hidden product-form variant id
+        document.querySelector("#hidden-product-variant-input").value = matchedVariant.id;
+
+        // update url without refreshing page,
+        // so that we can share url with correct variant-id.
+        const url = new URL(window.location.href);
+        url.searchParams.set("variant", matchedVariant.id);
+        if (window.history.replaceState) {
+          //prevents browser from storing history with each change:
+          window.history.replaceState(statedata=null, title=null, url.toString());
+        } else { // change location.href => reloads page!!!
+          window.location.href = url.toString();
+        }
+
+        // change prices
+        document.querySelector(".product-price-container").textContent ="Discounted Price "+ formatShopifyPriceToINR(matchedVariant.price.toString());
+
+        if (matchedVariant.compare_at_price == null || matchedVariant.compare_at_price == "" ||
+        matchedVariant.compare_at_price <= matchedVariant.price) {
+          document.querySelector(".product-compare-at-price-container").classList.add("hide"); // HIDE
+        } else {
+          document.querySelector(".product-compare-at-price-container").classList.remove("hide"); // SHOW
+          document.querySelector(".product-compare-at-price-container").textContent =
+          "Original Price " + formatShopifyPriceToINR(matchedVariant.compare_at_price.toString()); // set compare at price
+        }
+
+        // change featured image if selected variant has a featured image
+        console.log(matchedVariant.featured_image);
+        if(matchedVariant.featured_image) {
+          document.querySelector(".product-featured-image-container>img").setAttribute("src", matchedVariant.featured_image.src);
+          document.querySelector(".product-thumb-container>img.selected").classList.remove("selected");
+
+          document.querySelectorAll(".product-thumb-container>img")[matchedVariant.featured_image.position -1].classList.add("selected");
+        }
+
+        console.log(matchedVariant);
+      });
+    });
+
+    // Listener for changing image thumbs on click
+    document.querySelectorAll(".product-thumb-container>img").forEach((img) => {
+      img.addEventListener("click", () => {
+        // remove selected class from old image
+        document.querySelector(".product-thumb-container>img.selected").classList.remove("selected");
+        // add selected class to new image
+        img.classList.add("selected");
+
+        document.querySelector(".product-featured-image-container>img").setAttribute("src", img.getAttribute("src"));
+      });
+    });
+</script>
+
+<style>
+  .selected {
+    border: 5px solid wheat;
+  }
+</style>

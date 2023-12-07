@@ -1,0 +1,48 @@
+<header class="nav-container">
+  <p class="nav-logo">On Header snippet {{ shop.name }}</p>
+  <ul class="nav-link-container">
+    {% for navigation in linklists['main-menu'].links %}
+      <li class="nav-link">{{ navigation.title | link_to: navigation.url }}</li>
+    {% endfor %}
+  </ul>
+  <form action="/search" method="get">
+    <p>
+      <input type="text" name="q" value="{{search.terms  | escape}}" id="result-q">
+      <input type="submit" value="Search" style="width:100px">
+    </p>
+  </form>
+</header>
+
+<style>
+  .nav-container {
+    padding: 16px;
+    width: 100%;
+    height: 64px;
+    background-color: brown;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-logo {
+    background-color: aqua;
+    margin-right: auto;
+  }
+
+  .nav-link-container {
+    background-color: bisque;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 16px;
+  }
+
+  .nav-link {
+    list-style-position: inside;
+  }
+</style>

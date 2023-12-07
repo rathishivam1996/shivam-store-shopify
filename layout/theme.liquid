@@ -1,0 +1,24 @@
+<html>
+  <head>
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    {{ 'scripts.js' | asset_url | script_tag }}
+    {% render 'header' %}
+    {{ content_for_layout }}
+  </body>
+</html>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+    background-color: aqua;
+  }
+</style>

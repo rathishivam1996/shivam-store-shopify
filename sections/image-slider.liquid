@@ -1,0 +1,31 @@
+<div class="image-slider">
+  {% for image in section.settings.image-slider %}
+    <img width="200px" height="200px" src="{{ image | image_url }}" alt="Slider Image" />
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Image Slider",
+    "settings": [
+      {
+        "type": "image_picker", 
+        "label": "Pick Your Images",
+        "id": "image-slider",
+        "info": "Upload images for the slider"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image Slider",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
