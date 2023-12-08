@@ -63,7 +63,11 @@
   <p>{{ product.description }}</p>
 </div>
 
-<!-- Shopify product form -->
+<!--
+  Shopify product form
+  1) on SUBMIT adds product variant to cart with the selected quantity
+  2) REDIRECTS TO CART PAGE
+-->
 {% form 'product', product %}
   <!--
     * HIDDEN PRODUCT VARIANT SELECTOR input to replace with custom radio buttons.
@@ -78,9 +82,14 @@
   >
 
   <!-- * Input of PRODUCT QUANTITY SELECTOR -->
-  <div>
-    <label for="quantity">Quantity</label>
+  <div class="product-quantity-selector">
+    <!--
+      To render +/- svg inside of button use {% include "plus.svg" %} , for svg inside of snippets folder
+    -->
+    <!-- <label for="quantity">Quantity</label> -->
+    <button type="button" class="quantity-selector-minus">-</button>
     <input id="quantity" name="quantity" value="1" class="quantity-product">
+    <button type="button" class="quantity-selector-plus">+</button>
   </div>
 
   <!--
@@ -253,6 +262,21 @@
 
       shopifyProductForm.appendChild(hiddenCheckoutInput);
       shopifyProductForm.submit();
+    });
+
+    /**
+     * listeners for product quantity changes
+    */
+    document.querySelector(".quantity-selector-plus").addEventListener("click", () => {
+      const currentVal = Number(document.querySelector("#quantity").value);
+      document.querySelector("#quantity").value = currentVal+1;
+    });
+    
+    document.querySelector(".quantity-selector-minus").addEventListener("click", () => {
+      const currentVal = Number(document.querySelector("#quantity").value);
+      if (document.querySelector("#quantity").value > 1){
+        document.querySelector("#quantity").value = currentVal-1;
+      }
     });
 </script>
 

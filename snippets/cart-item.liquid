@@ -1,0 +1,33 @@
+<!--
+  using a key because we can have MULTIPLE LINE ITEMS WITH SAME VARIANT ID
+  key is used in cart.js to make the quantity update ajax call
+-->
+<div class="cart-item" data-key="{{item.key}}">
+  <img
+    width="200"
+    height="200"
+    src="{{ item.image |  image_url: width: 200 }}"
+    alt="Cart Item Image"
+  >
+  <div class="cart-item-details">
+    <h2>{{ item.product.title }}</h2>
+
+    {% if item.variant.title != 'Default Title' %}
+      <p>{{ item.variant.title }}</p>
+    {% endif %}
+  </div>
+
+  <div class="cart-item-quantity-selector">
+    <button class="minus" type="button">-</button>
+    <input type="number" name="updates[]" value="{{item.quantity}}">
+    <button class="plus" type="button">+</button>
+  </div>
+
+  <div class="cart-item-total">
+    <span>{{ item.final_line_price | money }}</span>
+  </div>
+  <div class="cart-item-remove">
+    <a href="{{item.url_to_remove}}">Remove</a>
+  </div>
+</div>
+<hr>

@@ -3,23 +3,49 @@
 {% form 'cart', cart %}
   {% if cart.empty? %}
     <p>Hey your cart is empty!</p>
+    <a class="button" href="/">Keep Shopping</a>
   {% else %}
     {% for item in cart.items %}
-      <div>
-        <img width="200" height="200" src="{{ item.image |  image_url: width: 200 }}" alt="Cart Item Image">
-        <h2>{{ item.title }}</h2>
-        <p>{{ item.final_line_price | money }}</p>
-
-        <input type="number" name="updates[]" value="{{item.quantity}}">
-        <a href="{{item.url_to_remove}}">Remove</a>
-      </div>
-      <hr>
+      {% render 'cart-item', item: item %}
     {% endfor %}
 
     <hr>
 
-    <p>Total: {{ cart.total_price | money }}</p>
-    <button type="submit" name="update">Update</button>
-    <button type="submit" name="checkout">Checkout</button>
+    <div class="cart-notes">
+      <textarea
+        name="note"
+        placeholder="Add special instructions for your order"
+      >{{cart.note}}</textarea>
+    </div>
+
+    <div class="cart-totals">
+      <p>
+        Discounts: <strong>{{ cart.total_discounts | money }}</strong>
+      </p>
+      <p>
+        Totals: <strong>{{ cart.total_price | money }}</strong>
+      </p>
+    </div>
+    <div class="cart-buttons">
+      <button type="submit" name="update" class="button update full">
+        Update
+      </button>
+      <button type="submit" name="checkout" class="button checkout full">
+        Checkout
+      </button>
+    </div>
   {% endif %}
 {% endform %}
+
+{{ 'cart.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Cart",
+  "presets": [
+    {
+      "name": "Cart"
+    }
+  ]
+}
+{% endschema %}
