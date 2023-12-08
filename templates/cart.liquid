@@ -1,41 +1,47 @@
-<h1>Cart template</h1>
+<div class="cart" data-store-money-format="{{shop.money_format}}">
+  <h1>Cart template</h1>
 
-{% form 'cart', cart %}
-  {% if cart.empty? %}
-    <p>Hey your cart is empty!</p>
-    <a class="button" href="/">Keep Shopping</a>
-  {% else %}
-    {% for item in cart.items %}
-      {% render 'cart-item', item: item %}
-    {% endfor %}
+  {% form 'cart', cart %}
+    {% if cart.empty? %}
+      <p>Hey your cart is empty!</p>
+      <a class="button" href="/">Keep Shopping</a>
+    {% else %}
+      {% for item in cart.items %}
+        {% render 'cart-item', item: item %}
+      {% endfor %}
 
-    <hr>
+      <hr>
 
-    <div class="cart-notes">
-      <textarea
-        name="note"
-        placeholder="Add special instructions for your order"
-      >{{cart.note}}</textarea>
-    </div>
+      <div class="cart-notes">
+        <textarea
+          name="note"
+          placeholder="Add special instructions for your order"
+        >{{cart.note}}</textarea>
+      </div>
 
-    <div class="cart-totals">
-      <p>
-        Discounts: <strong>{{ cart.total_discounts | money }}</strong>
-      </p>
-      <p>
-        Totals: <strong>{{ cart.total_price | money }}</strong>
-      </p>
-    </div>
-    <div class="cart-buttons">
-      <button type="submit" name="update" class="button update full">
-        Update
-      </button>
-      <button type="submit" name="checkout" class="button checkout full">
-        Checkout
-      </button>
-    </div>
-  {% endif %}
-{% endform %}
+      <div class="cart-totals">
+        <p>
+          Discounts:
+          <strong id="cart-total-discounts">
+            {{- cart.total_discounts | money -}}
+          </strong>
+        </p>
+        <p>
+          Totals:
+          <strong id="cart-total-price">{{ cart.total_price | money }}</strong>
+        </p>
+      </div>
+      <div class="cart-buttons">
+        <button type="submit" name="update" class="button update full">
+          Update
+        </button>
+        <button type="submit" name="checkout" class="button checkout full">
+          Checkout
+        </button>
+      </div>
+    {% endif %}
+  {% endform %}
+</div>
 
 {{ 'cart.js' | asset_url | script_tag }}
 

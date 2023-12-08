@@ -2,7 +2,7 @@
   using a key because we can have MULTIPLE LINE ITEMS WITH SAME VARIANT ID
   key is used in cart.js to make the quantity update ajax call
 -->
-<div class="cart-item" data-key="{{item.key}}">
+<div class="cart-item" data-unique-line-item-key="{{item.key}}">
   <img
     width="200"
     height="200"
@@ -24,10 +24,12 @@
   </div>
 
   <div class="cart-item-total">
-    <span>{{ item.final_line_price | money }}</span>
+    <span id="cart-item-line-item-price">
+      {{- item.final_line_price | money }}
+    </span>
   </div>
   <div class="cart-item-remove">
-    <a href="{{item.url_to_remove}}">Remove</a>
+    <a class="cart-item-remove-button" href="{{item.url_to_remove}}">Remove</a>
   </div>
 </div>
 <hr>
