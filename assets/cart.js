@@ -1,4 +1,5 @@
 // Shopify.money_format = "${{amount}}";
+
 function formatShopifyMoney(cents, format) {
   if (typeof cents == "string") {
     cents = cents.replace(".", "");
@@ -47,28 +48,30 @@ function formatShopifyMoney(cents, format) {
   return formatString.replace(placeholderRegex, value);
 }
 
-document.querySelectorAll("cart-item-quantity-selector").forEach((button) => {
-  button.addEventListener("click", () => {
-    const input = button.parentElement.querySelector("input");
-    const currValue = Number(input.value);
-    const isPlus = button.classList.contains("plus");
-    // using a key because we can have MULTIPLE LINE ITEMS WITH SAME VARIANT ID
-    // Key is manually set as a custom attribute on <div class="cart-item"></div>
-    const key = button
-      .closest(".cart-item")
-      .getAttribute("data-unique-line-item-key");
+document
+  .querySelectorAll(".cart-item-quantity-selector button")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
+      const input = button.parentElement.querySelector("input");
+      const currValue = Number(input.value);
+      const isPlus = button.classList.contains("plus");
+      // using a key because we can have MULTIPLE LINE ITEMS WITH SAME VARIANT ID
+      // Key is manually set as a custom attribute on <div class="cart-item"></div>
+      const key = button
+        .closest(".cart-item")
+        .getAttribute("data-unique-line-item-key");
 
-    if (isPlus) {
-      const newValue = currValue + 1;
-      input.value = newValue;
-      changeItemQuantity(key, newValue);
-    } else if (currValue > 1) {
-      const newValue = currValue - 1;
-      input.value = newValue;
-      changeItemQuantity(key, newValue);
-    }
+      if (isPlus) {
+        const newValue = currValue + 1;
+        input.value = newValue;
+        changeItemQuantity(key, newValue);
+      } else if (currValue > 1) {
+        const newValue = currValue - 1;
+        input.value = newValue;
+        changeItemQuantity(key, newValue);
+      }
+    });
   });
-});
 
 document.querySelectorAll(".cart-item-remove-button").forEach((removeBtn) => {
   removeBtn.addEventListener("click", (e) => {

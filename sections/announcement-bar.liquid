@@ -1,0 +1,62 @@
+<div class="announcement-bar-container">
+  <p class="announcement-bar-text">
+    Grab up to 30% off + ₹350 OFF on Orders above ₹1500 from your favourite
+    brands.
+  </p>
+  <p class="announcement-bar-sub-text">
+    *automatically applied at checkout, Cannot be used in conjunction with any
+    other offer.
+  </p>
+</div>
+
+<style>
+  .announcement-bar-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #7ee8fa;
+    background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "tag": "div",
+  "class": "announcement-bar",
+  "limit": 2,
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement-bar-text",
+      "label": "Enter your text"
+    },
+    {
+      "type": "image_picker",
+      "id": "announcement-bar-background-image",
+      "label": "Background Image (Optional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "settings": {
+        "announcement-bar-text": "Enter you text here"
+      }
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

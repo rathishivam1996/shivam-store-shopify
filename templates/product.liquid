@@ -102,7 +102,7 @@
     Loop product.options_with_values to display custom radio buttons
   -->
   {% if product.variants.size > 1 %}
-    <div class="product-options">
+    <div class="product-variant-options">
       {% for option in product.options_with_values -%}
         <fieldset>
           <legend>{{ option.name }}</legend>
@@ -163,11 +163,11 @@
   // Get the json product object from shopity product.liquid context
   let productJs = {{product | json}}
   // listener for different variant radio button change.
-    document.querySelectorAll(".product-options input[type='radio']").forEach((radio) => {
+    document.querySelectorAll(".product-variant-options input[type='radio']").forEach((radio) => {
       radio.addEventListener("change", () => {
         // find the selected options
         const selectedOptions = [];
-        document.querySelectorAll(".product-options input[type='radio']:checked").forEach((checkedRadio) => {
+        document.querySelectorAll(".product-variant-options input[type='radio']:checked").forEach((checkedRadio) => {
           selectedOptions.push(checkedRadio.value);
         });
 
@@ -184,7 +184,7 @@
         });
 
         // change hidden product-form variant id
-        document.querySelector("#hidden-product-variant-input").value = matchedVariant.id;
+        document.getElementById("hidden-product-variant-input").value = matchedVariant.id;
         // update url without refreshing page,
         // so that we can share url with correct variant-id.
         const url = new URL(window.location.href);
@@ -217,8 +217,8 @@
         }
 
         // toggle button if selected variant is out of stock
-        const addToCart = document.getElementById("#product-add-to-cart-button");
-        const buyItNow = document.getElementById("#product-buy-it-now-button");
+        const addToCart = document.getElementById("product-add-to-cart-button");
+        const buyItNow = document.getElementById("product-buy-it-now-button");
 
         if(matchedVariant.available) {
           addToCart.disabled = false;
@@ -256,7 +256,7 @@
      * 3) Append hidden checkout input to Shopify product form
      * 4) Submit product form manually
     */
-    document.getElementById("#product-buy-it-now-button").addEventListener("click", (e) => {
+    document.getElementById("product-buy-it-now-button").addEventListener("click", (e) => {
       e.preventDefault();
 
       const shopifyProductForm = document.querySelector(".shopify-product-form");
@@ -264,6 +264,7 @@
       const hiddenCheckoutInput = document.createElement("input");
       hiddenCheckoutInput.value = "/checkout";
       hiddenCheckoutInput.name = "return_to";
+      hiddenCheckoutInput.hidden = true;
 
       shopifyProductForm.appendChild(hiddenCheckoutInput);
       shopifyProductForm.submit();
@@ -273,14 +274,14 @@
      * listeners for product quantity changes
     */
     document.querySelector(".product-quantity-selector-plus").addEventListener("click", () => {
-      const currentVal = Number(document.querySelector("#quantity").value);
-      document.querySelector("#quantity").value = currentVal+1;
+      const currentVal = Number(document.getElementById("quantity").value);
+      document.getElementById("quantity").value = currentVal+1;
     });
 
     document.querySelector(".product-quantity-selector-minus").addEventListener("click", () => {
-      const currentVal = Number(document.querySelector("#quantity").value);
-      if (document.querySelector("#quantity").value > 1){
-        document.querySelector("#quantity").value = currentVal-1;
+      const currentVal = Number(document.getElementById("quantity").value);
+      if (document.getElementById("quantity").value > 1){
+        document.getElementById("quantity").value = currentVal-1;
       }
     });
 </script>
