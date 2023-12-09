@@ -87,9 +87,14 @@
       To render +/- svg inside of button use {% include "plus.svg" %} , for svg inside of snippets folder
     -->
     <!-- <label for="quantity">Quantity</label> -->
-    <button type="button" class="quantity-selector-minus">-</button>
-    <input id="quantity" name="quantity" value="1" class="quantity-product">
-    <button type="button" class="quantity-selector-plus">+</button>
+    <button type="button" class="product-quantity-selector-minus">-</button>
+    <input
+      id="quantity"
+      name="quantity"
+      value="1"
+      class="product-quantity-selector-input"
+    >
+    <button type="button" class="product-quantity-selector-plus">+</button>
   </div>
 
   <!--
@@ -267,12 +272,12 @@
     /**
      * listeners for product quantity changes
     */
-    document.querySelector(".quantity-selector-plus").addEventListener("click", () => {
+    document.querySelector(".product-quantity-selector-plus").addEventListener("click", () => {
       const currentVal = Number(document.querySelector("#quantity").value);
       document.querySelector("#quantity").value = currentVal+1;
     });
-    
-    document.querySelector(".quantity-selector-minus").addEventListener("click", () => {
+
+    document.querySelector(".product-quantity-selector-minus").addEventListener("click", () => {
       const currentVal = Number(document.querySelector("#quantity").value);
       if (document.querySelector("#quantity").value > 1){
         document.querySelector("#quantity").value = currentVal-1;
