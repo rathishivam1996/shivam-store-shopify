@@ -1,0 +1,11 @@
+<form id='header-search-form' action='/search' method='get'>
+  <p>
+    <input
+      type='text'
+      name='q'
+      value='{{search.terms  | escape}}'
+      id='result-q'
+    >
+    <input type='submit' value='Search' style='width:100px'>
+  </p>
+</form>

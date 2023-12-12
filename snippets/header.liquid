@@ -1,17 +1,26 @@
-<header class="nav-container">
-  <p class="nav-logo">On Header snippet {{ shop.name }}</p>
-  <ul class="nav-link-container">
+<header class='nav-container'>
+  <p class='nav-logo'>On Header snippet {{ shop.name }}</p>
+  <ul class='nav-link-container'>
     {% for navigation in linklists['main-menu'].links %}
-      <li class="nav-link">{{ navigation.title | link_to: navigation.url }}</li>
+      <li class='nav-link'>{{ navigation.title | link_to: navigation.url }}</li>
     {% endfor %}
   </ul>
-  <form action="/search" method="get">
+  <form id='header-search-form' action='/search' method='get'>
     <p>
-      <input type="text" name="q" value="{{search.terms  | escape}}" id="result-q">
-      <input type="submit" value="Search" style="width:100px">
+      <input
+        type='text'
+        name='q'
+        value='{{search.terms  | escape}}'
+        id='result-q'
+      >
+      <input type='submit' value='Search' style='width:100px'>
     </p>
   </form>
 </header>
+<div id="header-search-results">
+  <div id="header-search-suggestions"></div>
+  <div id="header-product-suggestions"></div>
+</div>
 
 <style>
   .nav-container {
@@ -46,3 +55,5 @@
     list-style-position: inside;
   }
 </style>
+
+{{ 'search.js' | asset_url | script_tag }}

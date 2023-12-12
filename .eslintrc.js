@@ -4,41 +4,35 @@ module.exports = {
     es2021: true,
     jest: true,
   },
+  parser: '@babel/eslint-parser',
   extends: [
-    "eslint-plugin-html",
-    "plugin:@shopify/esnext",
-    "plugin:@shopify/react",
-    "plugin:@shopify/prettier",
-    "airbnb",
-    "prettier",
-    "plugin:node/recommended",
-    "plugin:prettier/recommended",
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'airbnb',
+    'prettier',
   ],
-  plugins: ["prettier"],
-  settings: {
-    "html/javascript-mime-types": ["text/javascript", "text/worker"],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
   },
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: "script",
+        sourceType: 'script',
       },
     },
   ],
+  plugins: ['eslint-plugin-html', 'react', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
-      js: true,
-      liquid: true,
     },
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  rules: {
-    "prettier/prettier": "error",
-  },
+  rules: {},
 };
