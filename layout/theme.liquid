@@ -37,7 +37,6 @@
   <body>
     {{ 'scripts.js' | asset_url | script_tag }}
     {% render 'header' %}
-    {% render 'announcement-bar' %}
     {{ content_for_layout }}
   </body>
 </html>

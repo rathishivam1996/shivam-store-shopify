@@ -48,6 +48,7 @@ function formatShopifyMoney(cents, format) {
   return formatString.replace(placeholderRegex, value);
 }
 
+// cart item quantity selector calls changeItemQuantity(key, quantity)
 document
   .querySelectorAll(".cart-item-quantity-selector button")
   .forEach((button) => {
@@ -73,6 +74,7 @@ document
     });
   });
 
+// cart-item-remove-button
 document.querySelectorAll(".cart-item-remove-button").forEach((removeBtn) => {
   removeBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -84,8 +86,42 @@ document.querySelectorAll(".cart-item-remove-button").forEach((removeBtn) => {
         id: key,
         quantity: 0,
       })
-      .then((res) => {})
-      .catch(err);
+      .then((res) => {
+        // if cart is COMPLETELY empty render empty cart message from Cart.js
+        // todo - create reusable empty cart snippet
+        if (res.data.items.length === 0) {
+          document.querySelector("#cart_form").remove();
+          const html = document.createElement("div");
+
+          html.innerHTML = `
+          <p>Hey your cart is empty!</p>
+          <a class="button" href="/">Keep Shopping</a>
+          `;
+
+          document.querySelector(".cart").appendChild(html);
+        } else {
+          item.remove();
+          const moneyFormat = document
+            .querySelector(`[data-store-money-format]`)
+            .getAttribute("data-store-money-format");
+
+          const totalDiscount = formatShopifyMoney(
+            res.data.total_discount,
+            moneyFormat,
+          );
+          const totalPrice = formatShopifyMoney(
+            res.data.total_price,
+            moneyFormat,
+          );
+
+          document.querySelector("#cart-total-price").textContent = totalPrice;
+          document.querySelector("#cart-total-discounts").textContent =
+            totalDiscount;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 });
 
@@ -102,26 +138,23 @@ function changeItemQuantity(key, quantity) {
         .getAttribute("data-store-money-format");
       const item = res.data.items.find((item) => item.key === key);
 
+      // cart
       const totalDiscount = formatShopifyMoney(
         res.data.total_discount,
         moneyFormat,
       );
       const totalPrice = formatShopifyMoney(res.data.total_price, moneyFormat);
+      document.querySelector("#cart-total-price").textContent = totalPrice;
+      document.querySelector("#cart-total-discounts").textContent =
+        totalDiscount;
+
+      // cart item
       const lineItemPrice = formatShopifyMoney(
         item.final_line_price,
         moneyFormat,
       );
-
-      document.querySelector("#cart-total-price").textContent = totalPrice;
-
-      document.querySelector("#cart-total-discounts").textContent =
-        totalDiscount;
-
-      document.querySelector("#cart-item-line-item-price").textContent =
-        lineItemPrice;
-
       document.querySelector(
-        `[data-unique-line-item-key="${key}"] .cart-item-line-item-price`,
+        `[data-unique-line-item-key="${key}"] #cart-item-line-item-price`,
       ).textContent = lineItemPrice;
     })
     .catch((err) => {
