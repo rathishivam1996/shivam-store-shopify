@@ -23,23 +23,7 @@ const suggestionsContainer = document.getElementById(
   'header-search-suggestions-container',
 );
 
-function getSuggestionsAPI(searchTerm) {
-  const searchConfig = {
-    params: {
-      q: searchTerm,
-      resources: {
-        type: 'query,product,collection,page',
-        limit: 5,
-        limit_scope: 'each',
-        options: {
-          unavailable_products: 'last',
-        },
-      },
-    },
-  };
-  // eslint-disable-next-line no-undef
-  axios.get(`search/suggest.json`, searchConfig);
-}
+function getSuggestionsAPI(searchTerm) {}
 
 function suggestionItem({ text, url, styledText }) {
   return `<div>
@@ -66,7 +50,23 @@ function displaySuggestions(queries) {
 }
 
 const searchInputChangeHandler = debounce((e) => {
-  getSuggestionsAPI(e.target.value)
+  const searchConfig = {
+    params: {
+      q: e.target.value,
+      resources: {
+        type: 'query,product,collection,page',
+        limit: 5,
+        limit_scope: 'each',
+        options: {
+          unavailable_products: 'last',
+        },
+      },
+    },
+  };
+
+  // eslint-disable-next-line no-undef
+  axios
+    .get(`search/suggest.json`, searchConfig)
     .then((res) => {
       const { results } = res.data.resources;
       const { queries } = results;
