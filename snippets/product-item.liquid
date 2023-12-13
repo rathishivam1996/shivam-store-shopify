@@ -1,11 +1,17 @@
-<div>
-  <a href="{{product.url}}">
+<div class=''>
+  <a href='{{product.url}}'>
     <img
-      width="400"
-      height="400"
-      src="{{ product.featured_image |  image_url}}"
+      width='400'
+      height='400'
+      src='{{ product.featured_image |  image_url}}'
     >
     <h3>{{ product.title }}</h3>
     <p>{{ product.price | money }}</p>
   </a>
 </div>
+
+{{ 'productitem.js' | asset_url | script_tag }}
+
+<script>
+  logProduct({{product | json}});
+</script>

@@ -1,5 +1,6 @@
 <html>
   <head>
+    {{ 'output.css' | asset_url | stylesheet_tag }}
     {{ 'style.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
     <!-- google poppins fonts -->
@@ -35,9 +36,9 @@
     ></script>
   </head>
   <body>
-    {{ 'scripts.js' | asset_url | script_tag }}
     {% render 'header' %}
     {{ content_for_layout }}
+    {{ 'scripts.js' | asset_url | script_tag }}
   </body>
 </html>
 <style>

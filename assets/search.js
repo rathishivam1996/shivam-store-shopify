@@ -23,8 +23,6 @@ const suggestionsContainer = document.getElementById(
   'header-search-suggestions-container',
 );
 
-function getSuggestionsAPI(searchTerm) {}
-
 function suggestionItem(text, url, styledText) {
   return `<div>
             <p>${text}</p>
@@ -33,8 +31,10 @@ function suggestionItem(text, url, styledText) {
           </div>`;
 }
 
-function displaySuggestions(queries) {
-  suggestionsContainer.innerHTML = ``;
+function displayQueries(queries) {
+  suggestionsContainer.innerHTML = `
+  <h1>Did You Mean?</h1>
+  `;
 
   const ul = document.createElement('ul');
   ul.id = 'suggestions';
@@ -43,39 +43,63 @@ function displaySuggestions(queries) {
     const styledText = query.styled_text;
     const li = document.createElement('li');
 
-    li.appendChild = suggestionItem(text, url, styledText);
+    const item = suggestionItem(text, url, styledText);
+    li.innerHTML = item;
     ul.appendChild(li);
   });
   suggestionsContainer.appendChild(ul);
 }
 
+function diplayStaticQueries() {
+  suggestionsContainer.innerHTML = `
+  <h1>Treanding Searches</h1>
+  <p>L.A. Girl</p>
+  <p>Lamel</p>
+  <p>Carbon Theory</p>
+  <p>Blush</p>
+  `;
+}
+
+function isStrNullOrEmptyOrBlank(str) {
+  return str === null || str === undefined || str.trim() === '';
+}
+
 const searchInputChangeHandler = debounce((e) => {
-  const searchConfig = {
-    params: {
-      q: e.target.value,
-      resources: {
-        type: 'query,product,collection,page',
-        limit: 5,
-        limit_scope: 'each',
-        options: {
-          unavailable_products: 'last',
+  const searchTerm = e.target.value;
+  if (isStrNullOrEmptyOrBlank(searchTerm)) {
+    diplayStaticQueries();
+  } else {
+    const searchConfig = {
+      params: {
+        q: e.target.value,
+        resources: {
+          type: 'query,product,collection,page',
+          limit: 5,
+          limit_scope: 'each',
+          options: {
+            fields:
+              'author,body,product_type,tag,title,variants.barcode,variants.sku,variants.title,vendor',
+            unavailable_products: 'last',
+          },
         },
       },
-    },
-  };
-
-  // eslint-disable-next-line no-undef
-  axios
-    .get(`search/suggest.json`, searchConfig)
-    .then((res) => {
-      const { results } = res.data.resources;
-      const { queries } = results;
-
-      displaySuggestions(queries);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    };
+    // eslint-disable-next-line no-undef
+    axios
+      .get(`search/suggest.json`, searchConfig)
+      .then((res) => {
+        const { results } = res.data.resources;
+        const { queries } = results;
+        if (queries.length === 0) {
+          diplayStaticQueries();
+        } else {
+          displayQueries(queries);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }, 500);
 
 // eslint-disable-next-line no-unused-vars
