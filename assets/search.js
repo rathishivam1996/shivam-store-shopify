@@ -19,20 +19,11 @@ function debounce(func, wait, immediate) {
   };
 }
 
-const headerSearchSuggestions = document.getElementById(
-  'header-search-suggestions',
+const suggestionsContainer = document.getElementById(
+  'header-search-suggestions-container',
 );
 
-function searchSuggestionItem({ text, url, styledText }) {
-  return `
-  <p>${text}</p>
-  <a href=${url}>${url}</a>
-  <p>${styledText}</p>
-  `;
-}
-
-const searchInputChangeHandler = debounce((e) => {
-  const searchTerm = e.target.value;
+function getSuggestionsAPI(searchTerm) {
   const searchConfig = {
     params: {
       q: searchTerm,
@@ -47,20 +38,40 @@ const searchInputChangeHandler = debounce((e) => {
     },
   };
   // eslint-disable-next-line no-undef
-  axios
-    .get(`search/suggest.json`, searchConfig)
+  axios.get(`search/suggest.json`, searchConfig);
+}
+
+function suggestionItem({ text, url, styledText }) {
+  return `<div>
+            <p>${text}</p>
+            <a href=${url}>${url}</a>
+            <p>${styledText}</p>
+          </div>`;
+}
+
+function displaySuggestions(queries) {
+  suggestionsContainer.innerHTML = ``;
+
+  const ul = document.createElement('ul');
+  ul.id = 'suggestions';
+  queries.forEach((query) => {
+    const { text, url } = query;
+    const styledText = query.styled_text;
+    const li = document.createElement('li');
+
+    li.appendChild = suggestionItem(text, url, styledText);
+    ul.appendChild(li);
+  });
+  suggestionsContainer.appendChild(ul);
+}
+
+const searchInputChangeHandler = debounce((e) => {
+  getSuggestionsAPI(e.target.value)
     .then((res) => {
       const { results } = res.data.resources;
       const { queries } = results;
 
-      for (let i = 0; i < queries.length; i += 1) {
-        const query = queries[i];
-        const { text, url } = query;
-        const styledText = query.styled_text;
-        headerSearchSuggestions.appendChild(
-          searchSuggestionItem(text, url, styledText),
-        );
-      }
+      displaySuggestions(queries);
     })
     .catch((err) => {
       console.error(err);
