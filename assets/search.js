@@ -23,6 +23,14 @@ const headerSearchSuggestions = document.getElementById(
   'header-search-suggestions',
 );
 
+function searchSuggestionItem({ text, url, styledText }) {
+  return `
+  <p>${text}</p>
+  <a href=${url}>${url}</a>
+  <p>${styledText}</p>
+  `;
+}
+
 const searchInputChangeHandler = debounce((e) => {
   const searchTerm = e.target.value;
   const searchConfig = {
@@ -44,13 +52,14 @@ const searchInputChangeHandler = debounce((e) => {
     .then((res) => {
       const { results } = res.data.resources;
       const { queries } = results;
-      const { products } = results;
 
       for (let i = 0; i < queries.length; i += 1) {
         const query = queries[i];
-        const { text } = query;
-        const { url } = query;
+        const { text, url } = query;
         const styledText = query.styled_text;
+        headerSearchSuggestions.appendChild(
+          searchSuggestionItem(text, url, styledText),
+        );
       }
     })
     .catch((err) => {
