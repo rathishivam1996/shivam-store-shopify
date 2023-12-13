@@ -646,6 +646,14 @@ video {
   background-color: rgb(254 249 195 / var(--tw-bg-opacity));
 }
 
+.bg-inherit {
+  background-color: inherit;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
 .italic {
   font-style: italic;
 }
