@@ -25,7 +25,7 @@ const suggestionsContainer = document.getElementById(
 
 function getSuggestionsAPI(searchTerm) {}
 
-function suggestionItem({ text, url, styledText }) {
+function suggestionItem(text, url, styledText) {
   return `<div>
             <p>${text}</p>
             <a href=${url}>${url}</a>
