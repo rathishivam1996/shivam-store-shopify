@@ -36,9 +36,10 @@
     ></script>
   </head>
   <body>
+    {{ 'scripts.js' | asset_url | script_tag }}
+
     {% render 'header' %}
     {{ content_for_layout }}
-    {{ 'scripts.js' | asset_url | script_tag }}
   </body>
 </html>
 <style>

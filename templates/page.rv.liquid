@@ -1,0 +1,8 @@
+<h1>Recently Viewed Page</h1>
+
+{{ 'recentlyViewed.js' | asset_url | script_tag }}
+
+<script>
+  const arr = getFromLocalStorage('heyparadise.com-recently-viewed');
+  fetchAllRecentlyViewedProducts(arr);
+</script>

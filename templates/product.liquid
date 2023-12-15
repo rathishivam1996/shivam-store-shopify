@@ -158,12 +158,41 @@
   </button>
 {% endform %}
 
+<div
+  id='recently-viewed'
+  class='w-full h-[500px] flex justify-center items-center gap-y-2 bg-red-400'
+></div>
+
 {% comment %} {% render 'product' %} {% endcomment %}
+
+{{ 'recentlyviewed.js' | asset_url | script_tag }}
+
+<script>
+  /** save the current product id and variant id to local storage for recently viewed section.
+   * extract product handle and variant from url.
+   */
+  const url = new URL(window.location.href);
+  const productHandle = url.pathname.split('/products/')[1];
+  const viewedProduct = {
+    productHandle,
+  };
+
+  const key = `heyparadise.com-recently-viewed`;
+  // removeFromLocalStorage(key);
+  // clearLocalStorage();
+  saveRecentlyViewedToLocalStorage(key, viewedProduct);
+
+  // fetch all rv products
+  const arr = JSON.parse(getFromLocalStorage(key));
+  // console.log('response all');
+  fetchAllRecentlyViewedProducts(arr)
+  .then(products => console.log(products))
+  .catch(err => console.log(err));
+</script>
+
 <script>
   // Get the json product object from shopity product.liquid context
   let productJs = {{product | json}}
-  console.log(`productJs`);
-  console.log(productJs);
 
   // listener for different variant radio button change.
     document.querySelectorAll(".product-variant-options input[type='radio']").forEach((radio) => {
@@ -174,12 +203,10 @@
           selectedOptions.push(checkedRadio.value);
         });
 
-        console.log(`selectedOptions ${selectedOptions}`);
         // find the matched variant .find(v=>{}) returns true if the variant is to be selected.
         const matchedVariant = productJs.variants.find((variant) => {
           let pass = true;
           for (let i=0; i<selectedOptions.length; i+=1) {
-            console.log(`variant.options[i] ${variant.options[i]}`);
             if(selectedOptions.indexOf(variant.options[i]) === -1) {
               pass = false;
               break;
@@ -188,15 +215,10 @@
           return pass;
         });
 
-
-        console.log(`matched variant`);
-        console.log(matchedVariant);
-        
         // change hidden product-form variant id
         document.getElementById("hidden-product-variant-input").value = matchedVariant.id;
         // update url without refreshing page,
         // so that we can share url with correct variant-id.
-        const url = new URL(window.location.href);
         url.searchParams.set("variant", matchedVariant.id);
         if (window.history.replaceState) {
           //prevents browser from storing history with each change:
@@ -218,9 +240,7 @@
         }
 
         // change featured image if selected variant has a featured image
-        console.log(matchedVariant.featured_image);
         if(matchedVariant.featured_image) {
-          console.log(matchedVariant.featured_image.src);
           document.querySelector(".product-featured-image-container>img").setAttribute("src", matchedVariant.featured_image.src);
           document.querySelector(".product-thumb-container>img.selected").classList.remove("selected");
 
@@ -245,7 +265,6 @@
           buyItNow.disabled = true;
           buyItNow.textContent = "Out Of Stock";
         }
-        // console.log(matchedVariant);
       });
     });
 
