@@ -43,15 +43,19 @@
     </div>
   {%- endfor -%}
 
-  {% for product in collection.products %}
-    {% assign discountPercentage = product.compare_at_price
-      | minus: product.price
-      | times: 100
-      | divided_by: product.compare_at_price
-      | round: 0
-    %}
-    <p>{{ discountPercentage }}</p>
-  {% endfor %}
+  {% assign discount_array = discount_list | split: ',' %}
+
+  <!--
+    {% for product in collection.products %}
+      {% assign discountPercentage = product.compare_at_price
+        | minus: product.price
+        | times: 100
+        | divided_by: product.compare_at_price
+        | round: 0
+      %}
+      <p>{{ discountPercentage }}</p>
+    {% endfor %}
+  -->
 
   {{ paginate | default_pagination }}
 {% endpaginate %}
