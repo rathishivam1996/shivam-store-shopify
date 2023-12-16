@@ -12,3 +12,7 @@
 </div>
 
 {{ 'productitem.js' | asset_url | script_tag }}
+
+<script>
+  logProduct({{product | json}});
+</script>
