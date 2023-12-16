@@ -1,10 +1,17 @@
-<div class=''>
-  <a href='{{product.url}}'>
+<div class="">
+  <a href="{{product.url}}">
     <img
-      width='400'
-      height='400'
-      src='{{ product.featured_image |  image_url}}'
+      width="400"
+      height="400"
+      src="{{ product.featured_image |  image_url}}"
     >
+    {% assign discountPercentage = product.compare_at_price
+      | minus: product.price
+      | times: 100
+      | divided_by: product.compare_at_price
+      | round: 0
+    %}
+    <p>{{ discountPercentage }} %</p>
     <h3>{{ product.title }}</h3>
     <p>{{ product.price | money }}</p>
   </a>
