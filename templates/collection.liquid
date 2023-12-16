@@ -20,6 +20,29 @@
   <hr>
   <br>
 
+  {%- capture discount_list -%}
+{%- endcapture -%}
+
+  {%- for product in collection.products -%}
+    {%- assign discount_percentage = product.compare_at_price
+      | minus: product.price
+      | times: 100
+      | divided_by: product.compare_at_price
+      | round
+    -%}
+
+    {%- capture discount_list -%}
+    {{ discount_list }}{{ discount_percentage }}{% unless forloop.last %},{% endunless %}
+  {%- endcapture -%}
+
+    <div>
+      <h3>{{ product.title }}</h3>
+      <p>Price: ${{ product.price }}</p>
+      <p>Discount: {{ discount_percentage }}%</p>
+      <!-- Add other product information as needed -->
+    </div>
+  {%- endfor -%}
+
   {% for product in collection.products %}
     {% assign discountPercentage = product.compare_at_price
       | minus: product.price
@@ -28,11 +51,6 @@
       | round: 0
     %}
     <p>{{ discountPercentage }}</p>
-    {% assign sorted_products = collection.products | sort: 'discount_percentage' | reverse %}
-  {% endfor %}
-
-  {% for product in sorted_products %}
-    {% render 'product-item', product: product %}
   {% endfor %}
 
   {{ paginate | default_pagination }}
