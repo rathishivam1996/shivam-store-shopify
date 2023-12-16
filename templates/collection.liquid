@@ -19,52 +19,20 @@
 <hr>
 <br>
 
-{%- capture discount_list -%}
-{%- endcapture -%}
-
-{%- for product in collection.products -%}
-  {%- assign discount_percentage = product.compare_at_price
+{% for product in collection.products %}
+  {% assign discountPercentage = product.compare_at_price
     | minus: product.price
     | times: 100
     | divided_by: product.compare_at_price
-    | round
-  -%}
-
-  {%- capture discount_list -%}
-    {{ discount_list }}{{ discount_percentage }}{% unless forloop.last %},{% endunless %}
-  {%- endcapture -%}
-
-  <div>
-    <h3>{{ product.title }}</h3>
-    <p>Price: {{ product.price | money_with_currency }}</p>
-    <p>compare at price: {{ product.compare_at_price | money_with_currency }}</p>
-    <p>Discount: {{ discount_percentage }}%</p>
-    <!-- Add other product information as needed -->
-  </div>
-{%- endfor -%}
-
-{% assign discount_array = discount_list | split: ',' %}
-
-{% for discount in discount_array %}
-  <p>{{ discount }}</p>
+    | round: 0
+  %}
+  <p>{{ discountPercentage }}</p>
+  {% render 'product-item', discountP: discountPercentage %}
 {% endfor %}
-
-<!--
-  {% for product in collection.products %}
-    {% assign discountPercentage = product.compare_at_price
-      | minus: product.price
-      | times: 100
-      | divided_by: product.compare_at_price
-      | round: 0
-    %}
-    <p>{{ discountPercentage }}</p>
-  {% endfor %}
--->
 
 <!-- Javascript -->
 <!-- we have to update the url with sort_by=best-selling query param and refresh the page for sorting to work -->
 <script>
-
   const productsJs = "{{ collection.products | json }}";
 
     console.log(productsJs);
