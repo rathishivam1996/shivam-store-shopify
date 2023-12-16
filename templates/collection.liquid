@@ -27,7 +27,7 @@
     | round: 0
   %}
   <p>{{ discountPercentage }}</p>
-  {% render 'product-item', discountP: discountPercentage %}
+  {% render 'product-item', product: product, discountP: discountPercentage %}
 {% endfor %}
 
 <!-- Javascript -->
