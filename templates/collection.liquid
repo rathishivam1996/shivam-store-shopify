@@ -45,6 +45,10 @@
 
   {% assign discount_array = discount_list | split: ',' %}
 
+  {% for discount in discount_array %}
+    <p>{{ discount }}</p>
+  {% endfor %}
+
   <!--
     {% for product in collection.products %}
       {% assign discountPercentage = product.compare_at_price
