@@ -37,8 +37,8 @@
 
     <div>
       <h3>{{ product.title }}</h3>
-      <p>Price: ${{ product.price }}</p>
-      <p>compare at price: {{ product.compare_at_price }}</p>
+      <p>Price: ${{ product.price | money_with_currency }}</p>
+      <p>compare at price: {{ product.compare_at_price | money_with_currency }}</p>
       <p>Discount: {{ discount_percentage }}%</p>
       <!-- Add other product information as needed -->
     </div>
