@@ -3,16 +3,14 @@
 {% paginate collection.products by 5 %}
   <hr>
   <br>
-  <select id='sort-by'>
-    {% assign sort_by = collection.sort_by
-      | default: collection.default_sort_by
-    %}
+  <select id="sort-by">
+    {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
 
     {% for option in collection.sort_options %}
       <option
-        value='{{ option.value }}'
+        value="{{ option.value }}"
         {% if option.value == sort_by %}
-          selected='selected'
+          selected="selected"
         {% endif %}
       >
         {{ option.name }}
@@ -30,6 +28,10 @@
       | round: 0
     %}
     <p>{{ discountPercentage }}</p>
+    {% assign sorted_products = collection.products | sort: 'discount_percentage' | reverse %}
+  {% endfor %}
+
+  {% for product in sorted_products %}
     {% render 'product-item', product: product %}
   {% endfor %}
 
@@ -37,9 +39,7 @@
 {% endpaginate %}
 
 <!-- Javascript -->
-<!--
-  we have to update the url with sort_by=best-selling query param and refresh the page for sorting to work
--->
+<!-- we have to update the url with sort_by=best-selling query param and refresh the page for sorting to work -->
 <script>
   Shopify.queryParams = {};
 
