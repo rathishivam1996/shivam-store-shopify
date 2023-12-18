@@ -4,56 +4,56 @@
 
 {% assign selectedProduct = product.selected_or_first_available_variant %}
 
-<div class='product-featured-image-container'>
+<div class="product-featured-image-container">
   {% if selectedProduct.featured_image %}
     {% assign featuredImage = selectedProduct.featured_image %}
     <h3>Featured Image</h3>
     <img
-      width='200'
-      height='200'
-      src='{{featuredImage |  image_url: master }}'
+      width="200"
+      height="200"
+      src="{{featuredImage |  image_url }}"
     >
   {% else %}
     {% assign featuredImage = product.featured_image %}
     <h1>Product Image</h1>
     <img
-      width='200'
-      height='200'
-      src='{{featuredImage|  image_url: master }}'
+      width="200"
+      height="200"
+      src="{{featuredImage|  image_url }}"
     >
   {% endif %}
 </div>
 <br>
-<div class='product-thumb-container'>
+<div class="product-thumb-container">
   <h3>Thumbnail Images</h3>
   {% for image in product.images %}
     <img
-      width='200'
-      height='200'
-      src='{{image |  image_url: master }}'
-      class='
+      width="200"
+      height="200"
+      src="{{image |  image_url }}"
+      class="
         {% if image == featuredImage %}
           selected
         {% endif %}
-      '
+      "
     >
   {% endfor %}
 </div>
-<div class='product-prices-container'>
+<div class="product-prices-container">
   <p
-    class='
+    class="
       product-compare-at-price-container
       {% if selectedProduct.compare_at_price == nil or selectedProduct.compare_at_price == empty or selectedProduct.compare_at_price <= selectedProduct.price %}
         hide
       {% endif %}
-    '
+    "
   >
     Original Price =
     {{ product.selected_or_first_available_variant.compare_at_price | money }}
   </p>
 
   <p
-    class='product-price-container'
+    class="product-price-container"
   >
     Discounted Price =
     {{ product.selected_or_first_available_variant.price | money }}
@@ -75,26 +75,24 @@
     2) Selet the hidden-product-variant-input.value = matchedVariant.id
   -->
   <input
-    type='hidden'
-    name='id'
-    value='{{ product.selected_or_first_available_variant.id }}'
-    id='hidden-product-variant-input'
+    type="hidden"
+    name="id"
+    value="{{ product.selected_or_first_available_variant.id }}"
+    id="hidden-product-variant-input"
   >
 
   <!-- * Input of PRODUCT QUANTITY SELECTOR -->
-  <div class='product-quantity-selector'>
-    <!--
-      To render +/- svg inside of button use {% include "plus.svg" %} , for svg inside of snippets folder
-    -->
+  <div class="product-quantity-selector">
+    <!-- To render +/- svg inside of button use {% include "plus.svg" %} , for svg inside of snippets folder -->
     <!-- <label for="quantity">Quantity</label> -->
-    <button type='button' class='product-quantity-selector-minus'>-</button>
+    <button type="button" class="product-quantity-selector-minus">-</button>
     <input
-      id='quantity'
-      name='quantity'
-      value='1'
-      class='product-quantity-selector-input'
+      id="quantity"
+      name="quantity"
+      value="1"
+      class="product-quantity-selector-input"
     >
-    <button type='button' class='product-quantity-selector-plus'>+</button>
+    <button type="button" class="product-quantity-selector-plus">+</button>
   </div>
 
   <!--
@@ -102,7 +100,7 @@
     Loop product.options_with_values to display custom radio buttons
   -->
   {% if product.variants.size > 1 %}
-    <div class='product-variant-options'>
+    <div class="product-variant-options">
       {% for option in product.options_with_values -%}
         <fieldset>
           <legend>{{ option.name }}</legend>
@@ -112,12 +110,12 @@
                 {% if option.selected_value == value %}
                   checked
                 {% endif %}
-                type='radio'
-                name='{{ option.name }}'
-                value='{{ value }}'
-                id='{{ option.name | handleize }}-{{ value | handleize }}'
+                type="radio"
+                name="{{ option.name }}"
+                value="{{ value }}"
+                id="{{ option.name | handleize }}-{{ value | handleize }}"
               >
-              <label for='{{ option.name | handleize }}-{{ value | handleize }}'>
+              <label for="{{ option.name | handleize }}-{{ value | handleize }}">
                 {{- value -}}
               </label>
             </div>
@@ -129,8 +127,8 @@
 
   <!-- Add to cart button -->
   <button
-    type='submit'
-    id='product-add-to-cart-button'
+    type="submit"
+    id="product-add-to-cart-button"
     {% unless selectedProduct.available %}
       disabled
     {% endunless %}
@@ -144,8 +142,8 @@
 
   <!-- Buy it now button -->
   <button
-    type='submit'
-    id='product-buy-it-now-button'
+    type="submit"
+    id="product-buy-it-now-button"
     {% unless selectedProduct.available %}
       disabled
     {% endunless %}
@@ -159,8 +157,8 @@
 {% endform %}
 
 <div
-  id='recently-viewed'
-  class='w-full h-[500px] flex justify-center items-center gap-y-2 bg-red-400'
+  id="recently-viewed"
+  class="w-full h-[500px] flex justify-center items-center gap-y-2 bg-red-400"
 ></div>
 
 {% comment %} {% render 'product' %} {% endcomment %}
