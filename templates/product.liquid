@@ -339,4 +339,25 @@
 >
 <button type="button" id="id-product-quantity-decrement">Decrement</button>
 {% if product.variants.size > 1 %}
+  {% for option in product.options_with_values -%}
+    <fieldset>
+      <legend>{{ option.name }}</legend>
+      {% for value in option.values %}
+        <div>
+          <input
+            {% if option.selected_value == value %}
+              checked
+            {% endif %}
+            type="radio"
+            name="{{ option.name }}"
+            value="{{ value }}"
+            id="{{ option.name | handleize }}-{{ value | handleize }}"
+          >
+          <label for="{{ option.name | handleize }}-{{ value | handleize }}">
+            {{- value -}}
+          </label>
+        </div>
+      {% endfor %}
+    </fieldset>
+  {% endfor %}
 {% endif %}
