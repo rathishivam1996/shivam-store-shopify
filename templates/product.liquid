@@ -321,3 +321,22 @@
      }
    </style>
 {% endcomment %}
+
+{% assign selectedVariant = product.selected_or_first_available_variant %}
+<img src="{{ selectedVariant.featured_image | image_url }}" width="300" height="300">
+<h1>{{ selectedVariant.title }}</h1>
+<p>{{ selectedVariant.vendor }}</p>
+<p>{{ selectedVariant.price }}</p>
+<p>{{ selectedVariant.compare_at_price }}</p>
+<button type="button" id="id-product-quantity-increment">Increment</button>
+<label for="id-product-quantity">Product Quantity</label>
+<input
+  type="text"
+  id="id-product-quantity"
+  aria-describedby="hint"
+  inputmode="numeric"
+  pattern="[0-9]*"
+>
+<button type="button" id="id-product-quantity-decrement">Decrement</button>
+{% if product.variants.size > 1 %}
+{% endif %}
