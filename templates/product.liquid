@@ -341,8 +341,9 @@
 {% if product.variants.size > 1 %}
   {% for option in product.options_with_values -%}
     <fieldset>
-      <legend>{{ option.name }}</legend>
+      <legend>Option.name: {{ option.name }}</legend>
       {% for value in option.values %}
+        value in option.values: {{ value }}
         <div>
           <input
             {% if option.selected_value == value %}
