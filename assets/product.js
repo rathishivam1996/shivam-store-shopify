@@ -1,2 +1,2 @@
 // eslint-disable-next-line no-unused-vars
-function productjSON(PRODUCT)
+function productJson(productJson)
