@@ -365,3 +365,33 @@
     </fieldset>
   {% endfor %}
 {% endif %}
+
+<!-- Add to cart button -->
+<button
+  type="submit"
+  id="product-add-to-cart-button"
+  {% unless selectedProduct.available %}
+    disabled
+  {% endunless %}
+>
+  {% if selectedProduct.available %}
+    Add To Cart
+  {% else %}
+    Out Of Stock
+  {% endif %}
+</button>
+
+<!-- Buy it now button -->
+<button
+  type="submit"
+  id="product-buy-it-now-button"
+  {% unless selectedProduct.available %}
+    disabled
+  {% endunless %}
+>
+  {% if selectedProduct.available %}
+    Buy It Now
+  {% else %}
+    Out Of Stock
+  {% endif %}
+</button>
