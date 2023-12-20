@@ -1,3 +1,3 @@
 const init = {
-    product
+    productJson = ()
 }
