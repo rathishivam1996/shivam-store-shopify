@@ -425,8 +425,8 @@
 <script src='{{"product.js" |  asset_url}}' defer />
 
 <script>
-  $(document).ready(() => {
-    console.log(ready);
-    productJson({{product| json}})
-  });
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
 </script>
