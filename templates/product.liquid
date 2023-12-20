@@ -424,6 +424,7 @@
 
 <script>
   $(document).ready(function () {
-    productJs.setProduct({{product |  json}});
+    const productJs = Object.create(productJsUtils);
+    productJs.setProduct({{product | json}});
   });
 </script>
