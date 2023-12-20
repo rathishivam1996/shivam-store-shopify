@@ -14,6 +14,8 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
+    $: true,
+    jQuery: true,
   },
   overrides: [
     {
