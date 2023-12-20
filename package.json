@@ -23,6 +23,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "tw": "npx tailwindcss -i ./src/input.css -o ./assets/output.css --watch"
   }
 }
