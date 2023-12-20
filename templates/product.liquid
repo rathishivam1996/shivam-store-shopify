@@ -327,6 +327,10 @@
 <h1>{{ selectedVariant.title }}</h1>
 <p>{{ selectedVariant.vendor }}</p>
 <p>{{ selectedVariant.price }}</p>
+{% assign compareAtPrice = selectedVariant.compare_at_price %}
+{% if compareAtPrice == null or compareAtPrice == empty or compareAtPrice <= compareAtPrice.price %}
+  hide
+{% endif %}
 <p>{{ selectedVariant.compare_at_price }}</p>
 <label for="id-product-quantity">Product Quantity</label>
 <div style="display: flex; justify-content: flex-start; align-items: center;">
@@ -345,7 +349,6 @@
     <fieldset>
       <legend>Option.name: {{ option.name }}</legend>
       {% for value in option.values %}
-        value in option.values: {{ value }}
         <div>
           <!-- id="color-21336-Beige" -->
           <input
