@@ -2,5 +2,5 @@
 function handleVariantChange(product) {
   console.log(product, 'productJson');
 
-  $(".product-variant-radio-input").
+  $(".product-variant-radio-input input:radio").
 }
