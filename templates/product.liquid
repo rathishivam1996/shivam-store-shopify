@@ -370,11 +370,11 @@
 <button
   type="submit"
   id="product-add-to-cart-button"
-  {% unless selectedProduct.available %}
+  {% unless selectedVariant.available %}
     disabled
   {% endunless %}
 >
-  {% if selectedProduct.available %}
+  {% if selectedVariant.available %}
     Add To Cart
   {% else %}
     Out Of Stock
@@ -385,11 +385,11 @@
 <button
   type="submit"
   id="product-buy-it-now-button"
-  {% unless selectedProduct.available %}
+  {% unless selectedVariant.available %}
     disabled
   {% endunless %}
 >
-  {% if selectedProduct.available %}
+  {% if selectedVariant.available %}
     Buy It Now
   {% else %}
     Out Of Stock
