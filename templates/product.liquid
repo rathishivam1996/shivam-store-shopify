@@ -335,7 +335,9 @@
   <p>{{ selectedVariant.compare_at_price }}</p>
   <label for="id-product-quantity">Product Quantity</label>
   <div style="display: flex; justify-content: flex-start; align-items: center;">
-    <button type="button" id="id-product-quantity-increment">Increment</button>
+    <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-increment">
+      Increment
+    </button>
     <input
       type="text"
       id="id-product-quantity"
@@ -343,7 +345,9 @@
       inputmode="numeric"
       pattern="[0-9]*"
     >
-    <button type="button" id="id-product-quantity-decrement">Decrement</button>
+    <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-decrement">
+      Decrement
+    </button>
   </div>
   {% if product.variants.size > 1 %}
     {% for option in product.options_with_values -%}
