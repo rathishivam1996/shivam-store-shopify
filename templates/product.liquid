@@ -345,6 +345,7 @@
       {% for value in option.values %}
         value in option.values: {{ value }}
         <div>
+          <!-- id="color-21336-Beige" -->
           <input
             {% if option.selected_value == value %}
               checked
@@ -352,11 +353,8 @@
             type="radio"
             name="{{ option.name }}"
             value="{{ value }}"
-            <!--
-            id=""
-            --
+            id="{{ option.name | handleize }}-{{ value | handleize }}"
           >
-          id="{{ option.name | handleize }}-{{ value | handleize }}" >
           <label for="{{ option.name | handleize }}-{{ value | handleize }}">
             {{- value -}}
           </label>
