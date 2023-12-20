@@ -2,5 +2,5 @@
 function handleVariantChange(product) {
   console.log(product, 'productJson');
 
-  c
+  $()
 }
