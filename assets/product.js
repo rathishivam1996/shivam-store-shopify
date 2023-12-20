@@ -2,7 +2,7 @@
 const productJs = {
   product: {},
   setProduct: (productJson) => {
-    console.log(typeof productJson);
     this.product = productJson;
+    console.log(this.product, "product");
   },
 };
