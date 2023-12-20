@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-log
+console.log('running');
 function productJson(product) {
   console.log(product, 'productJson');
 }
