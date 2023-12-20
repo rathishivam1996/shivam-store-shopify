@@ -322,30 +322,45 @@
    </style>
 {% endcomment %}
 
-<div style="padding: 30px">
+<div style='padding: 30px'>
   {% assign selectedVariant = product.selected_or_first_available_variant %}
-  <img src="{{ selectedVariant.featured_image | image_url }}" width="300" height="300">
+  <img
+    src='{{ selectedVariant.featured_image | image_url }}'
+    width='300'
+    height='300'
+  >
   <h1>{{ selectedVariant.title }}</h1>
   <p>{{ selectedVariant.vendor }}</p>
   <p>{{ selectedVariant.price }}</p>
   {% assign compareAtPrice = selectedVariant.compare_at_price %}
-  {% if compareAtPrice == null or compareAtPrice == empty or compareAtPrice <= compareAtPrice.price %}
+  {% if compareAtPrice == null
+    or compareAtPrice == empty
+    or compareAtPrice <= compareAtPrice.price
+  %}
     hide
   {% endif %}
   <p>{{ selectedVariant.compare_at_price }}</p>
-  <label for="id-product-quantity">Product Quantity</label>
-  <div style="display: flex; justify-content: flex-start; align-items: center;">
-    <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-increment">
+  <label for='id-product-quantity'>Product Quantity</label>
+  <div style='display: flex; justify-content: flex-start; align-items: center;'>
+    <button
+      style='padding: 10px; background-color: gray;'
+      type='button'
+      id='id-product-quantity-increment'
+    >
       Increment
     </button>
     <input
-      type="text"
-      id="id-product-quantity"
-      aria-describedby="hint"
-      inputmode="numeric"
-      pattern="[0-9]*"
+      type='text'
+      id='id-product-quantity'
+      aria-describedby='hint'
+      inputmode='numeric'
+      pattern='[0-9]*'
     >
-    <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-decrement">
+    <button
+      style='padding: 10px; background-color: gray;'
+      type='button'
+      id='id-product-quantity-decrement'
+    >
       Decrement
     </button>
   </div>
@@ -360,12 +375,12 @@
               {% if option.selected_value == value %}
                 checked
               {% endif %}
-              type="radio"
-              name="{{ option.name }}"
-              value="{{ value }}"
-              id="{{ option.name | handleize }}-{{ value | handleize }}"
+              type='radio'
+              name='{{ option.name }}'
+              value='{{ value }}'
+              id='{{ option.name | handleize }}-{{ value | handleize }}'
             >
-            <label for="{{ option.name | handleize }}-{{ value | handleize }}">
+            <label for='{{ option.name | handleize }}-{{ value | handleize }}'>
               {{- value -}}
             </label>
           </div>
@@ -376,9 +391,9 @@
 
   <!-- Add to cart button -->
   <button
-    style="padding: 10px; background-color: gray;"
-    type="submit"
-    id="product-add-to-cart-button"
+    style='padding: 10px; background-color: gray;'
+    type='submit'
+    id='product-add-to-cart-button'
     {% unless selectedVariant.available %}
       disabled
     {% endunless %}
@@ -392,9 +407,9 @@
 
   <!-- Buy it now button -->
   <button
-    style="padding: 10px; background-color: gray;"
-    type="submit"
-    id="product-buy-it-now-button"
+    style='padding: 10px; background-color: gray;'
+    type='submit'
+    id='product-buy-it-now-button'
     {% unless selectedVariant.available %}
       disabled
     {% endunless %}
@@ -407,4 +422,4 @@
   </button>
 </div>
 
-<script src="{{product.js |  asset_url}}"
+<script src='{{"product.js" |  asset_url}}' />
