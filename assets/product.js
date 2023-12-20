@@ -1,3 +1,3 @@
 const init = {
-    productJson: (productJson) =>  productJson;
-}
+  productJson: (productJson) => productJson,
+};
