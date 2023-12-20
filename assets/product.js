@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const productJsUtils = {
+const productJs = {
   product: {},
   setProduct: function (productJson) {
     this.product = productJson;
