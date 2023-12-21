@@ -5,6 +5,8 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange () {
-    $(".product-variant-options inpust[type").each(function ())
+    $(".product-variant-options inpust[type").each(function (index, elem){
+      $(this)
+    })
   }
 };
