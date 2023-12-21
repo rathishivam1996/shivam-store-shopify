@@ -5,6 +5,8 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
-    document.querySelectorAll(`.product-variant-options input[type='radio']`).forEach((ra))
+    document
+      .querySelectorAll(`.product-variant-options input[type='radio']`)
+      .forEach((radio) => {});
   },
 };
