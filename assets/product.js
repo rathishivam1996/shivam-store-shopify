@@ -7,6 +7,8 @@ const productJs = {
   handleVariantChange() {
     document
       .querySelectorAll(`.product-variant-options input[type='radio']`)
-      .forEach((radio) => {});
+      .forEach((radio) => {
+        radio
+      });
   },
 };
