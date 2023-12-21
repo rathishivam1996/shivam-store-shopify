@@ -5,7 +5,7 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
-    console.log($(`.product-variant-options input[type='radio']`));
+    console.log($(`.product-variant-options`));
     $(`.product-variant-options input[type='radio']`).each(
       function (index, elem) {
         console.log(index);
