@@ -5,10 +5,8 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
-    document
-      .querySelectorAll(`.product-variant-options input[type='radio']`)
-      .forEach((radio) => {
-        radio.addEventListener("change", (e))
-      });
+    $(".product-variant-radio-group input:radio").each(function (index, radio) {
+      console.log(radio);
+    });
   },
 };
