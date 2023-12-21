@@ -4,11 +4,9 @@ const productJs = {
   setProduct(productJson) {
     this.product = productJson;
   },
-  handleVariantChange() {
-    $(`.product-variant-options input[type="radio"]`).each(
-      function (index, elem) {
-        console.log($(this);)
-      },
-    );
-  },
+  handleVariantChange () {
+    $(".product-variant-options input[type=").each(function (index, elem){
+      $(this)
+    })
+  }
 };
