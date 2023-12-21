@@ -8,7 +8,7 @@ const productJs = {
     document
       .querySelectorAll(`.product-variant-options input[type='radio']`)
       .forEach((radio) => {
-        radio
+        radio.addEventListener
       });
   },
 };
