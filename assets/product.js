@@ -4,4 +4,7 @@ const productJs = {
   setProduct(productJson) {
     this.product = productJson;
   },
+  handleVariantChange(){
+    
+  }
 };
