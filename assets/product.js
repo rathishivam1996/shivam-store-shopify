@@ -8,6 +8,8 @@ const productJs = {
     console.log($(`.product-variant-options input[type='radio']`));
     $(`.product-variant-options input[type='radio']`).each(
       function (index, elem) {
+        console.log(index);
+        
         console.log($(this));
       },
     );
