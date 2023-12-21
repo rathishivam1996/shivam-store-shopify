@@ -5,7 +5,7 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange () {
-    $(".product-variant-options input[type").each(function (index, elem){
+    $(".product-variant-options input[type=").each(function (index, elem){
       $(this)
     })
   }
