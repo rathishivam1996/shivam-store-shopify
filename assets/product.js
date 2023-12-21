@@ -5,6 +5,6 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange () {
-    const variantRadios = $(".product-variant-options")
+    const variantRadios = $(".product-variant-options inpust[type")
   }
 };
