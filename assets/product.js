@@ -5,6 +5,6 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
-    document.querySelectorAll()
+    document.querySelectorAll(`.product`)
   },
 };
