@@ -16,7 +16,6 @@ const productJs = {
         );
 
         // find matched variant
-        console.log(this);
         const matchedVariant = this.product.variants.find((variant) => {
           let pass = true;
           for (let i = 0; i < selectedOptions.length; i += 1) {
@@ -27,8 +26,6 @@ const productJs = {
           }
           return pass;
         });
-
-        console.log(matchedVariant);
       });
     });
   },
