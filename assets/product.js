@@ -29,7 +29,6 @@ const productJs = {
             return pass;
           },
         );
-        console.log(matchedVariant);
       });
     });
   },
