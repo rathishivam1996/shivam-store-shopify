@@ -37,6 +37,7 @@ const productJs = {
     const productJsContext = this;
     const radioGroup = $('.product-variant-radio-group');
 
+    // delegate event
     radioGroup.on('change', 'input:radio', function onRadioChange() {
       const selectedOptions = radioGroup
         .find('input:radio:checked')
