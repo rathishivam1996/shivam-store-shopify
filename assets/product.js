@@ -31,20 +31,27 @@ const productJs = {
     //     );
     //   });
     // });
-  
-  
+
     const productJsContext = this;
     const radioGroup = $('.product-variant-radio-group');
-  
+
     radioGroup.on('change', 'input:radio', function onRadioChange() {
-      const selectedOptions = radioGroup.find('input:radio:checked').map(function mapCheckedRadios() {
-        return $(this).val();
-      }).get();
-  
-      const matchedVariant = productJsContext.product.variants.find((variant) => {
-        return selectedOptions.every((option, index) => variant.options[index] === option);
-      });
-  
+      const selectedOptions = radioGroup
+        .find('input:radio:checked')
+        .map(function mapCheckedRadios() {
+          return $(this).val();
+        })
+        .get();
+
+      const matchedVariant = productJsContext.product.variants.find(
+        (variant) => {
+          return selectedOptions.every(
+            (option, index) => variant.options[index] === option,
+          );
+        },
+      );
+
       // Do something with matchedVariant
+    });
   },
 };
