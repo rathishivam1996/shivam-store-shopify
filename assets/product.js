@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable arrow-body-style */
 // eslint-disable-next-line no-unused-vars
 const productJs = {
@@ -43,6 +44,8 @@ const productJs = {
           return $(this).val();
         })
         .get();
+
+      console.log(selectedOptions);
 
       const matchedVariant = productJsContext.product.variants.find(
         (variant) => {
