@@ -9,11 +9,9 @@ const productJs = {
       // on each radio change
       $(this).on('change', () => {
         const selectedOptions = [];
-        $('.product-variant-radio-group input:radio:checked').each(
-          function () {
-            selectedOptions.push($(this).val());
-          },
-        );
+        $('.product-variant-radio-group input:radio:checked').each(function () {
+          selectedOptions.push($(this).val());
+        });
 
         // find matched variant
         const matchedVariant = product.variants.find((variant) => {
