@@ -11,7 +11,6 @@ const productJs = {
         $(".product-variant-radio-group input:radio:checked").each(function (index, nativeRadio) {
           selectedOptions.push($(this).val());
         });
-        
       });
     });
   },
