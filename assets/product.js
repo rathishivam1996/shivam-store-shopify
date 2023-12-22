@@ -26,6 +26,8 @@ const productJs = {
           }
           return pass;
         });
+
+        console.log(first)
       });
     });
   },
