@@ -27,7 +27,7 @@ const productJs = {
           return pass;
         });
 
-        console.log(first)
+        console.log(matchedVariant);
       });
     });
   },
