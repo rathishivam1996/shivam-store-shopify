@@ -16,6 +16,7 @@ const productJs = {
         );
 
         // find matched variant
+        console.log
         const matchedVariant = this.product.variants.find((variant) => {
           let pass = true;
           for (let i = 0; i < selectedOptions.length; i += 1) {
