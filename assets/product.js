@@ -16,13 +16,13 @@ const productJs = {
         // find matched variant
         const matchedVariant = product.variants.find((variant) => {
           let pass = true;
-             for (let i=0; i<selectedOptions.length; i+=1) {
-               if(selectedOptions.indexOf(variant.options[i]) === -1) {
-                 pass = false;
-                 break;
-               }
-             }
-             return pass;
+          for (let i=0; i<selectedOptions.length; i+=1) {
+            if(selectedOptions.indexOf(variant.options[i]) === -1) {
+              pass = false;
+              break;
+            }
+          }
+          return pass;
         });
       });
     });
