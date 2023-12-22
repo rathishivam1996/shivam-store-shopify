@@ -5,12 +5,12 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
-    $('.product-variant-radio-group input:radio').each(function _() {
+    $('.product-variant-radio-group input:radio').each(function () {
       // on each radio change
       $(this).on('change', () => {
         const selectedOptions = [];
         $('.product-variant-radio-group input:radio:checked').each(
-          function (index, nativeRadio) {
+          function () {
             selectedOptions.push($(this).val());
           },
         );
