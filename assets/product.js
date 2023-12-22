@@ -43,8 +43,7 @@ const productJs = {
         .find('input:radio:checked')
         .map(function mapCheckedRadios() {
           return $(this).val();
-        })
-        .get();
+        });
 
       console.log(selectedOptions);
 
