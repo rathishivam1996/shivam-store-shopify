@@ -5,9 +5,9 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
-    $('.product-variant-radio-group input:radio').each(function (index, elem) {
+    $('.product-variant-radio-group input:radio').each((index, elem) => {
       console.log(this, 'outer');
       console.log($(this), 'jquery');
-    }.bind(t));
+    });
   },
 };
