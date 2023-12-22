@@ -7,8 +7,12 @@ const productJs = {
   handleVariantChange() {
     $(".product-variant-radio-group input:radio").each(function (index, radio) {
       $(this).on("change", function () {
-        
-      })
+        const selectedOptions = [];
+        $(".product-variant-radio-group input:radio:checked").each(function (index, nativeRadio) {
+          selectedOptions.push($(this).val());
+        });
+        console.log(selectedOptions, "selectedOptions");
+      });
     });
   },
 };
