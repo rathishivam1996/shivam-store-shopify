@@ -5,13 +5,15 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
-    $('.product-variant-radio-group input:radio').each(function _() {
+    $('.product-variant-radio-group input:radio').each(function radio() {
       // on each radio change
       $(this).on('change', () => {
         const selectedOptions = [];
-        $('.product-variant-radio-group input:radio:checked').each(function _() {
-          selectedOptions.push($(this).val());
-        });
+        $('.product-variant-radio-group input:radio:checked').each(
+          function checkedRadio() {
+            selectedOptions.push($(this).val());
+          },
+        );
 
         // find matched variant
         const matchedVariant = product.variants.find((variant) => {
