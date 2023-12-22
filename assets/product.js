@@ -8,6 +8,7 @@ const productJs = {
     const productJsContext = this;
     $('.product-variant-radio-group input:radio').each(function (index, elem) {
       console.log($(this));
+      console.log(productJsContext);
     });
   },
 };
