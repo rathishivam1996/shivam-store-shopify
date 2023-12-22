@@ -5,6 +5,7 @@ const productJs = {
     this.product = productJson;
   },
   handleVariantChange() {
+    const productJsContext = this;
     $('.product-variant-radio-group input:radio').each(function radio() {
       // on each radio change
       $(this).on('change', () => {
