@@ -17,16 +17,19 @@ const productJs = {
         );
 
         // find matched variant
-        const matchedVariant = this.product.variants.find((variant) => {
-          let pass = true;
-          for (let i = 0; i < selectedOptions.length; i += 1) {
-            if (selectedOptions.indexOf(variant.options[i]) === -1) {
-              pass = false;
-              break;
+        const matchedVariant = productJsContext.product.variants.find(
+          (variant) => {
+            let pass = true;
+            for (let i = 0; i < selectedOptions.length; i += 1) {
+              if (selectedOptions.indexOf(variant.options[i]) === -1) {
+                pass = false;
+                break;
+              }
             }
-          }
-          return pass;
-        });
+            return pass;
+          },
+        );
+        console.log(matchedVariant);
       });
     });
   },
