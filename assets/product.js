@@ -7,9 +7,8 @@ const productJs = {
   handleVariantChange() {
     $('.product-variant-radio-group input:radio').each(
       function (index, elem) {
-        console.log(this, 'outer');
-        console.log($(this), 'jquery');
-      }.bind(this),
+        
+      }
     );
   },
 };
