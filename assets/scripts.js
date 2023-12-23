@@ -1,18 +1,18 @@
-Co Shopify = Shopify || {};
+const Shopify = Shopify || {};
 // ---------------------------------------------------------------------------
 // Money format handler
 // ---------------------------------------------------------------------------
 Shopify.money_format = '${{amount}}';
 Shopify.formatMoney = function (cents, format) {
-  if (typeof cents == 'string') {
+  if (typeof cents === 'string') {
     cents = cents.replace('.', '');
   }
-  var value = '';
-  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-  var formatString = format || this.money_format;
+  let value = '';
+  const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  const formatString = format || this.money_format;
 
   function defaultOption(opt, def) {
-    return typeof opt == 'undefined' ? def : opt;
+    return typeof opt === 'undefined' ? def : opt;
   }
 
   function formatWithDelimiters(number, precision, thousands, decimal) {
@@ -26,9 +26,12 @@ Shopify.formatMoney = function (cents, format) {
 
     number = (number / 100.0).toFixed(precision);
 
-    var parts = number.split('.'),
-      dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
-      cents = parts[1] ? decimal + parts[1] : '';
+    const parts = number.split('.');
+    const dollars = parts[0].replace(
+      /(\d)(?=(\d\d\d)+(?!\d))/g,
+      `$1${thousands}`,
+    );
+    const cents = parts[1] ? decimal + parts[1] : '';
 
     return dollars + cents;
   }
