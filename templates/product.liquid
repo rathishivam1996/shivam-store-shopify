@@ -279,40 +279,40 @@
   {% assign selectedVariant = product.selected_or_first_available_variant %}
 
   <img
-    id='{product-featured-image'
+    id='{{product.id}}-product-featured-image'
     src='{{ selectedVariant.featured_image | image_url }}'
     width='300'
     height='300'
   >
-  <h1 id='{product-title'>{{ selectedVariant.title }}</h1>
-  <p id='{product-vendor'>{{ selectedVariant.vendor }}</p>
+  <h1 id='{{product.id}}-product-title'>{{ selectedVariant.title }}</h1>
+  <p id='{{product.id}}-product-vendor'>{{ selectedVariant.vendor }}</p>
 
   <div class='product-price-container'>
-    <p id='{product-price' class='product.price'>
+    <p id='{{product.id}}-product-price' class='product.price'>
       {{ selectedVariant.price | money_with_currency }}
     </p>
 
     {% if selectedVariant.compare_at_price
       and selectedVariant.compare_at_price > selectedVariant.price
     %}
-      <p id='{product-compare-at-price' class='product.price'>
+      <p id='{{product.id}}-product-compare-at-price' class='product.price'>
         {{ selectedVariant.compare_at_price | money_with_currency }}
       </p>
     {% endif %}
   </div>
 
-  <label for='{product-quantity'>Product Quantity</label>
+  <label for=>Product Quantity</label>
   <div style='display: flex; justify-content: flex-start; align-items: center;'>
     <button
       style='padding: 10px; background-color: gray;'
       type='button'
-      id='{product-quantity-plus'
+      id='{{product.id}}-product-quantity-plus'
     >
       Increment
     </button>
     <input
       type='text'
-      id='{product-quantity'
+      id='{{product.id}}-product-quantity'
       aria-describedby='hint'
       inputmode='numeric'
       pattern='[0-9]*'
@@ -320,7 +320,7 @@
     <button
       style='padding: 10px; background-color: gray;'
       type='button'
-      id='{product-quantity-minus'
+      id='{{product.id}}-product-quantity-minus'
     >
       Decrement
     </button>
