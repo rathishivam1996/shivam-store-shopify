@@ -279,7 +279,7 @@
   {% assign selectedVariant = product.selected_or_first_available_variant %}
 
   <img
-    id='product-featured-image-{{product.id}}'
+    id='product-featured-image-{{product.id |  handleize}}'
     src='{{ selectedVariant.featured_image | image_url }}'
     width='300'
     height='300'
