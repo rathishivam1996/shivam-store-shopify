@@ -18,7 +18,7 @@ formatMoney = (
     .toFixed(0)
     .replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
 
-  const formattedPaise = paise.toFixed(decimals).padStart(decimals + 1, '0');
+  const formattedPaise = paise.toFixed(decimals).padStart(decimals, '0');
 
   return currency + formattedRupees + decimalSeperator + formattedPaise;
 };
