@@ -315,8 +315,6 @@
             <p>value in option.values: {{ value }}</p>
             <p>option.selected_value: {{ option.selected_value }}</p>
             <p>checked</p>
-            {% if option.selected_value == value %} checked {% endif %}
-
             <input
               {% if option.selected_value == value %}
                 checked
