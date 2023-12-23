@@ -344,7 +344,7 @@
               value='{{ value }}'
               id='{{product.id}}-{{ option.name | handleize }}-{{ value | handleize }}'
             >
-            <label for='{{ option.name | handleize }}-{{ value | handleize }}'>
+            <label for='{{product.id}}-{{ option.name | handleize }}-{{ value | handleize }}'>
               {{- value -}}
             </label>
           </div>
