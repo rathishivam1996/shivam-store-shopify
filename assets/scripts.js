@@ -49,6 +49,8 @@ Shopify.formatMoney = function (cents, format) {
     case 'amount_no_decimals_with_comma_separator':
       value = formatWithDelimiters(cents, 0, '.', ',');
       break;
+    default:
+      return '';
   }
 
   return formatString.replace(placeholderRegex, value);
