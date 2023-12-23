@@ -1,5 +1,4 @@
-MyShopify.money_format = 'Rs.{{amount}}';
-MyShopify.formatMoney = (
+formatMoney = (
   amount,
   currency = 'Rs.',
   decimals = 2,
