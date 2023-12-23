@@ -284,35 +284,42 @@
     width='300'
     height='300'
   >
-  <h1 id='product-title-{{product.id}}'>{{ selectedVariant.title }}</h1>
-  <p id='product-vendor-{{product.id}}'>{{ product.vendor }}</p>
+  <h1 id='product-title-{{product.id |  handleize}}'>
+    {{ selectedVariant.title }}
+  </h1>
+  <p id='product-vendor-{{product.id |  handleize}}'>{{ product.vendor }}</p>
 
   <div class='product-price-container'>
-    <p id='product-price-{{product.id}}' class='product.price'>
+    <p id='product-price-{{product.id |  handleize}}' class='product.price'>
       {{ selectedVariant.price | money_with_currency }}
     </p>
 
     {% if selectedVariant.compare_at_price
       and selectedVariant.compare_at_price > selectedVariant.price
     %}
-      <p id='product-compare-at-price-{{product.id}}' class='product.price'>
+      <p
+        id='product-compare-at-price-{{product.id |  handleize}}'
+        class='product.price'
+      >
         {{ selectedVariant.compare_at_price | money_with_currency }}
       </p>
     {% endif %}
   </div>
 
-  <label for='product-quantity-input-{{product.id}}'>Product Quantity</label>
+  <label for='product-quantity-input-{{product.id |  handleize}}'
+    >Product Quantity</label
+  >
   <div style='display: flex; justify-content: flex-start; align-items: center;'>
     <button
       style='padding: 10px; background-color: gray;'
       type='button'
-      id='product-quantity-plus-{{product.id}}'
+      id='product-quantity-plus-{{product.id |  handleize}}'
     >
       Increment
     </button>
     <input
       type='text'
-      id='product-quantity-input-{{product.id}}'
+      id='product-quantity-input-{{product.id |  handleize}}'
       aria-describedby='hint'
       inputmode='numeric'
       pattern='[0-9]*'
@@ -320,7 +327,7 @@
     <button
       style='padding: 10px; background-color: gray;'
       type='button'
-      id='product-quantity-minus-{{product.id}}'
+      id='product-quantity-minus-{{product.id |  handleize}}'
     >
       Decrement
     </button>
@@ -332,7 +339,7 @@
         <legend>Option.name: {{ option.name }}</legend>
         {% for value in option.values %}
           <div
-            id='product-variant-radio-group-{{product.id}}'
+            id='product-variant-radio-group-{{product.id |  handleize}}'
             class='product-variant-radio-group'
           >
             <input
@@ -342,9 +349,9 @@
               type='radio'
               name='{{ option.name }}'
               value='{{ value }}'
-              id='{{product.id}}-{{ option.name | handleize }}-{{ value | handleize }}'
+              id='{{product.id |  handleize}}-{{ option.name | handleize }}-{{ value | handleize }}'
             >
-            <label for='{{product.id}}-{{ option.name | handleize }}-{{ value | handleize }}'>
+            <label for='{{product.id |  handleize}}-{{ option.name | handleize }}-{{ value | handleize }}'>
               {{- value -}}
             </label>
           </div>
