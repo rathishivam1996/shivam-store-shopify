@@ -39,9 +39,9 @@ const productJs = {
       console.log(matchedVariant, "matchedVariant");
       // change prices
       $(`#product-price-${this.handlizedId}`).text(`Price: ${matchedVariant.price}`);
-      // if (matchedVariant.compare_at_price) {
-        
-      // }
+      if (matchedVariant.compare_at_price && matchedVariant.compare_at_price > matchedVariant.price) {
+        $(`#product-compare-at-price-${this.handlizedId}`).text(`Compare At Price: ${matchedVariant.compare_at_price}`);
+      }
     });
   },
 };
