@@ -23,13 +23,14 @@ const productJs = {
       );
 
       // change url of the product page without refreshing page
-      const url = new URL(window.location.href);
-      url.searchParams.set('variant', matchedVariant.id);
-      if (window.history.replaceState) {
-        window.history.replaceState(null, this.product.title, url.toString());
-      }else { // change location.href => reloads page!!!
-        window.location.href = url.toString();
-      }
+      // const url = new URL(window.location.href);
+      // url.searchParams.set('variant', matchedVariant.id);
+      // if (window.history.replaceState) {
+      //   window.history.replaceState(null, this.product.title, url.toString());
+      // }else { // change location.href => reloads page!!!
+      //   window.location.href = url.toString();
+      // }
+
     });
   },
 };
