@@ -3,7 +3,7 @@ const Shopify = Shopify || {};
 // Money format handler
 // ---------------------------------------------------------------------------
 Shopify.money_format = '${{amount}}';
-Shopify.formatMoney = function (cents, format) {
+Shopify.formatMoney = (cents, format) => {
   if (typeof cents === 'string') {
     cents = cents.replace('.', '');
   }
