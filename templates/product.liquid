@@ -1,277 +1,277 @@
 {% comment %}
-  <h1>On Product-Item snippet</h1>
-  <br>
-  <h1>{{ product.title }}</h1>
+<h1>On Product-Item snippet</h1>
+<br>
+<h1>{{ product.title }}</h1>
 
-  {% assign selectedProduct = product.selected_or_first_available_variant %}
+{% assign selectedProduct = product.selected_or_first_available_variant %}
 
-  <div class="product-featured-image-container">
-    {% if selectedProduct.featured_image %}
-    {% assign featuredImage = selectedProduct.featured_image %}
-    <h3>Featured Image</h3>
-    <img width="200" height="200" src="{{featuredImage |  image_url }}">
-    {% else %}
-    {% assign featuredImage = product.featured_image %}
-    <h1>Product Image</h1>
-    <img width="200" height="200" src="{{featuredImage|  image_url }}">
-    {% endif %}
-  </div>
-  <br>
-  <div class="product-thumb-container">
-    <h3>Thumbnail Images</h3>
-    {% for image in product.images %}
-    <img width="200" height="200" src="{{image |  image_url }}" class="
+<div class="product-featured-image-container">
+  {% if selectedProduct.featured_image %}
+  {% assign featuredImage = selectedProduct.featured_image %}
+  <h3>Featured Image</h3>
+  <img width="200" height="200" src="{{featuredImage |  image_url }}">
+  {% else %}
+  {% assign featuredImage = product.featured_image %}
+  <h1>Product Image</h1>
+  <img width="200" height="200" src="{{featuredImage|  image_url }}">
+  {% endif %}
+</div>
+<br>
+<div class="product-thumb-container">
+  <h3>Thumbnail Images</h3>
+  {% for image in product.images %}
+  <img width="200" height="200" src="{{image |  image_url }}" class="
                {% if image == featuredImage %}
                  selected
                {% endif %}
              ">
-    {% endfor %}
-  </div>
-  <div class="product-prices-container">
-    <p class="
+  {% endfor %}
+</div>
+<div class="product-prices-container">
+  <p class="
              product-compare-at-price-container
              {% if selectedProduct.compare_at_price == nil or selectedProduct.compare_at_price == empty or selectedProduct.compare_at_price <= selectedProduct.price %}
                hide
              {% endif %}
            ">
-      Original Price =
-      {{ product.selected_or_first_available_variant.compare_at_price | money }}
-    </p>
+    Original Price =
+    {{ product.selected_or_first_available_variant.compare_at_price | money }}
+  </p>
 
-    <p class="product-price-container">
-      Discounted Price =
-      {{ product.selected_or_first_available_variant.price | money }}
-    </p>
-  </div>
-  <div>
-    <p>{{ product.description }}</p>
-  </div>
+  <p class="product-price-container">
+    Discounted Price =
+    {{ product.selected_or_first_available_variant.price | money }}
+  </p>
+</div>
+<div>
+  <p>{{ product.description }}</p>
+</div>
 
-  <!--
+<!--
          Shopify product form
          1) on SUBMIT adds product variant to cart with the selected quantity
          2) REDIRECTS TO CART PAGE
        -->
-  {% form 'product', product %}
-  <!--
+{% form 'product', product %}
+<!--
            * HIDDEN PRODUCT VARIANT SELECTOR input to replace with custom radio buttons.
            1) Listen for radio button changes
            2) Selet the hidden-product-variant-input.value = matchedVariant.id
          -->
-  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"
-    id="hidden-product-variant-input">
+<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"
+  id="hidden-product-variant-input">
 
-  <!-- * Input of PRODUCT QUANTITY SELECTOR -->
-  <div class="product-quantity-selector">
-    <!-- To render +/- svg inside of button use {% include "plus.svg" %} , for svg inside of snippets folder -->
-    <!-- <label for="quantity">Quantity</label> -->
-    <button type="button" class="product-quantity-selector-minus">-</button>
-    <input id="quantity" name="quantity" value="1" class="product-quantity-selector-input">
-    <button type="button" class="product-quantity-selector-plus">+</button>
-  </div>
+<!-- * Input of PRODUCT QUANTITY SELECTOR -->
+<div class="product-quantity-selector">
+  <!-- To render +/- svg inside of button use {% include "plus.svg" %} , for svg inside of snippets folder -->
+  <!-- <label for="quantity">Quantity</label> -->
+  <button type="button" class="product-quantity-selector-minus">-</button>
+  <input id="quantity" name="quantity" value="1" class="product-quantity-selector-input">
+  <button type="button" class="product-quantity-selector-plus">+</button>
+</div>
 
-  <!--
+<!--
            * Custom VARIANT SELECTOR radio buttons
            Loop product.options_with_values to display custom radio buttons
          -->
-  {% if product.variants.size > 1 %}
-  <div class="product-variant-options">
-    {% for option in product.options_with_values -%}
-    <fieldset>
-      <legend>{{ option.name }}</legend>
-      {% for value in option.values %}
-      <div>
-        <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
-          value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
-        <label for="{{ option.name | handleize }}-{{ value | handleize }}">
-          {{- value -}}
-        </label>
-      </div>
-      {% endfor %}
-    </fieldset>
+{% if product.variants.size > 1 %}
+<div class="product-variant-options">
+  {% for option in product.options_with_values -%}
+  <fieldset>
+    <legend>{{ option.name }}</legend>
+    {% for value in option.values %}
+    <div>
+      <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
+        value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
+      <label for="{{ option.name | handleize }}-{{ value | handleize }}">
+        {{- value -}}
+      </label>
+    </div>
     {% endfor %}
-  </div>
+  </fieldset>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- Add to cart button -->
+<button type="submit" id="product-add-to-cart-button" {% unless selectedProduct.available %} disabled {% endunless %}>
+  {% if selectedProduct.available %}
+  Add To Cart
+  {% else %}
+  Out Of Stock
   {% endif %}
+</button>
 
-  <!-- Add to cart button -->
-  <button type="submit" id="product-add-to-cart-button" {% unless selectedProduct.available %} disabled {% endunless %}>
-    {% if selectedProduct.available %}
-    Add To Cart
-    {% else %}
-    Out Of Stock
-    {% endif %}
-  </button>
+<!-- Buy it now button -->
+<button type="submit" id="product-buy-it-now-button" {% unless selectedProduct.available %} disabled {% endunless %}>
+  {% if selectedProduct.available %}
+  Buy It Now
+  {% else %}
+  Out Of Stock
+  {% endif %}
+</button>
+{% endform %}
 
-  <!-- Buy it now button -->
-  <button type="submit" id="product-buy-it-now-button" {% unless selectedProduct.available %} disabled {% endunless %}>
-    {% if selectedProduct.available %}
-    Buy It Now
-    {% else %}
-    Out Of Stock
-    {% endif %}
-  </button>
-  {% endform %}
+<div id="recently-viewed" class="w-full h-[500px] flex justify-center items-center gap-y-2 bg-red-400"></div>
 
-  <div id="recently-viewed" class="w-full h-[500px] flex justify-center items-center gap-y-2 bg-red-400"></div>
+{% render 'product' %}
 
-  {% render 'product' %}
+{{ 'recentlyviewed.js' | asset_url | script_tag }}
 
-  {{ 'recentlyviewed.js' | asset_url | script_tag }}
+<script>
+  /** save the current product id and variant id to local storage for recently viewed section.
+   * extract product handle and variant from url.
+   */
+  const url = new URL(window.location.href);
+  const productHandle = url.pathname.split('/products/')[1];
+  const viewedProduct = {
+    productHandle,
+  };
 
-  <script>
-    /** save the current product id and variant id to local storage for recently viewed section.
-     * extract product handle and variant from url.
-     */
-    const url = new URL(window.location.href);
-    const productHandle = url.pathname.split('/products/')[1];
-    const viewedProduct = {
-      productHandle,
-    };
+  const key = `heyparadise.com-recently-viewed`;
+  // removeFromLocalStorage(key);
+  // clearLocalStorage();
+  saveRecentlyViewedToLocalStorage(key, viewedProduct);
 
-    const key = `heyparadise.com-recently-viewed`;
-    // removeFromLocalStorage(key);
-    // clearLocalStorage();
-    saveRecentlyViewedToLocalStorage(key, viewedProduct);
+  // fetch all rv products
+  const arr = JSON.parse(getFromLocalStorage(key));
+  // console.log('response all');
+  fetchAllRecentlyViewedProducts(arr)
+    .then(products => console.log(products))
+    .catch(err => console.log(err));
+</script>
 
-    // fetch all rv products
-    const arr = JSON.parse(getFromLocalStorage(key));
-    // console.log('response all');
-    fetchAllRecentlyViewedProducts(arr)
-      .then(products => console.log(products))
-      .catch(err => console.log(err));
-  </script>
+<script>
+  // Get the json product object from shopity product.liquid context
+  let productJs = {{ product | json}}
 
-  <script>
-    // Get the json product object from shopity product.liquid context
-    let productJs = {{ product | json}}
+  // listener for different variant radio button change.
+  document.querySelectorAll(".product-variant-options input[type='radio']").forEach((radio) => {
+    radio.addEventListener("change", () => {
+      // find the selected options
+      const selectedOptions = [];
+      document.querySelectorAll(".product-variant-options input[type='radio']:checked").forEach((checkedRadio) => {
+        selectedOptions.push(checkedRadio.value);
+      });
 
-    // listener for different variant radio button change.
-    document.querySelectorAll(".product-variant-options input[type='radio']").forEach((radio) => {
-      radio.addEventListener("change", () => {
-        // find the selected options
-        const selectedOptions = [];
-        document.querySelectorAll(".product-variant-options input[type='radio']:checked").forEach((checkedRadio) => {
-          selectedOptions.push(checkedRadio.value);
-        });
-
-        // find the matched variant .find(v=>{}) returns true if the variant is to be selected.
-        const matchedVariant = productJs.variants.find((variant) => {
-          let pass = true;
-          for (let i = 0; i < selectedOptions.length; i += 1) {
-            if (selectedOptions.indexOf(variant.options[i]) === -1) {
-              pass = false;
-              break;
-            }
+      // find the matched variant .find(v=>{}) returns true if the variant is to be selected.
+      const matchedVariant = productJs.variants.find((variant) => {
+        let pass = true;
+        for (let i = 0; i < selectedOptions.length; i += 1) {
+          if (selectedOptions.indexOf(variant.options[i]) === -1) {
+            pass = false;
+            break;
           }
-          return pass;
-        });
-
-        // change hidden product-form variant id
-        document.getElementById("hidden-product-variant-input").value = matchedVariant.id;
-        // update url without refreshing page,
-        // so that we can share url with correct variant-id.
-        url.searchParams.set("variant", matchedVariant.id);
-        if (window.history.replaceState) {
-          //prevents browser from storing history with each change:
-          window.history.replaceState(statedata = null, title = null, url.toString());
-        } else { // change location.href => reloads page!!!
-          window.location.href = url.toString();
         }
-
-        // change prices
-        document.querySelector(".product-price-container").textContent = "Discounted Price " + formatShopifyPriceToINR(matchedVariant.price.toString());
-
-        if (matchedVariant.compare_at_price == null || matchedVariant.compare_at_price == "" ||
-          matchedVariant.compare_at_price <= matchedVariant.price) {
-          document.querySelector(".product-compare-at-price-container").classList.add("hide"); // HIDE
-        } else {
-          document.querySelector(".product-compare-at-price-container").classList.remove("hide"); // SHOW
-          document.querySelector(".product-compare-at-price-container").textContent =
-            "Original Price " + formatShopifyPriceToINR(matchedVariant.compare_at_price.toString()); // set compare at price
-        }
-
-        // change featured image if selected variant has a featured image
-        if (matchedVariant.featured_image) {
-          document.querySelector(".product-featured-image-container>img").setAttribute("src", matchedVariant.featured_image.src);
-          document.querySelector(".product-thumb-container>img.selected").classList.remove("selected");
-
-          document.querySelectorAll(".product-thumb-container>img")[matchedVariant.featured_image.position - 1].classList.add("selected");
-        }
-
-        // toggle button if selected variant is out of stock
-        const addToCart = document.getElementById("product-add-to-cart-button");
-        const buyItNow = document.getElementById("product-buy-it-now-button");
-
-        if (matchedVariant.available) {
-          addToCart.disabled = false;
-          addToCart.textContent = "Add To Cart";
-
-          buyItNow.disabled = false;
-          buyItNow.textContent = "Buy It Now";
-
-        } else {
-          addToCart.disabled = true;
-          addToCart.textContent = "Out Of Stock";
-
-          buyItNow.disabled = true;
-          buyItNow.textContent = "Out Of Stock";
-        }
+        return pass;
       });
-    });
 
-    // Listener for changing image thumbs on click
-    document.querySelectorAll(".product-thumb-container>img").forEach((img) => {
-      img.addEventListener("click", () => {
-        // remove selected class from old image
+      // change hidden product-form variant id
+      document.getElementById("hidden-product-variant-input").value = matchedVariant.id;
+      // update url without refreshing page,
+      // so that we can share url with correct variant-id.
+      url.searchParams.set("variant", matchedVariant.id);
+      if (window.history.replaceState) {
+        //prevents browser from storing history with each change:
+        window.history.replaceState(statedata = null, title = null, url.toString());
+      } else { // change location.href => reloads page!!!
+        window.location.href = url.toString();
+      }
+
+      // change prices
+      document.querySelector(".product-price-container").textContent = "Discounted Price " + formatShopifyPriceToINR(matchedVariant.price.toString());
+
+      if (matchedVariant.compare_at_price == null || matchedVariant.compare_at_price == "" ||
+        matchedVariant.compare_at_price <= matchedVariant.price) {
+        document.querySelector(".product-compare-at-price-container").classList.add("hide"); // HIDE
+      } else {
+        document.querySelector(".product-compare-at-price-container").classList.remove("hide"); // SHOW
+        document.querySelector(".product-compare-at-price-container").textContent =
+          "Original Price " + formatShopifyPriceToINR(matchedVariant.compare_at_price.toString()); // set compare at price
+      }
+
+      // change featured image if selected variant has a featured image
+      if (matchedVariant.featured_image) {
+        document.querySelector(".product-featured-image-container>img").setAttribute("src", matchedVariant.featured_image.src);
         document.querySelector(".product-thumb-container>img.selected").classList.remove("selected");
-        // add selected class to new image
-        img.classList.add("selected");
-        document.querySelector(".product-featured-image-container>img").setAttribute("src", img.getAttribute("src"));
-      });
-    });
 
-    /**
-     * To go straight to checkout form add a hidden input with name="return_to" and value="checkout"
-     * 1) listen click on Buy-It-Now button
-     * 2) prevent default submit
-     * 3) Append hidden checkout input to Shopify product form
-     * 4) Submit product form manually
-    */
-    document.getElementById("product-buy-it-now-button").addEventListener("click", (e) => {
-      e.preventDefault();
+        document.querySelectorAll(".product-thumb-container>img")[matchedVariant.featured_image.position - 1].classList.add("selected");
+      }
 
-      const shopifyProductForm = document.querySelector(".shopify-product-form");
-      // <input type="hidden" name="return_to" value="/checkout/" /> add this hidden input to go straight to checkout page.
-      const hiddenCheckoutInput = document.createElement("input");
-      hiddenCheckoutInput.value = "/checkout";
-      hiddenCheckoutInput.name = "return_to";
-      hiddenCheckoutInput.hidden = true;
+      // toggle button if selected variant is out of stock
+      const addToCart = document.getElementById("product-add-to-cart-button");
+      const buyItNow = document.getElementById("product-buy-it-now-button");
 
-      shopifyProductForm.appendChild(hiddenCheckoutInput);
-      shopifyProductForm.submit();
-    });
+      if (matchedVariant.available) {
+        addToCart.disabled = false;
+        addToCart.textContent = "Add To Cart";
 
-    /**
-     * listeners for product quantity changes
-    */
-    document.querySelector(".product-quantity-selector-plus").addEventListener("click", () => {
-      const currentVal = Number(document.getElementById("quantity").value);
-      document.getElementById("quantity").value = currentVal + 1;
-    });
+        buyItNow.disabled = false;
+        buyItNow.textContent = "Buy It Now";
 
-    document.querySelector(".product-quantity-selector-minus").addEventListener("click", () => {
-      const currentVal = Number(document.getElementById("quantity").value);
-      if (document.getElementById("quantity").value > 1) {
-        document.getElementById("quantity").value = currentVal - 1;
+      } else {
+        addToCart.disabled = true;
+        addToCart.textContent = "Out Of Stock";
+
+        buyItNow.disabled = true;
+        buyItNow.textContent = "Out Of Stock";
       }
     });
-  </script>
+  });
 
-  <style>
-    .selected {
-      border: 5px solid wheat;
+  // Listener for changing image thumbs on click
+  document.querySelectorAll(".product-thumb-container>img").forEach((img) => {
+    img.addEventListener("click", () => {
+      // remove selected class from old image
+      document.querySelector(".product-thumb-container>img.selected").classList.remove("selected");
+      // add selected class to new image
+      img.classList.add("selected");
+      document.querySelector(".product-featured-image-container>img").setAttribute("src", img.getAttribute("src"));
+    });
+  });
+
+  /**
+   * To go straight to checkout form add a hidden input with name="return_to" and value="checkout"
+   * 1) listen click on Buy-It-Now button
+   * 2) prevent default submit
+   * 3) Append hidden checkout input to Shopify product form
+   * 4) Submit product form manually
+  */
+  document.getElementById("product-buy-it-now-button").addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const shopifyProductForm = document.querySelector(".shopify-product-form");
+    // <input type="hidden" name="return_to" value="/checkout/" /> add this hidden input to go straight to checkout page.
+    const hiddenCheckoutInput = document.createElement("input");
+    hiddenCheckoutInput.value = "/checkout";
+    hiddenCheckoutInput.name = "return_to";
+    hiddenCheckoutInput.hidden = true;
+
+    shopifyProductForm.appendChild(hiddenCheckoutInput);
+    shopifyProductForm.submit();
+  });
+
+  /**
+   * listeners for product quantity changes
+  */
+  document.querySelector(".product-quantity-selector-plus").addEventListener("click", () => {
+    const currentVal = Number(document.getElementById("quantity").value);
+    document.getElementById("quantity").value = currentVal + 1;
+  });
+
+  document.querySelector(".product-quantity-selector-minus").addEventListener("click", () => {
+    const currentVal = Number(document.getElementById("quantity").value);
+    if (document.getElementById("quantity").value > 1) {
+      document.getElementById("quantity").value = currentVal - 1;
     }
-  </style>
+  });
+</script>
+
+<style>
+  .selected {
+    border: 5px solid wheat;
+  }
+</style>
 {% endcomment %}
 
 <div style="padding: 30px">
@@ -284,11 +284,8 @@
   <div class="product-price-container">
     <p>{{ selectedVariant.price }}</p>
     {% assign compareAtPrice = selectedVariant.compare_at_price %}
-    <p
-      {% if compareAtPrice == null or compareAtPrice == empty or compareAtPrice <= compareAtPrice.price %}
-        style="display: none;"
-      {% endif %}
-    >
+    <p {% if compareAtPrice==null or compareAtPrice==empty or compareAtPrice <=compareAtPrice.price %}
+      style="display: none;" {% endif %}>
       {{ selectedVariant.compare_at_price }}
     </p>
   </div>
@@ -305,63 +302,44 @@
   </div>
 
   {% if product.variants.size > 1 %}
-    {% for option in product.options_with_values -%}
-      <fieldset>
-        <legend>Option.name: {{ option.name }}</legend>
-        {% for value in option.values %}
-          <div class="product-variant-radio-group">
-            <p>option.selected_value: {{ option.selected_value }}</p>
-            <p>option.value: {{ value }}</p>
-            {% if option.selected_value == value %}
-              <p>checked</p>
-            {% endif %}
-            <input
-              {% if option.selected_value == value %}
-                checked
-              {% endif %}
-              type="radio"
-              name="{{ option.name }}"
-              value="{{ value }}"
-              id="{{ option.name | handleize }}-{{ value | handleize }}"
-            >
-            <label for="{{ option.name | handleize }}-{{ value | handleize }}">
-              {{- value -}}
-            </label>
-          </div>
-        {% endfor %}
-      </fieldset>
+  {% for option in product.options_with_values -%}
+  <fieldset>
+    <legend>Option.name: {{ option.name }}</legend>
+    {% for value in option.values %}
+    <div class="product-variant-radio-group">
+      <p>option.selected_value: {{ option.selected_value }}</p>
+      <p>option.value: {{ value }}</p>
+      {% if option.selected_value == value %}
+      <p>checked</p>
+      {% endif %}
+      <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
+        value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
+      <label for="{{ option.name | handleize }}-{{ value | handleize }}">
+        {{- value -}}
+      </label>
+    </div>
     {% endfor %}
+  </fieldset>
+  {% endfor %}
   {% endif %}
 
   <!-- Add to cart button -->
-  <button
-    style="padding: 10px; background-color: gray;"
-    type="submit"
-    id="product-add-to-cart-button"
-    {% unless selectedVariant.available %}
-      disabled
-    {% endunless %}
-  >
+  <button style="padding: 10px; background-color: gray;" type="submit" id="product-add-to-cart-button" {% unless
+    selectedVariant.available %} disabled {% endunless %}>
     {% if selectedVariant.available %}
-      Add To Cart
+    Add To Cart
     {% else %}
-      Out Of Stock
+    Out Of Stock
     {% endif %}
   </button>
 
   <!-- Buy it now button -->
-  <button
-    style="padding: 10px; background-color: gray;"
-    type="submit"
-    id="product-buy-it-now-button"
-    {% unless selectedVariant.available %}
-      disabled
-    {% endunless %}
-  >
+  <button style="padding: 10px; background-color: gray;" type="submit" id="product-buy-it-now-button" {% unless
+    selectedVariant.available %} disabled {% endunless %}>
     {% if selectedVariant.available %}
-      Buy It Now
+    Buy It Now
     {% else %}
-      Out Of Stock
+    Out Of Stock
     {% endif %}
   </button>
 </div>
