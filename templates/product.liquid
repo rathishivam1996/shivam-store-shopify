@@ -281,7 +281,7 @@
   <h1>{{ selectedVariant.title }}</h1>
   <p>{{ selectedVariant.vendor }}</p>
 
-  <div>
+  <div class="product-price">
     <p>{{ selectedVariant.price }}</p>
     {% assign compareAtPrice = selectedVariant.compare_at_price %}
     <p {% if compareAtPrice==null or compareAtPrice==empty or compareAtPrice <=compareAtPrice.price %}
