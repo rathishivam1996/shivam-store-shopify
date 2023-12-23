@@ -279,23 +279,23 @@
   {% assign selectedVariant = product.selected_or_first_available_variant %}
 
   <img
-    id='product-featured-image'
+    id='product-featured-image-{{product.id}}'
     src='{{ selectedVariant.featured_image | image_url }}'
     width='300'
     height='300'
   >
-  <h1 id='product-title'>{{ selectedVariant.title }}</h1>
-  <p id='product-vendor'>{{ selectedVariant.vendor }}</p>
+  <h1 id='product-title-{{product.id}}'>{{ selectedVariant.title }}</h1>
+  <p id='product-vendor-{{product.id}}'>{{ selectedVariant.vendor }}</p>
 
   <div class='product-price-container'>
-    <p id='product-price' class='product.price'>
+    <p id='product-price-{{product.id}}' class='product.price'>
       {{ selectedVariant.price | money_with_currency }}
     </p>
 
     {% if selectedVariant.compare_at_price
       and selectedVariant.compare_at_price > selectedVariant.price
     %}
-      <p id='product-compare-at-price' class='product.price'>
+      <p id='product-compare-at-price-{{product.id}}' class='product.price'>
         {{ selectedVariant.compare_at_price | money_with_currency }}
       </p>
     {% endif %}
@@ -306,13 +306,13 @@
     <button
       style='padding: 10px; background-color: gray;'
       type='button'
-      id='product-quantity-plus'
+      id='product-quantity-plus-{{product.id}}'
     >
       Increment
     </button>
     <input
       type='text'
-      id='product-quantity'
+      id='product-quantity-{{product.id}}'
       aria-describedby='hint'
       inputmode='numeric'
       pattern='[0-9]*'
@@ -320,7 +320,7 @@
     <button
       style='padding: 10px; background-color: gray;'
       type='button'
-      id='product-quantity-minus'
+      id='product-quantity-minus-{{product.id}}'
     >
       Decrement
     </button>
