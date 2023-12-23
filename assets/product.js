@@ -32,26 +32,20 @@ const productJs = {
     // });
     const radioGroup = $('.product-variant-radio-group');
 
-    console.log(this, 'handle');
     // delegate event to radio group
     radioGroup.on('change', 'input:radio', () => {
       const selectedOptions = radioGroup
         .find('input:radio:checked')
         .map(function mapCheckedRadios() {
-          console.log(this, 'jquery');
           return $(this).val();
         })
         .get();
 
-      console.log(selectedOptions);
-      console.log(this, 'test');
       const matchedVariant = this.product.variants.find((variant) =>
         selectedOptions.every(
           (option, index) => variant.options[index] === option,
         ),
       );
-
-      console.log(matchedVariant);
 
       // Do something with matchedVariant
     });
