@@ -1,55 +1,49 @@
-const Shopify = Shopify || {};
 
+var Shopify = Shopify || {};
+// ---------------------------------------------------------------------------
 // Money format handler
-Shopify.money_format = '${{amount}}';
+// ---------------------------------------------------------------------------
+Shopify.money_format = "${{amount}}";
+Shopify.formatMoney = function(cents, format) {
+  if (typeof cents == 'string') { cents = cents.replace('.',''); }
+  var value = '';
+  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  var formatString = (format || this.money_format);
 
-Shopify.formatMoney = (cents, format) => {
-  let modifiedCents = cents;
-
-  if (typeof modifiedCents === 'string') {
-    modifiedCents = modifiedCents.replace('.', '');
+  function defaultOption(opt, def) {
+     return (typeof opt == 'undefined' ? def : opt);
   }
 
-  const defaultOption = (opt, def) => (typeof opt === 'undefined' ? def : opt);
-
-  const formatWithDelimiters = (number, precision, thousands, decimal) => {
+  function formatWithDelimiters(number, precision, thousands, decimal) {
     precision = defaultOption(precision, 2);
     thousands = defaultOption(thousands, ',');
-    decimal = defaultOption(decimal, '.');
+    decimal   = defaultOption(decimal, '.');
 
-    if (Number.isNaN(number) || number == null) {
-      return 0;
-    }
+    if (isNaN(number) || number == null) { return 0; }
 
-    number = (number / 100.0).toFixed(precision);
+    number = (number/100.0).toFixed(precision);
 
-    const parts = number.split('.');
-    const dollars = parts[0].replace(
-      /(\d)(?=(\d\d\d)+(?!\d))/g,
-      `$1${thousands}`,
-    );
-    const cents = parts[1] ? decimal + parts[1] : '';
+    var parts   = number.split('.'),
+        dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+        cents   = parts[1] ? (decimal + parts[1]) : '';
 
     return dollars + cents;
-  };
+  }
 
-  const value = (() => {
-    const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-    const formatString = format || Shopify.money_format;
+  switch(formatString.match(placeholderRegex)[1]) {
+    case 'amount':
+      value = formatWithDelimiters(cents, 2);
+      break;
+    case 'amount_no_decimals':
+      value = formatWithDelimiters(cents, 0);
+      break;
+    case 'amount_with_comma_separator':
+      value = formatWithDelimiters(cents, 2, '.', ',');
+      break;
+    case 'amount_no_decimals_with_comma_separator':
+      value = formatWithDelimiters(cents, 0, '.', ',');
+      break;
+  }
 
-    switch (formatString.match(placeholderRegex)[1]) {
-      case 'amount':
-        return formatWithDelimiters(modifiedCents, 2);
-      case 'amount_no_decimals':
-        return formatWithDelimiters(modifiedCents, 0);
-      case 'amount_with_comma_separator':
-        return formatWithDelimiters(modifiedCents, 2, '.', ',');
-      case 'amount_no_decimals_with_comma_separator':
-        return formatWithDelimiters(modifiedCents, 0, '.', ',');
-      default:
-        return '';
-    }
-  })();
-
-  return format.replace(/\{\{\s*(\w+)\s*\}\}/, value);
+  return formatString.replace(placeholderRegex, value);
 };
