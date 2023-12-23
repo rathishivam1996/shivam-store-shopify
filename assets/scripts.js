@@ -32,9 +32,9 @@ Shopify.formatMoney = (cents, format) => {
       /(\d)(?=(\d\d\d)+(?!\d))/g,
       `$1${thousands}`,
     );
-    const cents = parts[1] ? decimal + parts[1] : '';
+    const newCents = parts[1] ? decimal + parts[1] : '';
 
-    return dollars + cents;
+    return dollars + newCents;
   }
 
   switch (formatString.match(placeholderRegex)[1]) {
