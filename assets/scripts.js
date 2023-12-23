@@ -4,8 +4,9 @@ const MyShopify = Shopify || {};
 // ---------------------------------------------------------------------------
 MyShopify.money_format = 'Rs.{{amount}}';
 MyShopify.formatMoney = (amount, currency='Rs.', decimals=2, thousandsSeparator=',', decimalSeperator='.') => {
+    debugger;
+
   const numericAmount = typeof amount === 'string' ? parseFloat(amount) / 100 : amount/100;
-  debugger;
   const fixedAmount = amount.toFixed(decimals);
   const parts = fixedAmount.split(decimalSeperator);
   const rupees = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
