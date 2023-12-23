@@ -24,7 +24,7 @@ const productJs = {
 
       // change url of the product page without refreshing page
       const url = new URL(window.location.href);
-      
+      url.searchParams.set("variant")
     });
   },
 };
