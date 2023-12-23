@@ -334,6 +334,10 @@
   </div>
 
   {% if product.variants.size > 1 %}
+    <div
+    id='product-variant-radio-group-{{product.id |  handleize}}'
+    class='product-variant-radio-group'
+  >
     {% for option in product.options_with_values -%}
       <fieldset>
         <legend>Option.name: {{ option.name }}</legend>
@@ -352,7 +356,6 @@
               {{- value -}}
             </label>
           {% endfor %}
-        </div>
       </fieldset>
     {% endfor %}
   {% endif %}
