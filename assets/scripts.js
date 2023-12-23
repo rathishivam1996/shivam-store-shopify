@@ -5,11 +5,9 @@ formatMoney = (
   thousandsSeparator = ',',
   decimalSeperator = '.',
 ) => {
-  debugger;
-
   const numericAmount =
     typeof amount === 'string' ? parseFloat(amount) : amount;
-
+  debugger;
   const rupees = Math.floor(numericAmount / 100);
   const paise = numericAmount % 100;
 
