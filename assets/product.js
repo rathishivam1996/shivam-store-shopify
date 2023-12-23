@@ -31,6 +31,7 @@ const productJs = {
         // change location.href => reloads page!!!
         window.location.href = url.toString();
       }
+      
     });
   },
 };
