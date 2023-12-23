@@ -284,7 +284,8 @@
   <div>
     <p>{{ selectedVariant.price }}</p>
     {% assign compareAtPrice = selectedVariant.compare_at_price %}
-    <p {% if compareAtPrice==null or compareAtPrice==empty or compareAtPrice <=compareAtPrice.price %} style="display: ;" {% endif %}>
+    <p {% if compareAtPrice==null or compareAtPrice==empty or compareAtPrice <=compareAtPrice.price %}
+      style="display: none;" {% endif %}>
       {{ selectedVariant.compare_at_price }}
     </p>
   </div>
