@@ -1,10 +1,10 @@
-formatMoney = (
+function formatMoney (
   amount,
   currency = 'Rs.',
   decimals = 2,
   thousandsSeparator = ',',
   decimalSeperator = '.',
-) => {
+) {
   const numericAmount =
     typeof amount === 'string' ? parseFloat(amount) : amount;
   debugger;
