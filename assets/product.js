@@ -46,6 +46,7 @@ const productJs = {
         })
         .get();
 
+      debugger;
       console.log(selectedOptions);
       const matchedVariant = productJsContext.product.variants.find(
         (variant) => {
