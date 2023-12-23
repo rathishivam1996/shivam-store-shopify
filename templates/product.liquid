@@ -286,7 +286,7 @@
   <p>{{ selectedVariant.vendor }}</p>
 
   <div class='product-price-container'>
-    <p class>{{ selectedVariant.price | money_with_currency }}</p>
+    <p class="product.price">{{ selectedVariant.price | money_with_currency }}</p>
 
     {% if selectedVariant.compare_at_price
       and selectedVariant.compare_at_price > selectedVariant.price
