@@ -5,8 +5,8 @@ const Shopify = Shopify || {};
 Shopify.money_format = '${{amount}}';
 Shopify.formatMoney = (cents, format) => {
   let modifiedCents = cents;
-  if (typeof cents === 'string') {
-    cents = cents.replace('.', '');
+  if (typeof modifiedCents === 'string') {
+    modifiedCents = cents.replace('.', '');
   }
   let value = '';
   const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
@@ -39,7 +39,7 @@ Shopify.formatMoney = (cents, format) => {
 
   switch (formatString.match(placeholderRegex)[1]) {
     case 'amount':
-      value = formatWithDelimiters(cents, 2);
+      value = formatWithDelimiters(modifiedCents, 2);
       break;
     case 'amount_no_decimals':
       value = formatWithDelimiters(cents, 0);
