@@ -283,11 +283,11 @@
 
   <div>
     <p>{{ selectedVariant.price }}</p>
-
     {% assign compareAtPrice = selectedVariant.compare_at_price %}
     {% if compareAtPrice == null or compareAtPrice == empty or compareAtPrice <= compareAtPrice.price %} hide {% endif
       %} <p>{{ selectedVariant.compare_at_price }}</p>
   </div>
+
   <label for="id-product-quantity">Product Quantity</label>
   <div style="display: flex; justify-content: flex-start; align-items: center;">
     <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-increment">
