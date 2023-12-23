@@ -13,6 +13,8 @@ const productJs = {
 
     // delegate event to radio group
     radioGroup.on('change', 'input:radio', () => {
+      debugger;
+
       const selectedOptions = radioGroup
         .find('input:radio:checked')
         .map(function mapCheckedRadios() {
