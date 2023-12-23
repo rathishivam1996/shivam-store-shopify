@@ -280,58 +280,61 @@
   <img src="{{ selectedVariant.featured_image | image_url }}" width="300" height="300">
   <h1>{{ selectedVariant.title }}</h1>
   <p>{{ selectedVariant.vendor }}</p>
-  <p>{{ selectedVariant.price }}</p>
 
-  {% assign compareAtPrice = selectedVariant.compare_at_price %}
-  {% if compareAtPrice == null or compareAtPrice == empty or compareAtPrice <= compareAtPrice.price %} hide {% endif %}
-    <p>{{ selectedVariant.compare_at_price }}</p>
-    <label for="id-product-quantity">Product Quantity</label>
-    <div style="display: flex; justify-content: flex-start; align-items: center;">
-      <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-increment">
-        Increment
-      </button>
-      <input type="text" id="id-product-quantity" aria-describedby="hint" inputmode="numeric" pattern="[0-9]*">
-      <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-decrement">
-        Decrement
-      </button>
+  <div>
+    <p>{{ selectedVariant.price }}</p>
+
+    {% assign compareAtPrice = selectedVariant.compare_at_price %}
+    {% if compareAtPrice == null or compareAtPrice == empty or compareAtPrice <= compareAtPrice.price %} hide {% endif
+      %} <p>{{ selectedVariant.compare_at_price }}</p>
+  </div>
+  <label for="id-product-quantity">Product Quantity</label>
+  <div style="display: flex; justify-content: flex-start; align-items: center;">
+    <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-increment">
+      Increment
+    </button>
+    <input type="text" id="id-product-quantity" aria-describedby="hint" inputmode="numeric" pattern="[0-9]*">
+    <button style="padding: 10px; background-color: gray;" type="button" id="id-product-quantity-decrement">
+      Decrement
+    </button>
+  </div>
+  {% if product.variants.size > 1 %}
+  {% for option in product.options_with_values -%}
+  <fieldset>
+    <legend>Option.name: {{ option.name }}</legend>
+    {% for value in option.values %}
+    <div class="product-variant-radio-group">
+      <!-- id="color-21336-Beige" -->
+      <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
+        value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
+      <label for="{{ option.name | handleize }}-{{ value | handleize }}">
+        {{- value -}}
+      </label>
     </div>
-    {% if product.variants.size > 1 %}
-    {% for option in product.options_with_values -%}
-    <fieldset>
-      <legend>Option.name: {{ option.name }}</legend>
-      {% for value in option.values %}
-      <div class="product-variant-radio-group">
-        <!-- id="color-21336-Beige" -->
-        <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
-          value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
-        <label for="{{ option.name | handleize }}-{{ value | handleize }}">
-          {{- value -}}
-        </label>
-      </div>
-      {% endfor %}
-    </fieldset>
     {% endfor %}
+  </fieldset>
+  {% endfor %}
+  {% endif %}
+
+  <!-- Add to cart button -->
+  <button style="padding: 10px; background-color: gray;" type="submit" id="product-add-to-cart-button" {% unless
+    selectedVariant.available %} disabled {% endunless %}>
+    {% if selectedVariant.available %}
+    Add To Cart
+    {% else %}
+    Out Of Stock
     {% endif %}
+  </button>
 
-    <!-- Add to cart button -->
-    <button style="padding: 10px; background-color: gray;" type="submit" id="product-add-to-cart-button" {% unless
-      selectedVariant.available %} disabled {% endunless %}>
-      {% if selectedVariant.available %}
-      Add To Cart
-      {% else %}
-      Out Of Stock
-      {% endif %}
-    </button>
-
-    <!-- Buy it now button -->
-    <button style="padding: 10px; background-color: gray;" type="submit" id="product-buy-it-now-button" {% unless
-      selectedVariant.available %} disabled {% endunless %}>
-      {% if selectedVariant.available %}
-      Buy It Now
-      {% else %}
-      Out Of Stock
-      {% endif %}
-    </button>
+  <!-- Buy it now button -->
+  <button style="padding: 10px; background-color: gray;" type="submit" id="product-buy-it-now-button" {% unless
+    selectedVariant.available %} disabled {% endunless %}>
+    {% if selectedVariant.available %}
+    Buy It Now
+    {% else %}
+    Out Of Stock
+    {% endif %}
+  </button>
 </div>
 
 <script src="{{" product.js" | asset_url}}" defer></script>
