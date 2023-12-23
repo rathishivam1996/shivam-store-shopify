@@ -48,7 +48,7 @@ const productJs = {
 
       const matchedVariant = productJsContext.product.variants.find(
         (variant) => {
-          return selectedOptions.every(
+          return selectedOptions.some(
             (option, index) => variant.options[index] === option,
           );
         },
