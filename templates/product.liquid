@@ -291,7 +291,7 @@
     <p
       {% if compareAtPrice == null
         or compareAtPrice == empty
-        or selectedVariant.price <= compareAtPrice.price
+        or compareAtPrice <= selectedVariant.price
       %}
         style='display: none;'
       {% endif %}
