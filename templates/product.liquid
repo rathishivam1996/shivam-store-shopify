@@ -307,7 +307,7 @@
     <legend>Option.name: {{ option.name }}</legend>
     {% for value in option.values %}
     <div class="product-variant-radio-group">
-      {% if option.selected_value==value %} checked {% endif %}
+      {% if option.selected_value==value %} <p>checked</p> {% endif %}
       <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
         value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
       <label for="{{ option.name | handleize }}-{{ value | handleize }}">
