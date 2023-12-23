@@ -42,13 +42,13 @@ Shopify.formatMoney = (cents, format) => {
       value = formatWithDelimiters(modifiedCents, 2);
       break;
     case 'amount_no_decimals':
-      value = formatWithDelimiters(cents, 0);
+      value = formatWithDelimiters(modifiedCents, 0);
       break;
     case 'amount_with_comma_separator':
-      value = formatWithDelimiters(cents, 2, '.', ',');
+      value = formatWithDelimiters(modifiedCents, 2, '.', ',');
       break;
     case 'amount_no_decimals_with_comma_separator':
-      value = formatWithDelimiters(cents, 0, '.', ',');
+      value = formatWithDelimiters(modifiedCents, 0, '.', ',');
       break;
     default:
       return '';
