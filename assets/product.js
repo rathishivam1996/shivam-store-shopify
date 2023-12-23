@@ -1,9 +1,9 @@
 const productJs = {
   product: {},
-  handlizedId: "",
-setHandlizedId(id) {
-  this.handlizedId=
-}
+  handlizedId: '',
+  setHandlizedId(id) {
+    this.handlizedId = id;
+  },
   setProduct(productJson) {
     this.product = productJson;
   },
@@ -37,7 +37,6 @@ setHandlizedId(id) {
       }
 
       console.log(matchedVariant);
-
     });
   },
 };
