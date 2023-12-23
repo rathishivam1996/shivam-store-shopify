@@ -331,7 +331,7 @@
       <fieldset>
         <legend>Option.name: {{ option.name }}</legend>
         {% for value in option.values %}
-          <div id={{pro}}class='product-variant-radio-group'>
+          <div id={{product.id}} class='product-variant-radio-group'>
             <input
               {% if option.selected_value == value %}
                 checked
