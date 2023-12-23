@@ -1,9 +1,9 @@
-const Shopify = Shopify || {};
+const MyShopify = Shopify || {};
 
 // Money format handler
-Shopify.money_format = '${{amount}}';
+MyShopify.money_format = '${{amount}}';
 
-Shopify.formatMoney = (cents, format) => {
+MyShopify.formatMoney = (cents, format) => {
   if (typeof cents === 'string') {
     cents = cents.replace('.', '');
   }
@@ -30,7 +30,7 @@ Shopify.formatMoney = (cents, format) => {
 
   const value = (() => {
     const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-    const formatString = format || Shopify.money_format;
+    const formatString = format || MyShopify.money_format;
 
     switch (formatString.match(placeholderRegex)[1]) {
       case 'amount':
