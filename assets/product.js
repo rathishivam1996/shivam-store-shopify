@@ -27,13 +27,9 @@ const productJs = {
       url.searchParams.set('variant', matchedVariant.id);
       if (window.history.replaceState) {
         window.history.replaceState(null, this.product.title, url.toString());
-      } else {
-        // change location.href => reloads page!!!
+      }else { // change location.href => reloads page!!!
         window.location.href = url.toString();
       }
-
-      // update prices
-      // document.querySelector("")
     });
   },
 };
