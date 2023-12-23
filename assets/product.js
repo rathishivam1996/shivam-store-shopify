@@ -9,7 +9,7 @@ const productJs = {
   },
   handleVariantChange() {
     // const productJsContext = this;
-    const radioGroup = $(`#product-variant-radio-group`);
+    const radioGroup = $(`#product-variant-radio-group-${this.handlizedId}`);
 
     // delegate event to radio group
     radioGroup.on('change', 'input:radio', () => {
