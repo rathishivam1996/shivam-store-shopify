@@ -17,7 +17,7 @@ Shopify.formatMoney = (cents, format) => {
     thousands = defaultOption(thousands, ',');
     decimal = defaultOption(decimal, '.');
 
-    if (isNaN(number) || number == null) {
+    if (Number.isNaN(number) || number == null) {
       return 0;
     }
 
