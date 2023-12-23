@@ -291,7 +291,7 @@
     <p
       {% if compareAtPrice == null
         or compareAtPrice == empty
-        or compareAtPrice.price <= compareAtPrice.price
+        or compareAtPrice <= compareAtPrice.price
       %}
         style='display: none;'
       {% endif %}
@@ -331,6 +331,11 @@
         <legend>Option.name: {{ option.name }}</legend>
         {% for value in option.values %}
           <div class='product-variant-radio-group'>
+            <p>option.selected_value: {{ option.selected_value }}</p>
+            <p>option.value: {{ value }}</p>
+            {% if option.selected_value == value %}
+              <p>checked</p>
+            {% endif %}
             <input
               {% if option.selected_value == value %}
                 checked
