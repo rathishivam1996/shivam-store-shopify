@@ -33,7 +33,7 @@ const productJs = {
       }
 
       // update prices
-      document.querySelector()
+      // document.querySelector("")
     });
   },
 };
