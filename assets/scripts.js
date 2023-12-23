@@ -1,13 +1,13 @@
-// eslint-disable-next-line no-use-before-define
 const Shopify = Shopify || {};
 
 // Money format handler
-// eslint-disable-next-line no-template-curly-in-string
 Shopify.money_format = '${{amount}}';
 
 Shopify.formatMoney = (cents, format) => {
-  if (typeof cents === 'string') {
-    cents = cents.replace('.', '');
+  let modifiedCents = cents;
+
+  if (typeof modifiedCents === 'string') {
+    modifiedCents = modifiedCents.replace('.', '');
   }
 
   const defaultOption = (opt, def) => (typeof opt === 'undefined' ? def : opt);
@@ -36,13 +36,13 @@ Shopify.formatMoney = (cents, format) => {
 
     switch (formatString.match(placeholderRegex)[1]) {
       case 'amount':
-        return formatWithDelimiters(cents, 2);
+        return formatWithDelimiters(modifiedCents, 2);
       case 'amount_no_decimals':
-        return formatWithDelimiters(cents, 0);
+        return formatWithDelimiters(modifiedCents, 0);
       case 'amount_with_comma_separator':
-        return formatWithDelimiters(cents, 2, '.', ',');
+        return formatWithDelimiters(modifiedCents, 2, '.', ',');
       case 'amount_no_decimals_with_comma_separator':
-        return formatWithDelimiters(cents, 0, '.', ',');
+        return formatWithDelimiters(modifiedCents, 0, '.', ',');
       default:
         return '';
     }
@@ -50,29 +50,3 @@ Shopify.formatMoney = (cents, format) => {
 
   return format.replace(/\{\{\s*(\w+)\s*\}\}/, value);
 };
-
-/**
- * Shopify price is in the format 55160, where last two digits are the fractional part i.e. 551.60
- *  @param {string|number} price - The unformatted price in the format 55160
- * @returns {string} the formatted price in the INR format i.e ₹551.60 or ₹55,168.79
- * If the fractional part is "00" then this removes the fractional part.
- * */
-// eslint-disable-next-line no-unused-vars
-function formatShopifyPriceToINR(price) {
-  const integerPart = price.toString().slice(0, -2);
-  const fractionalPart = price.toString().slice(-2);
-
-  // format integral part to INR format
-  let indianFormatedPrice = `Rs. ${parseInt(integerPart, 10).toLocaleString(
-    'en-IN',
-    { maximumFractionDigits: 0 },
-  )}`;
-
-  // append fractional part
-  indianFormatedPrice =
-    fractionalPart === '00'
-      ? indianFormatedPrice
-      : `${indianFormatedPrice}.${fractionalPart}`;
-
-  return indianFormatedPrice;
-}
