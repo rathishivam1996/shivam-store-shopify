@@ -21,19 +21,19 @@
   <h3>Thumbnail Images</h3>
   {% for image in product.images %}
   <img width="200" height="200" src="{{image |  image_url }}" class="
-                   {% if image == featuredImage %}
-                     selected
-                   {% endif %}
-                 ">
+                     {% if image == featuredImage %}
+                       selected
+                     {% endif %}
+                   ">
   {% endfor %}
 </div>
 <div class="product-prices-container">
   <p class="
-                 product-compare-at-price-container
-                 {% if selectedProduct.compare_at_price == nil or selectedProduct.compare_at_price == empty or selectedProduct.compare_at_price <= selectedProduct.price %}
-                   hide
-                 {% endif %}
-               ">
+                   product-compare-at-price-container
+                   {% if selectedProduct.compare_at_price == nil or selectedProduct.compare_at_price == empty or selectedProduct.compare_at_price <= selectedProduct.price %}
+                     hide
+                   {% endif %}
+                 ">
     Original Price =
     {{ product.selected_or_first_available_variant.compare_at_price | money }}
   </p>
@@ -48,16 +48,16 @@
 </div>
 
 <!--
-             Shopify product form
-             1) on SUBMIT adds product variant to cart with the selected quantity
-             2) REDIRECTS TO CART PAGE
-           -->
+               Shopify product form
+               1) on SUBMIT adds product variant to cart with the selected quantity
+               2) REDIRECTS TO CART PAGE
+             -->
 {% form 'product', product %}
 <!--
-               * HIDDEN PRODUCT VARIANT SELECTOR input to replace with custom radio buttons.
-               1) Listen for radio button changes
-               2) Selet the hidden-product-variant-input.value = matchedVariant.id
-             -->
+                 * HIDDEN PRODUCT VARIANT SELECTOR input to replace with custom radio buttons.
+                 1) Listen for radio button changes
+                 2) Selet the hidden-product-variant-input.value = matchedVariant.id
+               -->
 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"
   id="hidden-product-variant-input">
 
@@ -71,9 +71,9 @@
 </div>
 
 <!--
-               * Custom VARIANT SELECTOR radio buttons
-               Loop product.options_with_values to display custom radio buttons
-             -->
+                 * Custom VARIANT SELECTOR radio buttons
+                 Loop product.options_with_values to display custom radio buttons
+               -->
 {% if product.variants.size > 1 %}
 <div class="product-variant-options">
   {% for option in product.options_with_values -%}
