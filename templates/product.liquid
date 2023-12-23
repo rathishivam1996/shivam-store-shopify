@@ -291,7 +291,7 @@
 
   <div class='product-price-container'>
     <p id='product-price-{{product.id |  handleize}}' class='product.price'>
-      {{ selectedVariant.price | money_with_currency }}
+      Price: {{ selectedVariant.price | money_with_currency }}
     </p>
 
     {% if selectedVariant.compare_at_price
@@ -335,12 +335,12 @@
 
   {% if product.variants.size > 1 %}
     <div
-    id='product-variant-radio-group-{{product.id |  handleize}}'
-    class='product-variant-radio-group'
-  >
-    {% for option in product.options_with_values -%}
-      <fieldset>
-        <legend>Option.name: {{ option.name }}</legend>
+      id='product-variant-radio-group-{{product.id |  handleize}}'
+      class='product-variant-radio-group'
+    >
+      {% for option in product.options_with_values -%}
+        <fieldset>
+          <legend>Option.name: {{ option.name }}</legend>
 
           {% for value in option.values %}
             <input
@@ -356,8 +356,9 @@
               {{- value -}}
             </label>
           {% endfor %}
-      </fieldset>
-    {% endfor %}
+        </fieldset>
+      {% endfor %}
+    </div>
   {% endif %}
 
   <!-- Add to cart button -->
