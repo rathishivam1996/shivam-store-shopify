@@ -26,7 +26,7 @@ const productJs = {
       const url = new URL(window.location.href);
       url.searchParams.set('variant', matchedVariant.id);
       if (window.history.replaceState) {
-        window.history.replaceState(null, this.product.handl, url.toString())
+        window.history.replaceState(null, this.product.title, url.toString());
       }
     });
   },
