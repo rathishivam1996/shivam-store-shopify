@@ -34,13 +34,13 @@ const productJs = {
     const productJsContext = this;
     const radioGroup = $('.product-variant-radio-group');
 
+    console.log(this, "handle")
     // delegate event to radio group
     radioGroup.on('change', 'input:radio', () => {
       const selectedOptions = radioGroup
         .find('input:radio:checked')
         .map(function mapCheckedRadios() {
-                    console.log(this, 'jquery');
-
+          console.log(this, 'jquery');
           return $(this).val();
         })
         .get();
