@@ -6,7 +6,7 @@ Shopify.money_format = '${{amount}}';
 Shopify.formatMoney = (cents, format) => {
   let modifiedCents = cents;
   if (typeof modifiedCents === 'string') {
-    modifiedCents = cents.replace('.', '');
+    modifiedCents = modifiedCents.replace('.', '');
   }
   let value = '';
   const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
