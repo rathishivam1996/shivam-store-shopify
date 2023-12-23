@@ -48,6 +48,7 @@ const productJs = {
       );
 
       // Do something with matchedVariant
+      
     });
   },
 };
