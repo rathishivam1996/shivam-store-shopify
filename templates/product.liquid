@@ -308,7 +308,7 @@
     {% for value in option.values %}
     <div class="product-variant-radio-group">
       <!-- id="color-21336-Beige" -->
-      value in option.values: {{option.values}}
+      value in option.values: {{option.value}}
       option.selected_value: {{option.selected_value}}
       <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
         value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
