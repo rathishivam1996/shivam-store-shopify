@@ -30,8 +30,6 @@ const productJs = {
     //     );
     //   });
     // });
-
-    const productJsContext = this;
     const radioGroup = $('.product-variant-radio-group');
 
     console.log(this, 'handle');
@@ -47,7 +45,7 @@ const productJs = {
 
       console.log(selectedOptions);
       console.log(this, 'test');
-      const matchedVariant = productJsContext.product.variants.find((variant) =>
+      const matchedVariant = this.product.variants.find((variant) =>
         selectedOptions.every(
           (option, index) => variant.options[index] === option,
         ),
