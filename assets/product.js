@@ -33,6 +33,7 @@ const productJs = {
       }
 
       console.log(matchedVariant);
+      
     });
   },
 };
