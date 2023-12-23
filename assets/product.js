@@ -1,7 +1,9 @@
 const productJs = {
   product: {},
   handlizedId: "",
-setHandlizedId(id)
+setHandlizedId(id) {
+  this.handlizedId=
+}
   setProduct(productJson) {
     this.product = productJson;
   },
