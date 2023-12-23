@@ -34,7 +34,7 @@ const productJs = {
     const productJsContext = this;
     const radioGroup = $('.product-variant-radio-group');
 
-    console.log(this, "handle")
+    console.log(this, 'handle');
     // delegate event to radio group
     radioGroup.on('change', 'input:radio', () => {
       const selectedOptions = radioGroup
@@ -46,6 +46,7 @@ const productJs = {
         .get();
 
       console.log(selectedOptions);
+      console.log(this, 'test');
       const matchedVariant = productJsContext.product.variants.find((variant) =>
         selectedOptions.every(
           (option, index) => variant.options[index] === option,
