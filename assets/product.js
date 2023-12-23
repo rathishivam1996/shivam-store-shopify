@@ -1,6 +1,3 @@
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable arrow-body-style */
-// eslint-disable-next-line no-unused-vars
 const productJs = {
   product: {},
   setProduct(productJson) {
@@ -38,7 +35,7 @@ const productJs = {
     const radioGroup = $('.product-variant-radio-group');
 
     // delegate event to radio group
-    radioGroup.on('change', 'input:radio', function onRadioChange() {
+    radioGroup.on('change', 'input:radio', () => {
       const selectedOptions = radioGroup
         .find('input:radio:checked')
         .map(function mapCheckedRadios() {
@@ -46,14 +43,11 @@ const productJs = {
         })
         .get();
 
-      debugger;
       console.log(selectedOptions);
-      const matchedVariant = productJsContext.product.variants.find(
-        (variant) => {
-          return selectedOptions.every(
-            (option, index) => variant.options[index] === option,
-          );
-        },
+      const matchedVariant = productJsContext.product.variants.find((variant) =>
+        selectedOptions.every(
+          (option, index) => variant.options[index] === option,
+        ),
       );
 
       console.log(matchedVariant);
