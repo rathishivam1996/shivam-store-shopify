@@ -291,7 +291,7 @@
     {% if selectedVariant.compare_at_price
       and selectedVariant.compare_at_price > selectedVariant.price
     %}
-      <p>{{ selectedVariant.compare_at_price }}</p>
+      <p>{{ selectedVariant.compare_at_price | money_with_currency }}</p>
     {% endif %}
   </div>
 
