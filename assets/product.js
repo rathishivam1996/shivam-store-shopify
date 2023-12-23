@@ -1,5 +1,7 @@
 const productJs = {
   product: {},
+  handliid: "",
+
   setProduct(productJson) {
     this.product = productJson;
   },
@@ -33,7 +35,7 @@ const productJs = {
       }
 
       console.log(matchedVariant);
-      
+
     });
   },
 };
