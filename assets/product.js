@@ -32,7 +32,8 @@ const productJs = {
         window.location.href = url.toString();
       }
 
-      // update 
+      // update prices
+      document.querySelector()
     });
   },
 };
