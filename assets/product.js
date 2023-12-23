@@ -31,6 +31,7 @@ const productJs = {
       //   window.location.href = url.toString();
       // }
 
+      console.log(matchedVariant);
     });
   },
 };
