@@ -349,7 +349,7 @@
               type='radio'
               name='{{ option.name }}'
               value='{{ value }}'
-              id='{{product.id |  handleize}}-{{ option.name | handleize }}-{{ value | handleize }}'
+              id='{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}'
             >
             <label for='{{product.id |  handleize}}-{{ option.name | handleize }}-{{ value | handleize }}'>
               {{- value -}}
