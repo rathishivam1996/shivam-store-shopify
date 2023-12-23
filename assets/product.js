@@ -39,6 +39,8 @@ const productJs = {
       const selectedOptions = radioGroup
         .find('input:radio:checked')
         .map(function mapCheckedRadios() {
+                    console.log(this, 'jquery');
+
           return $(this).val();
         })
         .get();
