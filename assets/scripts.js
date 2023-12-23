@@ -1,9 +1,11 @@
-const MyShopify = Shopify || {};
+// eslint-disable-next-line no-use-before-define
+const Shopify = Shopify || {};
 
 // Money format handler
-MyShopify.money_format = '${{amount}}';
+// eslint-disable-next-line no-template-curly-in-string
+Shopify.money_format = '${{amount}}';
 
-MyShopify.formatMoney = (cents, format) => {
+Shopify.formatMoney = (cents, format) => {
   if (typeof cents === 'string') {
     cents = cents.replace('.', '');
   }
@@ -30,7 +32,7 @@ MyShopify.formatMoney = (cents, format) => {
 
   const value = (() => {
     const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-    const formatString = format || MyShopify.money_format;
+    const formatString = format || Shopify.money_format;
 
     switch (formatString.match(placeholderRegex)[1]) {
       case 'amount':
