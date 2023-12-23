@@ -1,9 +1,9 @@
-const MyMyShopify = MyMyShopify || {};
+const MyShopify = Shopify || {};
 // ---------------------------------------------------------------------------
 // Money format handler
 // ---------------------------------------------------------------------------
-MyMyShopify.money_format = '${{amount}}';
-MyMyShopify.formatMoney = (cents, format) => {
+MyShopify.money_format = '${{amount}}';
+MyShopify.formatMoney = (cents, format) => {
   let modifiedCents = cents;
   if (typeof modifiedCents === 'string') {
     modifiedCents = modifiedCents.replace('.', '');
