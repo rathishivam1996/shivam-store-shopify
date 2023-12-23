@@ -22,8 +22,8 @@ const productJs = {
         ),
       );
 
-      // Do something with matchedVariant
-      
+      // change url of the 
+      const url = new URL(window.location.href);
     });
   },
 };
