@@ -312,7 +312,7 @@
       <p>value in option.values: {{value}}</p>
       <p>option.selected_value: {{option.selected_value}}</p>
       {% if option.selected_value==value %} checked {% endif %}
-      <input {% if option.selected_value==value %} checked {% endif %}
+      <input {% if option.selected_value==value %} checked {% endif %} type="radio" name="{{ option.name }}"
         value="{{ value }}" id="{{ option.name | handleize }}-{{ value | handleize }}">
       <label for="{{ option.name | handleize }}-{{ value | handleize }}">
         {{- value -}}
