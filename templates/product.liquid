@@ -338,22 +338,23 @@
       <fieldset>
         <legend>Option.name: {{ option.name }}</legend>
         {% for value in option.values %}
+          <input
+          {% if option.selected_value == value %}
+            checked
+          {% endif %}
+          type='radio'
+          name='{{ option.name }}'
+          value='{{ value }}'
+          id='{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}'
+        >
+        <label for='{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}'>
+          {{- value -}}
+        </label>
           <div
             id='product-variant-radio-group-{{product.id |  handleize}}'
             class='product-variant-radio-group'
           >
-            <input
-              {% if option.selected_value == value %}
-                checked
-              {% endif %}
-              type='radio'
-              name='{{ option.name }}'
-              value='{{ value }}'
-              id='{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}'
-            >
-            <label for='{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}'>
-              {{- value -}}
-            </label>
+
           </div>
         {% endfor %}
       </fieldset>
