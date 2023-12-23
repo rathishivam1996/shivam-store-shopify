@@ -38,12 +38,12 @@ const productJs = {
 
       console.log(matchedVariant, "matchedVariant");
       // change prices
-      $(`#product-price-${this.handlizedId}`).text(`Price: ${MyShopify.formatMoney(matchedVariant.price)}`);
+      $(`#product-price-${this.handlizedId}`).text(`Price: ${formatMoney(matchedVariant.price)}`);
       const $compareAtPrice = $(`#product-compare-at-price-${this.handlizedId}`);
       if (matchedVariant.compare_at_price && matchedVariant.compare_at_price > matchedVariant.price) {
         $compareAtPrice.css("display", "block");
-        console.log(MyShopify.formatMoney(matchedVariant.compare_at_price));
-        $compareAtPrice.text(`Compare At Price: ${MyShopify.formatMoney(matchedVariant.compare_at_price)}`);
+        console.log(formatMoney(matchedVariant.compare_at_price));
+        $compareAtPrice.text(`Compare At Price: ${formatMoney(matchedVariant.compare_at_price)}`);
       } else {
         $compareAtPrice.text(``);
         $compareAtPrice.css("display", "none");
