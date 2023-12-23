@@ -36,8 +36,12 @@ const productJs = {
         window.location.href = url.toString();
       }
 
+      console.log(matchedVariant, "matchedVariant");
       // change prices
-      $("#")
+      $(`#product-price-${this.handlizedId}`).text(`Price: ${matchedVariant.price}`);
+      // if (matchedVariant.compare_at_price) {
+        
+      // }
     });
   },
 };
