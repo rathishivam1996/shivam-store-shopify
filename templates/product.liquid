@@ -283,9 +283,7 @@
   <div>
     <p>{{ selectedVariant.price }}</p>
     {% assign compareAtPrice = selectedVariant.compare_at_price %}
-    {% if compareAtPrice == null
-    or compareAtPrice == empty
-    or compareAtPrice <= compareAtPrice.price %} hide {% endif %} <p>{{ selectedVariant.compare_at_price }}</p>
+    <p >{{ selectedVariant.compare_at_price }}</p>
   </div>
 
   <label for='id-product-quantity'>Product Quantity</label>
