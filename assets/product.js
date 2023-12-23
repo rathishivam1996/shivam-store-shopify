@@ -22,7 +22,7 @@ const productJs = {
         ),
       );
 
-      // change url of the 
+      // change url of the product page without changing 
       const url = new URL(window.location.href);
     });
   },
