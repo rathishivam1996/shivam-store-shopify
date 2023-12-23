@@ -343,7 +343,7 @@
     >
       {% for option in product.options_with_values -%}
         <fieldset>
-          <legend>Option.name: {{ option.name }}</legend>
+          <legend>{{ option.name }}</legend>
 
           {% for value in option.values %}
             <input
