@@ -291,7 +291,7 @@
 
   <div class='product-price-container'>
     <p id='product-price-{{product.id |  handleize}}' class='product.price'>
-      Price: <
+      Price: <strong>{{ selectedVariant.price | money_with_currency }}</strong>
     </p>
 
     {% if selectedVariant.compare_at_price
@@ -302,7 +302,9 @@
         class='product.price'
       >
         Compare At Price:
-        <strong>{{ selectedVariant.compare_at_price | money_with_currency }}</strong>
+        <strong>
+          {{- selectedVariant.compare_at_price | money_with_currency -}}
+        </strong>
       </p>
     {% endif %}
   </div>
