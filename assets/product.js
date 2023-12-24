@@ -36,16 +36,40 @@ const productJs = {
         window.location.href = url.toString();
       }
 
-      console.log(matchedVariant, "matchedVariant");
+      console.log(matchedVariant, 'matchedVariant');
       // change prices
-      $(`#product-price-${this.handlizedId} > strong`).text(`${formatMoney(matchedVariant.price)}`);
-      const $compareAtPrice = $(`#product-compare-at-price-${this.handlizedId} > strong`);
-      if (matchedVariant.compare_at_price && matchedVariant.compare_at_price > matchedVariant.price) {
-        $compareAtPrice.parent().css("display", "block");
+      $(`#product-price-${this.handlizedId} > strong`).text(
+        `${formatMoney(matchedVariant.price)}`,
+      );
+      const $compareAtPrice = $(
+        `#product-compare-at-price-${this.handlizedId} > strong`,
+      );
+      if (
+        matchedVariant.compare_at_price &&
+        matchedVariant.compare_at_price > matchedVariant.price
+      ) {
+        $compareAtPrice.parent().css('display', 'block');
         $compareAtPrice.text(`${formatMoney(matchedVariant.compare_at_price)}`);
       } else {
         $compareAtPrice.text(``);
-        $compareAtPrice.parent().css("display", "none");
+        $compareAtPrice.parent().css('display', 'none');
+      }
+
+      // change featured image if selected variant has a featured image
+      if (matchedVariant.featured_image) {
+        $(`#product-featured-image-${this.handlizedId}`).setAttribute(
+          'src',
+          matchedVariant.featured_image.src,
+        );
+        // document
+        //   .querySelector('.product-thumb-container>img.selected')
+        //   .classList.remove('selected');
+
+        // document
+        //   .querySelectorAll('.product-thumb-container>img')
+        //   [matchedVariant.featured_image.position - 1].classList.add(
+        //     'selected',
+        //   );
       }
     });
   },
