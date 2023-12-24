@@ -279,7 +279,6 @@
 
   {% if selectedVariant.featured_image %}
     {% assign featuredImage = selectedVariant.featured_image %}
-
     <img
       id="product-featured-image-{{product.id |  handleize}}"
       src="{{ selectedVariant.featured_image | image_url }}"
@@ -287,6 +286,7 @@
       height="300"
     >
   {% else %}
+    {% assign featuredImage = product.featured_image %}
     <img
       id="product-featured-image-{{product.id |  handleize}}"
       src="{{ product.featured_image | image_url }}"
