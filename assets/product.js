@@ -57,7 +57,7 @@ const productJs = {
 
       // change featured image if selected variant has a featured image
       if (matchedVariant.featured_image) {
-        $(`#product-featured-image-${this.handlizedId}`).setAttribute(
+        $(`#product-featured-image-${this.handlizedId}`).attr(
           'src',
           matchedVariant.featured_image.src,
         );
