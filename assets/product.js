@@ -38,8 +38,8 @@ const productJs = {
 
       console.log(matchedVariant, "matchedVariant");
       // change prices
-      $(`#product-price-${this.handlizedId}`).text(`Price: ${formatMoney(matchedVariant.price)}`);
-      const $compareAtPrice = $(`#product-compare-at-price-${this.handlizedId}`);
+      $(`#product-price-${this.handlizedId} > strong`).text(`Price: ${formatMoney(matchedVariant.price)}`);
+      const $compareAtPrice = $(`#product-compare-at-price-${this.handlizedId} > strong`);
       if (matchedVariant.compare_at_price && matchedVariant.compare_at_price > matchedVariant.price) {
         $compareAtPrice.css("display", "block");
         console.log(formatMoney(matchedVariant.compare_at_price));
