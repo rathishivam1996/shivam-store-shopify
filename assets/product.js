@@ -41,11 +41,11 @@ const productJs = {
       $(`#product-price-${this.handlizedId} > strong`).text(`${formatMoney(matchedVariant.price)}`);
       const $compareAtPrice = $(`#product-compare-at-price-${this.handlizedId} > strong`);
       if (matchedVariant.compare_at_price && matchedVariant.compare_at_price > matchedVariant.price) {
-        $compareAtPrice.css("display", "block");
+        $compareAtPrice.parent().css("display", "block");
         $compareAtPrice.text(`${formatMoney(matchedVariant.compare_at_price)}`);
       } else {
         $compareAtPrice.text(``);
-        $compareAtPrice.css("display", "none");
+        $compareAtPrice.parent().css("display", "none");
       }
     });
   },
