@@ -25,8 +25,8 @@
     >
       {% for image in product.images %}
         <img
-          width="200"
           height="200"
+          style="aspect-ratio: 3/4"
           src="{{image |  image_url }}"
           class="
             {% if image == featuredImage %}
