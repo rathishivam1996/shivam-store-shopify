@@ -18,40 +18,47 @@
       height='300'
     >
   {% endif %}
+
   <h3>Thumbnail Images</h3>
-  <div class='relative container h-52 mx-auto px-4 bg-red-400'>
+  <div class='relative container h-52 flex justify-center items-center mx-auto px-4 bg-red-400'>
     <div
-      class='w-full h-full bg-pink-400'
-      id='product-thumb-{{ product.id | handle }}'
+      class='flex-grow h-full flex flex-col justify-center items-center bg-pink-400'
     >
-      {% for image in product.images %}
-        <img
-          width='200'
-          height='200'
-          src='{{image |  image_url }}'
-          class='
-            {% if image == featuredImage %}
-              selected
-            {% endif %}
-          '
-        >
-      {% endfor %}
+      <div
+        id='product-thumb-{{ product.id | handle }}'
+        class='w-full flex-grow bg-blue-400'
+      >
+        {% for image in product.images %}
+          <img
+            width='200'
+            height='200'
+            src='{{image |  image_url }}'
+            class='
+              {% if image == featuredImage %}
+                selected
+              {% endif %}
+            '
+          >
+        {% endfor %}
+      </div>
+      <div class='slick-dots-container h-4 w-full bg-green-400'></div>
     </div>
     <button
-      class='absolute top-[50%] mr-[100%] bg-blue-500'
+      class='absolute w-4 bg-blue-500'
       type='button'
       id='slick-prev-btn-{{product.id | handle}}'
     >
       Prev
     </button>
     <button
-      class='absolute top-[50%] ml-[100%] bg-blue-500'
+      class='absolute w-4 bg-blue-500'
       type='button'
       id='slick-next-btn-{{product.id | handle}}'
     >
       Next
     </button>
   </div>
+
   <h1 id='product-title-{{product.id |  handleize}}'>
     {{ selectedVariant.title }}
   </h1>
