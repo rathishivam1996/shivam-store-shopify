@@ -9,7 +9,7 @@ const productJs = {
     console.log(this.product, 'product');
   },
   handleVariantChange() {
-    console.log(product.selected_or_first_available_variant, "clg");
+    console.log(this.product.selected_or_first_available_variant, "clg");
     // const productJsContext = this;
     const radioGroup = $(`#product-variant-radio-group-${this.handlizedId}`);
 
