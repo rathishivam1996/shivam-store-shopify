@@ -187,7 +187,6 @@
     });
   });
   */
-      console.log({{product.selected_or_first_available_variant | json}});
 </script>
 
 <script src="{{" product.js" | asset_url}}" defer></script>
@@ -195,7 +194,7 @@
   $(document).ready(function() {
     productJs.setProduct({{ product | json}});
     productJs.setHandlizedId({{product.id |  handleize}});
-    productJs.handleVariantChange();
+    productJs.handleVariantChange({{product.selected_or_first_available_variant | json}});
   });
 </script>
 
