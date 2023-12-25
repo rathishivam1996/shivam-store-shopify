@@ -9,6 +9,7 @@ const productJs = {
     console.log(this.product, 'product');
   },
   handleVariantChange() {
+    console.log(product.selected_or_first_available_variant, "clg");
     // const productJsContext = this;
     const radioGroup = $(`#product-variant-radio-group-${this.handlizedId}`);
 
@@ -59,6 +60,7 @@ const productJs = {
       }
 
       // change featured image if selected variant has a featured image
+      // const defaultAltText = 
       if (matchedVariant.featured_image) {
         $(`#product-featured-image-${this.handlizedId}`).attr(
           'src',
