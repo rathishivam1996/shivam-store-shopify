@@ -18,7 +18,7 @@
       height="300"
     >
   {% endif %}
-  <div class='container h-96 mx-auto px-4 bg-red-400'>
+  <div class='container h-52 mx-auto px-4 bg-red-400'>
     <h3>Thumbnail Images</h3>
     <div
       class='w-full h-full bg-red-200'
@@ -35,6 +35,8 @@
           "
         >
       {% endfor %}
+      <button id="slick-prev-btn-{{product.id | handle}}"/>
+      <button id="slick-next-btn-{{product.id | handle}}"/>
     </div>
   </div>
   <h1 id="product-title-{{product.id |  handleize}}">
@@ -157,6 +159,8 @@
       slidesToShow: 2,
       slidesToScroll: 2,
       mobileFirst: true,
+      prevArrow: $('#slick-prev-arrow-{{product.id}}'),
+      nextArrow: $('#slick-prev-arrow-{{product.id}}'),
       responsive: [
         {
           breakpoint: 1024,
