@@ -20,10 +20,10 @@
   {% endif %}
 
   {% if product.variants.size > 1 %}
-    {% assign variantAltText = 'Group-' %}
+    {% capture variantAltText %}"group"-{{ selectedVariant.options[0] }}{% endcapture %}
   {% endif %}
 
-  {{ selectedVariant.options[0] }}
+  {{ variantAltText }}
   <h3>Thumbnail Images</h3>
   <div
     id="product-thumb-container-{{product.id|handle}}"
