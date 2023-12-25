@@ -36,21 +36,21 @@
           '
         >
       {% endfor %}
-      <button
-        class='absolute top-[50%] mr-[auto] bg-blue-500'
-        type='button'
-        id='slick-prev-btn-{{product.id | handle}}'
-      >
-        Prev
-      </button>
-      <button
-        class='absolute top-[50%] ml-[auto] bg-blue-500'
-        type='button'
-        id='slick-next-btn-{{product.id | handle}}'
-      >
-        Next
-      </button>
     </div>
+    <button
+      class='absolute top-[50%] mr-[100%] bg-blue-500'
+      type='button'
+      id='slick-prev-btn-{{product.id | handle}}'
+    >
+      Prev
+    </button>
+    <button
+      class='absolute top-[50%] ml-[100%] bg-blue-500'
+      type='button'
+      id='slick-next-btn-{{product.id | handle}}'
+    >
+      Next
+    </button>
   </div>
   <h1 id='product-title-{{product.id |  handleize}}'>
     {{ selectedVariant.title }}
