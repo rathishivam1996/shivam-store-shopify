@@ -273,3 +273,42 @@
     }
   </style>
 {% endcomment %}
+
+<div class='relative container flex justify-center items-center mx-auto px-4 bg-red-400'>
+  <button
+    class='w-4 bg-blue-50 flex justify-center items-center'
+    type='button'
+    id='slick-prev-btn-{{product.id | handle}}'
+  >
+    Prev
+  </button>
+  <div
+    class='flex-grow h-full flex flex-col justify-center items-center bg-pink-400'
+  >
+    <div
+      id='product-thumb-{{ product.id | handle }}'
+      class='w-full flex-grow flex justify-center items-center flex-wrap bg-blue-200'
+    >
+      {% for image in product.images %}
+        <img
+          width='200'
+          height='200'
+          src='{{image |  image_url }}'
+          class='
+            {% if image == featuredImage %}
+              selected
+            {% endif %}
+          '
+        >
+      {% endfor %}
+    </div>
+    <div class='slick-dots-container h-4 w-full bg-green-400'></div>
+  </div>
+  <button
+    class='w-4 bg-blue-50 flex justify-center items-center'
+    type='button'
+    id='slick-next-btn-{{product.id | handle}}'
+  >
+    Next
+  </button>
+</div>
