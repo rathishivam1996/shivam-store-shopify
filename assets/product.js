@@ -91,6 +91,7 @@ const productJs = {
         //     'selected',
         //   );
       }
+      defaultAltText = currAltText; 
     });
   },
 };
