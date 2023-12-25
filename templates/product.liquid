@@ -18,17 +18,17 @@
       height="300"
     >
   {% endif %}
-  <div class='container h-96 mx-auto px-4 bg-red-400'>
-    <h3>Thumbnail Images</h3>
+  <h3>Thumbnail Images</h3>
+  <div class="container mx-auto px-4 bg-red-400">
     <div
-      class='w-full h-full bg-red-200'
-      id='product-thumb-{{ product.id | handle }}'
+      id="product-thumb-{{ product.id | handle }}"
     >
       {% for image in product.images %}
         <img
-          src='{{image |  image_url }}'
-          class='
-            aspect-square
+          width="200"
+          height="200"
+          src="{{image |  image_url }}"
+          class="
             {% if image == featuredImage %}
               selected
             {% endif %}
