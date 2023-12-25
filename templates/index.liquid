@@ -1,12 +1,13 @@
+{{ content_for_index }}
+
 {% comment %}
   <h1>Index template</h1>
   <h3>Inside {{ collections.frontpage.title }} collection</h3>
 {% endcomment %}
 <!-- rentered in product-item snippet. Accepts a product object -->
-{% comment %}
-  {% for product in collections['test-collection'].products %}
-    {% render 'product-item', product: product %}
-  {% endfor %}
-{% endcomment %}
 
-{% render 'product-carousel-item', product: product %}
+{% for product in collections['test-collection'].products %}
+  {% render 'product-item', product: product %}
+{% endfor %}
+
+{% comment %} {% render 'product-card-item', product: product %} {% endcomment %}
