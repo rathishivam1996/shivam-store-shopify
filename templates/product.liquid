@@ -23,16 +23,22 @@
   <div class='relative container h-52 flex justify-center items-center mx-auto px-4 bg-red-400'>
     <div
       class='flex-grow h-full flex flex-col justify-center items-center bg-pink-400'
-    ></div>
+    >
+      <div
+        id='product-thumb-{{ product.id | handle }}'
+        class='w-full flex-grow bg-blue-200'
+      ></div>
+      <div class='slick-dots-container h-4 w-full bg-green-400'></div>
+    </div>
     <button
-      class='absolute w-4 bg-blue-500'
+      class='w-4 bg-blue-950'
       type='button'
       id='slick-prev-btn-{{product.id | handle}}'
     >
       Prev
     </button>
     <button
-      class='absolute w-4 bg-blue-500'
+      class='w-4 bg-blue-950'
       type='button'
       id='slick-next-btn-{{product.id | handle}}'
     >
