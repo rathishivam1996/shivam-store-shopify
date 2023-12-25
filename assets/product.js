@@ -65,19 +65,14 @@ const productJs = {
           matchedVariant.featured_image.src,
         );
         // remove thumb selector for prev variant
-        console.log(
-          $(`#product-thumb-container-${this.handlizedId}>img.selected`),
-        );
-
         $(
           `#product-thumb-container-${this.handlizedId}>img.selected`,
         ).removeClass('selected');
 
-        console.log(
-          $(`#product-thumb-container-${this.handlizedId}>img`).eq(
-            matchedVariant.featured_image.position - 1,
-          ),
-        );
+        console.log($(`#product-thumb-container-${this.handlizedId}>img`));
+        $(`#product-thumb-container-${this.handlizedId}>img`).hide();
+
+        // add selected to new variant thumb
         $(`#product-thumb-container-${this.handlizedId}>img`)
           .eq(matchedVariant.featured_image.position - 1)
           .addClass('selected');
