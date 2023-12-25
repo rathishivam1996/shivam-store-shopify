@@ -7,14 +7,16 @@
       id="product-featured-image-{{product.id |  handleize}}"
       src="{{ selectedVariant.featured_image | image_url }}"
       width="300"
-      height="300">
+      height="300"
+    >
   {% else %}
     {% assign featuredImage = product.featured_image %}
     <img
       id="product-featured-image-{{product.id |  handleize}}"
       src="{{ product.featured_image | image_url }}"
       width="300"
-      height="300">
+      height="300"
+    >
   {% endif %}
   <div class="container mx-auto px-4 bg-red-400">
     <h3>Thumbnail Images</h3>
@@ -25,9 +27,11 @@
           height="200"
           src="{{image |  image_url }}"
           class="
-        {% if image == featuredImage %}
-          selected
-        {% endif %}">
+            {% if image == featuredImage %}
+              selected
+            {% endif %}
+          "
+        >
       {% endfor %}
     </div>
   </div>
@@ -57,7 +61,8 @@
     <button
       style="padding: 10px; background-color: gray;"
       type="button"
-      id="product-quantity-plus-{{product.id |  handleize}}">
+      id="product-quantity-plus-{{product.id |  handleize}}"
+    >
       Increment
     </button>
     <input
@@ -65,11 +70,13 @@
       id="product-quantity-input-{{product.id |  handleize}}"
       aria-describedby="hint"
       inputmode="numeric"
-      pattern="[0-9]*">
+      pattern="[0-9]*"
+    >
     <button
       style="padding: 10px; background-color: gray;"
       type="button"
-      id="product-quantity-minus-{{product.id |  handleize}}">
+      id="product-quantity-minus-{{product.id |  handleize}}"
+    >
       Decrement
     </button>
   </div>
@@ -82,11 +89,14 @@
 
           {% for value in option.values %}
             <input
-              {% if option.selected_value == value %}checked{% endif %}
+              {% if option.selected_value == value %}
+                checked
+              {% endif %}
               type="radio"
               name="{{ option.name }}"
               value="{{ value }}"
-              id="{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}">
+              id="{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}"
+            >
             <label for="{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}">
               {{- value -}}
             </label>
@@ -101,7 +111,10 @@
     style="padding: 10px; background-color: gray;"
     type="submit"
     id="product-add-to-cart-button"
-    {% unless selectedVariant.available %}disabled{% endunless %}>
+    {% unless selectedVariant.available %}
+      disabled
+    {% endunless %}
+  >
     {% if selectedVariant.available %}
       Add To Cart
     {% else %}
@@ -114,7 +127,10 @@
     style="padding: 10px; background-color: gray;"
     type="submit"
     id="product-buy-it-now-button"
-    {% unless selectedVariant.available %}disabled{% endunless %}>
+    {% unless selectedVariant.available %}
+      disabled
+    {% endunless %}
+  >
     {% if selectedVariant.available %}
       Buy It Now
     {% else %}
@@ -139,7 +155,7 @@
           settings: {
             slidesToShow: 4,
             slidesToScroll: 4,
-          }
+
         }
       ]
     });
