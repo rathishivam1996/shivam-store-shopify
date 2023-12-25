@@ -8,7 +8,7 @@ const productJs = {
     this.product = productJson;
     console.log(this.product, 'product');
   },
-  handleVariantChange() {
+  handleVariantChange(defaultVariant) {
     // const productJsContext = this;
     const radioGroup = $(`#product-variant-radio-group-${this.handlizedId}`);
 
@@ -59,7 +59,7 @@ const productJs = {
       }
 
       // change featured image if selected variant has a featured image
-      // const defaultAltText = 
+      const defaultAltText = `Group-${defaultVariant.options[0]}`;
       if (matchedVariant.featured_image) {
         $(`#product-featured-image-${this.handlizedId}`).attr(
           'src',
@@ -70,8 +70,8 @@ const productJs = {
           `#product-thumb-container-${this.handlizedId}>img.selected`,
         ).removeClass('selected');
 
-        console.log($(`#product-thumb-container-${this.handlizedId}>img`));
-        $(`#product-thumb-container-${this.handlizedId}>img`).hide();
+        console.log($(`#product-thumb-container-${this.handlizedId}>img:has([alt="${defaultAltText}"])`));
+        $(`#product-thumb-container-${this.handlizedId}>img:has([alt="${defaultAltText}"])`).hide();
 
         // add selected to new variant thumb
         $(`#product-thumb-container-${this.handlizedId}>img`)
