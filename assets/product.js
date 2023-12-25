@@ -62,7 +62,7 @@ const productJs = {
       const defaultAltText = `Group-${defaultVariant.options[0]}`;
       const currAltText = `Group-${matchedVariant.options[0]}`;
       console.log(defaultAltText, "defaultAltText");
-      console.log(defaultAltText, "currAltText");
+      console.log(currAltText, "currAltText");
       
       if (matchedVariant.featured_image) {
         $(`#product-featured-image-${this.handlizedId}`).attr(
@@ -74,8 +74,8 @@ const productJs = {
           `#product-thumb-container-${this.handlizedId}>img.selected`,
         ).removeClass('selected');
 
-=        $(`#product-thumb-container-${this.handlizedId}>img[alt="${defaultAltText}"]`).hide();
-        
+        $(`#product-thumb-container-${this.handlizedId}>img[alt="${defaultAltText}"]`).hide();
+        $(`#product-thumb-container-${this.handlizedId}>img[alt="${currAltText}"]`).show(); 
 
         // add selected to new variant thumb
         $(`#product-thumb-container-${this.handlizedId}>img`)
