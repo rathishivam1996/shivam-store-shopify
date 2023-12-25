@@ -141,7 +141,7 @@
 
 <script>
   $(document).ready(() => {
-    $('#product-thumb-  {{ product.id | handle }}').slick({
+    $('#product-thumb-{{ product.id | handle }}').slick({
       dots: true,
       infinite: false,
       speed: 300,
@@ -155,7 +155,7 @@
           settings: {
             slidesToShow: 4,
             slidesToScroll: 4,
-
+          }
         }
       ]
     });
