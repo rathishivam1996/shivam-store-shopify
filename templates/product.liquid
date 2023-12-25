@@ -37,6 +37,7 @@
           class="
             {% if media.preview_image == featuredImage %}
               selected
+              block
             {% endif %}
           "
         >
@@ -46,9 +47,10 @@
           height="200"
           src="{{media.preview_image.src |  image_url }}"
           class="
-            {% if media.preview_image == featuredImage %}
-              selected
-            {% endif %}
+              {% if media.preview_image == featuredImage %}
+                selected
+            none
+              {% endif %}
           "
         >
       {% endif %}
