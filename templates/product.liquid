@@ -1,6 +1,5 @@
 <div style="padding: 30px">
   {% assign selectedVariant = product.selected_or_first_available_variant %}
-  {{ selectedVariant | json }}
   {% if selectedVariant.featured_image %}
     {% assign featuredImage = selectedVariant.featured_image %}
     <img
