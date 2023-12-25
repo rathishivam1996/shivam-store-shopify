@@ -153,15 +153,14 @@
 
 <script>
   $(document).ready(() => {
-    console.log($('product-thumb-{{ product.id | handle }}'));
-    $('product-thumb-{{ product.id | handle }}').slick({
+    $('.responsive').slick({
       dots: true,
+      arrows: true,
       infinite: false,
       speed: 300,
       slidesToShow: 2,
       slidesToScroll: 2,
       mobileFirst: true,
-      arrows: true,
       responsive: [
         {
           breakpoint: 1024,
