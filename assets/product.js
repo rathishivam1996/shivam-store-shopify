@@ -60,6 +60,7 @@ const productJs = {
 
       // change featured image if selected variant has a featured image
       const defaultAltText = `Group-${defaultVariant.options[0]}`;
+      console.log(defaultAltText, "defaultAltText");
       if (matchedVariant.featured_image) {
         $(`#product-featured-image-${this.handlizedId}`).attr(
           'src',
@@ -70,7 +71,7 @@ const productJs = {
           `#product-thumb-container-${this.handlizedId}>img.selected`,
         ).removeClass('selected');
 
-        console.log($(`#product-thumb-container-${this.handlizedId}>img:has([alt="${defaultAltText}"])`));
+        console.log($(`#product-thumb-container-${this.handlizedId}>img:has([alt="${defaultAltText}"])`), "jqqqqqqqqq");
         $(`#product-thumb-container-${this.handlizedId}>img:has([alt="${defaultAltText}"])`).hide();
 
         // add selected to new variant thumb
