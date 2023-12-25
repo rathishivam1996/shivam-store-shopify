@@ -71,7 +71,7 @@ const productJs = {
           `#product-thumb-container-${this.handlizedId}>img.selected`,
         ).removeClass('selected');
 
-        console.log($(`#product-thumb-container-${this.handlizedId}>img:has([alt="${defaultAltText}"])`), "jqqqqqqqqq");
+        console.log($(`#product-thumb-container-${this.handlizedId}>img[alt="${defaultAltText}"]`), "jqqqqqqqqq");
         $(`#product-thumb-container-${this.handlizedId}>img:has([alt="${defaultAltText}"])`).hide();
 
         // add selected to new variant thumb
