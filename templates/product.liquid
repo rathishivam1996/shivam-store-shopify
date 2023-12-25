@@ -21,14 +21,14 @@
   <div class='container h-52 mx-auto px-4 bg-red-400'>
     <h3>Thumbnail Images</h3>
     <div
-      class='w-full h-full bg-red-200'
-      id='product-thumb-{{ product.id | handle }}'
+      id="product-thumb-{{ product.id | handle }}"
     >
       {% for image in product.images %}
         <img
-          src='{{image |  image_url }}'
-          class='
-            aspect-square
+          width="200"
+          height="200"
+          src="{{image |  image_url }}"
+          class="
             {% if image == featuredImage %}
               selected
             {% endif %}
@@ -160,7 +160,7 @@
       slidesToScroll: 2,
       mobileFirst: true,
       prevArrow: $('#slick-prev-arrow-{{product.id}}'),
-      nextArrow: $('#slick-prev-arrow-{{product.id}}'),
+      nextArrow: $('#slick-next-btn-{{product.id | handle}}'),
       responsive: [
         {
           breakpoint: 1024,
