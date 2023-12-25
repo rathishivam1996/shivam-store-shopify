@@ -40,6 +40,17 @@
             {% endif %}
           "
         >
+      {% else %}
+        <img
+          width="200"
+          height="200"
+          src="{{media.preview_image.src |  image_url }}"
+          class="
+            {% if media.preview_image == featuredImage %}
+              selected
+            {% endif %}
+          "
+        >
       {% endif %}
     {% endfor %}
   </div>
