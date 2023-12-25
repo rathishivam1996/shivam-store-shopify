@@ -6,6 +6,7 @@ const productJs = {
   },
   setProduct(productJson) {
     this.product = productJson;
+    console.log(this.product, 'product');
   },
   handleVariantChange() {
     // const productJsContext = this;
@@ -39,6 +40,7 @@ const productJs = {
       console.log(matchedVariant, 'matchedVariant');
       // change prices
       $(`#product-price-${this.handlizedId} > strong`).text(
+        // eslint-disable-next-line no-undef
         `${formatMoney(matchedVariant.price)}`,
       );
       const $compareAtPrice = $(
@@ -49,6 +51,7 @@ const productJs = {
         matchedVariant.compare_at_price > matchedVariant.price
       ) {
         $compareAtPrice.parent().css('display', 'block');
+        // eslint-disable-next-line no-undef
         $compareAtPrice.text(`${formatMoney(matchedVariant.compare_at_price)}`);
       } else {
         $compareAtPrice.text(``);
@@ -61,6 +64,22 @@ const productJs = {
           'src',
           matchedVariant.featured_image.src,
         );
+        // remove thumb selector for prev variant
+        console.log(
+          $(`#product-thumb-container-${this.handlizedId}>img.selected`),
+        );
+        $(
+          `#product-thumb-container-${this.handlizedId}>img.selected`,
+        ).removeClass('selected');
+
+        console.log(
+          $(`#product-thumb-container-${this.handlizedId}>img`).eq(
+            matchedVariant.featured_image.position - 1,
+          ),
+        );
+        $(`#product-thumb-container-${this.handlizedId}>img`)
+          .eq(matchedVariant.featured_image.position - 1)
+          .addClass('selected');
         // document
         //   .querySelector('.product-thumb-container>img.selected')
         //   .classList.remove('selected');

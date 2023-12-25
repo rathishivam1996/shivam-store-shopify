@@ -20,7 +20,10 @@
   {% endif %}
 
   <h3>Thumbnail Images</h3>
-  <div class='relative container flex justify-center items-center flex-wrap mx-auto px-4 bg-red-400'>
+  <div
+    id='product-thumb-container-{{product.id|handle}}'
+    class='relative container flex justify-center items-center flex-wrap mx-auto px-4 bg-red-400'
+  >
     {% for image in product.images %}
       <img
         width='200'
