@@ -22,23 +22,25 @@
     {% capture variantAltText %}Group-{{ selectedVariant.options[0] }}{% endcapture %}
   {% endif %}
 
-  {{ variantAltText }}
   <h3>Thumbnail Images</h3>
   <div
     id="product-thumb-container-{{product.id|handle}}"
     class="relative container flex justify-center items-center flex-wrap mx-auto px-4 bg-red-400"
   >
-    {% for image in product.images %}
-      <img
-        width="200"
-        height="200"
-        src="{{image |  image_url }}"
-        class="
-          {% if image == featuredImage %}
-            selected
-          {% endif %}
-        "
-      >
+    {% for media in product.media %}
+      {% assign currAltText = media.alt %}
+      {% if variantAltText == currAltText %}
+        <img
+          width="200"
+          height="200"
+          src="{{media.preview_image.src |  image_url }}"
+          class="
+            {% if media.preview_image == featuredImage %}
+              selected
+            {% endif %}
+          "
+        >
+      {% endif %}
     {% endfor %}
   </div>
   <h1 id="product-title-{{product.id |  handleize}}">
