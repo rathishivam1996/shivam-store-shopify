@@ -23,26 +23,7 @@
   <div class='relative container h-52 flex justify-center items-center mx-auto px-4 bg-red-400'>
     <div
       class='flex-grow h-full flex flex-col justify-center items-center bg-pink-400'
-    >
-      <div
-        id='product-thumb-{{ product.id | handle }}'
-        class='w-full flex-grow bg-blue-400'
-      >
-        {% for image in product.images %}
-          <img
-            width='200'
-            height='200'
-            src='{{image |  image_url }}'
-            class='
-              {% if image == featuredImage %}
-                selected
-              {% endif %}
-            '
-          >
-        {% endfor %}
-      </div>
-      <div class='slick-dots-container h-4 w-full bg-green-400'></div>
-    </div>
+    ></div>
     <button
       class='absolute w-4 bg-blue-500'
       type='button'
