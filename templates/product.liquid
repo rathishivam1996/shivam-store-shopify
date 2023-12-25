@@ -149,8 +149,8 @@
 
 <script>
   $(document).ready(() => {
-    console.log('product-thumb-{{ product.id | handle }}');
-    $('product-thumb-{{ product.id | handle }}').slick({
+    console.log($('#product-thumb-{{ product.id | handle }}'));
+    $('#product-thumb-{{ product.id | handle }}').slick({
       dots: true,
       arrows: true,
       infinite: false,
