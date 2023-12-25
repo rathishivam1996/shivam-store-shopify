@@ -21,6 +21,13 @@
 
   <h3>Thumbnail Images</h3>
   <div class='relative container h-52 flex justify-center items-center mx-auto px-4 bg-red-400'>
+    <button
+      class='w-4 bg-blue-950'
+      type='button'
+      id='slick-prev-btn-{{product.id | handle}}'
+    >
+      Prev
+    </button>
     <div
       class='flex-grow h-full flex flex-col justify-center items-center bg-pink-400'
     >
@@ -30,13 +37,6 @@
       ></div>
       <div class='slick-dots-container h-4 w-full bg-green-400'></div>
     </div>
-    <button
-      class='w-4 bg-blue-950'
-      type='button'
-      id='slick-prev-btn-{{product.id | handle}}'
-    >
-      Prev
-    </button>
     <button
       class='w-4 bg-blue-950'
       type='button'
