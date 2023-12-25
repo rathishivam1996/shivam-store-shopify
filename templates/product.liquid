@@ -20,7 +20,7 @@
   {% endif %}
 
   {% if product.variants.size > 1 %}
-    {% capture variantAltText %}"group"-{{ selectedVariant.options[0] }}{% endcapture %}
+    {% capture variantAltText %}Group-{{ selectedVariant.options[0] }}{% endcapture %}
   {% endif %}
 
   {{ variantAltText }}
