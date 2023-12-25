@@ -59,7 +59,7 @@ const productJs = {
       }
 
       // change featured image if selected variant has a featured image
-      const defaultAltText = `Group-${defaultVariant.options[0]}`;
+      let defaultAltText = `Group-${defaultVariant.options[0]}`;
       const currAltText = `Group-${matchedVariant.options[0]}`;
       console.log(defaultAltText, "defaultAltText");
       console.log(currAltText, "currAltText");
