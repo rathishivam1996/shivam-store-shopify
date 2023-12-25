@@ -68,6 +68,7 @@ const productJs = {
         console.log(
           $(`#product-thumb-container-${this.handlizedId}>img.selected`),
         );
+
         $(
           `#product-thumb-container-${this.handlizedId}>img.selected`,
         ).removeClass('selected');
