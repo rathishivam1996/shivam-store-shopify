@@ -20,7 +20,7 @@
   {% endif %}
 
   {% if product.variants.size > 1 %}
-    {% assign variantAltText = "Group-"{{selectedVariant.options[0]}} %}
+    {% assign variantAltText = "Group-"selectedVariant.options[0] %}
   {% endif %}
 
   {{ variantAltText }}
