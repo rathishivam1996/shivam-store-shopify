@@ -74,7 +74,7 @@ const productJs = {
           `#product-thumb-container-${this.handlizedId}>img.selected`,
         ).removeClass('selected');
 
-        $(`#product-thumb-container-${this.handlizedId}>img[alt="${defaultAltText}"]`).hide();
+        $(`#product-thumb-container-${this.handlizedId}>img`).hide();
         $(`#product-thumb-container-${this.handlizedId}>img[alt="${currAltText}"]`).show(); 
 
         // add selected to new variant thumb
@@ -91,7 +91,6 @@ const productJs = {
         //     'selected',
         //   );
       }
-      defaultAltText = currAltText; 
     });
   },
 };
