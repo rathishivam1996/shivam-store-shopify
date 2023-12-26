@@ -29,6 +29,7 @@ const productJs = {
       this.updatePageUrlUtil(matchedVariant.id);
 
       // change prices
+      debugger;
       this.changePriceUtil(matchedVariant.price, matchedVariant.compareAtPrice);
 
       // change featured image if selected variant has a featured image
