@@ -30,7 +30,10 @@ const productJs = {
 
       // change prices
       debugger;
-      this.changePriceUtil(matchedVariant.price, matchedVariant.compareAtPrice);
+      this.changePriceUtil(
+        matchedVariant.price,
+        matchedVariant.compare_at_price,
+      );
 
       // change featured image if selected variant has a featured image
       const currAltText = `Group-${matchedVariant.options[0]}`;
