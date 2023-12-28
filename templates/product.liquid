@@ -1,3 +1,5 @@
+{{ product | json }}
+
 <div style="padding: 30px">
   {% assign selectedVariant = product.selected_or_first_available_variant %}
   {% if selectedVariant.featured_image %}
