@@ -36,7 +36,11 @@ const productJs = {
 
       // change featured image if selected variant has a featured image
       const currAltText = `Group-${matchedVariant.options[0]}`;
-      this.updateImagesUtil(currAltText, matchedVariant.featured_image);
+      this.updateImagesUtil(
+        currAltText,
+        matchedVariant.featured_image,
+        this.product.featured_image,
+      );
     });
   },
   updatePageUrlUtil(matchedVariantId) {
@@ -68,7 +72,7 @@ const productJs = {
       $compareAtPrice.parent().css('display', 'none');
     }
   },
-  updateImagesUtil(currAltText, featuredImage) {
+  updateImagesUtil(currAltText, featuredImage, produtImage) {
     const thumbContainerId = `#product-thumb-container-${this.handlizedId}`;
     const featuredImageId = `#product-featured-image-${this.handlizedId}`;
 
@@ -92,6 +96,8 @@ const productJs = {
       $($thumbImages)
         .eq(featuredImage.position - 1)
         .addClass('selected');
+    } else {
+      $(featuredImageId).attr('src', produtImage.src);
     }
   },
 };
