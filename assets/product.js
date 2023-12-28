@@ -60,18 +60,24 @@ const productJs = {
     $price.text(`${formatMoney(price)}`);
 
     if (compareAtPrice && compareAtPrice > price) {
-      console.log($compareAtPrice);
       $compareAtPrice.parent().css('display', 'block');
       // eslint-disable-next-line no-undef
       $compareAtPrice.text(`${formatMoney(compareAtPrice)}`);
     } else {
-      console.log($compareAtPrice);
       $compareAtPrice.text(``);
       $compareAtPrice.parent().css('display', 'none');
     }
   },
   updateImagesUtil(currAltText, featuredImage) {
-    // hide all images
+    const thumbContainerId = `#product-thumb-container-${this.handlizedId}`;
+    const featuredImageId = `#product-featured-image-${this.handlizedId}`;
+
+    const $thumbImages = $(`${thumbContainerId}>img`);
+    const $currVariantImages = $thumbImages.filter(`[alt=${currAltText}]`);
+
+    console.log($thumbImages);
+    console.log($currVariantImages);
+
     $(`#product-thumb-container-${this.handlizedId}>img`).hide();
     // SHOW IMAGES WITH CURRENT ALT TEXT = SELECTED OPTION
     const $currAltImgs = $(
