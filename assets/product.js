@@ -6,6 +6,7 @@ const productJs = {
   },
   setProduct(productJson) {
     this.product = productJson;
+    console.log(this.product);
   },
   handleVariantChange(defaultVariant) {
     // const productJsContext = this;
