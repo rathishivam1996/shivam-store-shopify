@@ -1,20 +1,20 @@
-<div style='padding: 30px'>
+<div style="padding: 30px">
   {% assign selectedVariant = product.selected_or_first_available_variant %}
   {% if selectedVariant.featured_image %}
     {% assign featuredImage = selectedVariant.featured_image %}
     <img
-      id='product-featured-image-{{product.id |  handleize}}'
-      src='{{ selectedVariant.featured_image | image_url }}'
-      width='300'
-      height='300'
+      id="product-featured-image-{{product.id |  handleize}}"
+      src="{{ selectedVariant.featured_image | image_url }}"
+      width="100"
+      height="100"
     >
   {% else %}
     {% assign featuredImage = product.featured_image %}
     <img
-      id='product-featured-image-{{product.id |  handleize}}'
-      src='{{ product.featured_image | image_url }}'
-      width='300'
-      height='300'
+      id="product-featured-image-{{product.id |  handleize}}"
+      src="{{ product.featured_image | image_url }}"
+      width="100"
+      height="100"
     >
   {% endif %}
 
@@ -24,51 +24,49 @@
 
   <h3>Thumbnail Images</h3>
   <div
-    id='product-thumb-container-{{product.id|handle}}'
-    class='relative container flex justify-center items-center flex-wrap mx-auto px-4 bg-red-400'
+    id="product-thumb-container-{{product.id|handle}}"
+    class="relative container flex justify-center items-center flex-wrap mx-auto px-4 bg-red-400"
   >
     {% for media in product.media %}
       {% assign currAltText = media.alt %}
       {% if variantAltText == currAltText %}
         <img
-          width='200'
-          height='200'
-          src='{{media.preview_image.src |  image_url }}'
-          class='
+          width="200"
+          height="200"
+          src="{{media.preview_image.src |  image_url }}"
+          class="
             {% if media.preview_image == featuredImage %}
               selected
             {% endif %}
-          '
-          alt='{{currAltText}}'
+          "
+          alt="{{currAltText}}"
         >
       {% else %}
         <img
-          width='200'
-          height='200'
-          src='{{media.preview_image.src |  image_url }}'
-          class='none'
-          alt='{{currAltText}}'
+          width="200"
+          height="200"
+          src="{{media.preview_image.src |  image_url }}"
+          class="none"
+          alt="{{currAltText}}"
         >
       {% endif %}
     {% endfor %}
   </div>
-  <h1 id='product-title-{{product.id |  handleize}}'>
+  <h1 id="product-title-{{product.id |  handleize}}">
     {{ selectedVariant.title }}
   </h1>
-  <p id='product-vendor-{{product.id |  handleize}}'>{{ product.vendor }}</p>
+  <p id="product-vendor-{{product.id |  handleize}}">{{ product.vendor }}</p>
 
-  <div class='product-price-container'>
-    <p id='product-price-{{product.id |  handleize}}' class='product.price'>
+  <div class="product-price-container">
+    <p id="product-price-{{product.id |  handleize}}" class="product.price">
       Price:
       <strong>{{ selectedVariant.price | money_with_currency }}</strong>
     </p>
 
-    {% if selectedVariant.compare_at_price
-      and selectedVariant.compare_at_price > selectedVariant.price
-    %}
+    {% if selectedVariant.compare_at_price and selectedVariant.compare_at_price > selectedVariant.price %}
       <p
-        id='product-compare-at-price-{{product.id |  handleize}}'
-        class='product.price'
+        id="product-compare-at-price-{{product.id |  handleize}}"
+        class="product.price"
       >
         Compare At Price:
         <strong>
@@ -78,28 +76,26 @@
     {% endif %}
   </div>
 
-  <label for='product-quantity-input-{{product.id |  handleize}}'
-    >Product Quantity</label
-  >
-  <div style='display: flex; justify-content: flex-start; align-items: center;'>
+  <label for="product-quantity-input-{{product.id |  handleize}}">Product Quantity</label>
+  <div style="display: flex; justify-content: flex-start; align-items: center;">
     <button
-      style='padding: 10px; background-color: gray;'
-      type='button'
-      id='product-quantity-plus-{{product.id |  handleize}}'
+      style="padding: 10px; background-color: gray;"
+      type="button"
+      id="product-quantity-plus-{{product.id |  handleize}}"
     >
       Increment
     </button>
     <input
-      type='text'
-      id='product-quantity-input-{{product.id |  handleize}}'
-      aria-describedby='hint'
-      inputmode='numeric'
-      pattern='[0-9]*'
+      type="text"
+      id="product-quantity-input-{{product.id |  handleize}}"
+      aria-describedby="hint"
+      inputmode="numeric"
+      pattern="[0-9]*"
     >
     <button
-      style='padding: 10px; background-color: gray;'
-      type='button'
-      id='product-quantity-minus-{{product.id |  handleize}}'
+      style="padding: 10px; background-color: gray;"
+      type="button"
+      id="product-quantity-minus-{{product.id |  handleize}}"
     >
       Decrement
     </button>
@@ -107,8 +103,8 @@
 
   {% if product.variants.size > 1 %}
     <div
-      id='product-variant-radio-group-{{product.id |  handleize}}'
-      class='product-variant-radio-group'
+      id="product-variant-radio-group-{{product.id |  handleize}}"
+      class="product-variant-radio-group"
     >
       {% for option in product.options_with_values -%}
         <fieldset>
@@ -119,12 +115,12 @@
               {% if option.selected_value == value %}
                 checked
               {% endif %}
-              type='radio'
-              name='{{ option.name }}'
-              value='{{ value }}'
-              id='{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}'
+              type="radio"
+              name="{{ option.name }}"
+              value="{{ value }}"
+              id="{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}"
             >
-            <label for='{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}'>
+            <label for="{{ option.name | handleize }}-{{ value | handleize }}-{{product.id |  handleize}}">
               {{- value -}}
             </label>
           {% endfor %}
@@ -135,9 +131,9 @@
 
   <!-- Add to cart button -->
   <button
-    style='padding: 10px; background-color: gray;'
-    type='submit'
-    id='product-add-to-cart-button'
+    style="padding: 10px; background-color: gray;"
+    type="submit"
+    id="product-add-to-cart-button"
     {% unless selectedVariant.available %}
       disabled
     {% endunless %}
@@ -151,9 +147,9 @@
 
   <!-- Buy it now button -->
   <button
-    style='padding: 10px; background-color: gray;'
-    type='submit'
-    id='product-buy-it-now-button'
+    style="padding: 10px; background-color: gray;"
+    type="submit"
+    id="product-buy-it-now-button"
     {% unless selectedVariant.available %}
       disabled
     {% endunless %}
@@ -193,7 +189,7 @@
   */
 </script>
 
-<script src='{{" product.js" | asset_url}}' defer></script>
+<script src="{{" product.js" | asset_url}}" defer></script>
 <script>
   $(document).ready(function() {
     productJs.setProduct({{ product | json}});
