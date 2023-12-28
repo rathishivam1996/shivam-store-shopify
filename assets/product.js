@@ -98,7 +98,7 @@ const productJs = {
         .eq(featuredImage.position - 1)
         .addClass('selected');
     } else {
-      $(featuredImageId).attr('src', produtImage.src);
+      $(featuredImageId).attr('src', produtImage);
     }
   },
 };
