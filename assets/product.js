@@ -73,7 +73,7 @@ const productJs = {
     const featuredImageId = `#product-featured-image-${this.handlizedId}`;
 
     const $thumbImages = $(`${thumbContainerId}>img`);
-    const $currVariantImages = $thumbImages.filter(`[alt=${currAltText}]`);
+    const $currVariantImages = $thumbImages.filter(`[alt="${currAltText}"]`);
 
     console.log($thumbImages);
     console.log($currVariantImages);
