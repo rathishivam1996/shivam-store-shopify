@@ -192,7 +192,9 @@
 <script src="{{" product.js" | asset_url}}" defer></script>
 <script>
   console.log({{ product | json }}, "product");
-  console.log({{ product.featured_image | json }}, "featured_iamge");
+  console.log({{ product.featured_image.src | json }}, "featured_iamge");
+
+    console.log({{ product.featured_image.alt | json }}, "featured_iamge");
 
   $(document).ready(function() {
     productJs.setProduct({{ product | json}});
