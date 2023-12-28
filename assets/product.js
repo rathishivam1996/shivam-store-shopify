@@ -75,35 +75,21 @@ const productJs = {
     const $thumbImages = $(`${thumbContainerId}>img`);
     const $currVariantImages = $thumbImages.filter(`[alt="${currAltText}"]`);
 
-    console.log($thumbImages);
-    console.log($currVariantImages);
+    $thumbImages.hide();
 
-    $(`#product-thumb-container-${this.handlizedId}>img`).hide();
-    // SHOW IMAGES WITH CURRENT ALT TEXT = SELECTED OPTION
-    const $currAltImgs = $(
-      `#product-thumb-container-${this.handlizedId}>img[alt="${currAltText}"]`,
-    );
-
-    if ($currAltImgs.length) {
-      // show images with alt tag = curr selected variant
-      $currAltImgs.show();
+    if ($currVariantImages.length) {
+      $currVariantImages.show();
     } else {
-      // IF NO IMAGES WITH ALT EQUAL TO CURRENT SELECTD OPTION DISPLAY ALL IMAGES
-      $(`#product-thumb-container-${this.handlizedId}>img`).show();
+      $thumbImages.show();
     }
+
     // CHANGE FEATURED IMAGE OF CURRENT SELECTED OPTION
     if (featuredImage) {
-      $(`#product-featured-image-${this.handlizedId}`).attr(
-        'src',
-        featuredImage.src,
-      );
-      // remove thumb selector for prev variant
-      $(
-        `#product-thumb-container-${this.handlizedId}>img.selected`,
-      ).removeClass('selected');
+      $(featuredImageId).attr('src', featuredImage.src);
+      $($thumbImages).filter('.selected').removeClass('selected');
 
       // add selected CLASS to new variant thumb
-      $(`#product-thumb-container-${this.handlizedId}>img`)
+      $($thumbImages)
         .eq(featuredImage.position - 1)
         .addClass('selected');
     }
