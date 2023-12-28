@@ -51,13 +51,15 @@ const productJs = {
     }
   },
   changePriceUtil(price, compareAtPrice) {
-    $(`#product-price-${this.handlizedId} > strong`).text(
-      // eslint-disable-next-line no-undef
-      `${formatMoney(price)}`,
-    );
-    const $compareAtPrice = $(
-      `#product-compare-at-price-${this.handlizedId} > strong`,
-    );
+    const priceId = `#product-price-${this.handlizedId}>strong`;
+    const compareAtPriceId = `#product-compare-at-price-${this.handlizedId}>strong`;
+
+    const $price = $(priceId);
+    const $compareAtPrice = $(compareAtPrice);
+
+    // eslint-disable-next-line no-undef
+    $price.text(`${formatMoney(price)}`);
+
     if (compareAtPrice && compareAtPrice > price) {
       $compareAtPrice.parent().css('display', 'block');
       // eslint-disable-next-line no-undef
@@ -74,7 +76,7 @@ const productJs = {
     const $currAltImgs = $(
       `#product-thumb-container-${this.handlizedId}>img[alt="${currAltText}"]`,
     );
-    
+
     if ($currAltImgs.length) {
       // show images with alt tag = curr selected variant
       $currAltImgs.show();
