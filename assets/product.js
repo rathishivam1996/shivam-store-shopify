@@ -73,6 +73,7 @@ const productJs = {
     }
   },
   updateImagesUtil(currAltText, featuredImage, produtImage) {
+    debugger;
     const thumbContainerId = `#product-thumb-container-${this.handlizedId}`;
     const featuredImageId = `#product-featured-image-${this.handlizedId}`;
 
