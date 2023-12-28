@@ -29,7 +29,6 @@ const productJs = {
       this.updatePageUrlUtil(matchedVariant.id);
 
       // change prices
-      debugger;
       this.changePriceUtil(
         matchedVariant.price,
         matchedVariant.compare_at_price,
@@ -61,10 +60,12 @@ const productJs = {
     $price.text(`${formatMoney(price)}`);
 
     if (compareAtPrice && compareAtPrice > price) {
+      console.log($compareAtPrice);
       $compareAtPrice.parent().css('display', 'block');
       // eslint-disable-next-line no-undef
       $compareAtPrice.text(`${formatMoney(compareAtPrice)}`);
     } else {
+      console.log($compareAtPrice);
       $compareAtPrice.text(``);
       $compareAtPrice.parent().css('display', 'none');
     }
