@@ -70,17 +70,19 @@ const productJs = {
   updateImagesUtil(currAltText, featuredImage) {
     // hide all images
     $(`#product-thumb-container-${this.handlizedId}>img`).hide();
+    // SHOW IMAGES WITH CURRENT ALT TEXT = SELECTED OPTION
     const $currAltImgs = $(
       `#product-thumb-container-${this.handlizedId}>img[alt="${currAltText}"]`,
     );
+    
     if ($currAltImgs.length) {
       // show images with alt tag = curr selected variant
       $currAltImgs.show();
     } else {
-      // show all images as a fail safe
+      // IF NO IMAGES WITH ALT EQUAL TO CURRENT SELECTD OPTION DISPLAY ALL IMAGES
       $(`#product-thumb-container-${this.handlizedId}>img`).show();
     }
-
+    // CHANGE FEATURED IMAGE OF CURRENT SELECTED OPTION
     if (featuredImage) {
       $(`#product-featured-image-${this.handlizedId}`).attr(
         'src',
@@ -91,7 +93,7 @@ const productJs = {
         `#product-thumb-container-${this.handlizedId}>img.selected`,
       ).removeClass('selected');
 
-      // add selected to new variant thumb
+      // add selected CLASS to new variant thumb
       $(`#product-thumb-container-${this.handlizedId}>img`)
         .eq(featuredImage.position - 1)
         .addClass('selected');
