@@ -191,6 +191,8 @@
 
 <script src="{{" product.js" | asset_url}}" defer></script>
 <script>
+  console.log({{ product | json }});
+
   $(document).ready(function() {
     productJs.setProduct({{ product | json}});
     productJs.setHandlizedId({{product.id |  handleize}});
