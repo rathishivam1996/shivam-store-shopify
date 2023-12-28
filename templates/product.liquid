@@ -31,8 +31,8 @@
       {% assign currAltText = media.alt %}
       {% if variantAltText == currAltText %}
         <img
-          width="200"
-          height="200"
+          width="100"
+          height="100"
           src="{{media.preview_image.src |  image_url }}"
           class="
             {% if media.preview_image == featuredImage %}
@@ -43,8 +43,8 @@
         >
       {% else %}
         <img
-          width="200"
-          height="200"
+          width="100"
+          height="100"
           src="{{media.preview_image.src |  image_url }}"
           class="none"
           alt="{{currAltText}}"
