@@ -55,7 +55,7 @@ const productJs = {
     const compareAtPriceId = `#product-compare-at-price-${this.handlizedId}>strong`;
 
     const $price = $(priceId);
-    const $compareAtPrice = $(compareAtPrice);
+    const $compareAtPrice = $(compareAtPriceId);
 
     // eslint-disable-next-line no-undef
     $price.text(`${formatMoney(price)}`);
