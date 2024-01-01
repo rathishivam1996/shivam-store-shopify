@@ -192,7 +192,9 @@
 <script src="{{" product.js" | asset_url}}" defer></script>
 <script>
   console.log({{ product | json }}, "product");
-  const featured = {{product.featured_image | json_encode}};
+
+  console.log({{ product.selected_or_first_available_variant | json }});
+  const featured = {{product.featured_image | json}};
 
   console.log(featured);
 
